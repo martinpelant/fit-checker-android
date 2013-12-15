@@ -86,7 +86,6 @@ public class Downloader extends AsyncTask<String, String, Boolean> {
 		if (!sp.contains(Login.PREFERENCES_USERNAME) || !sp.contains(Login.PREFERENCES_PASSWORD)) {
 			cancel();
 			if (Activity.class.isInstance(context)) {
-				Log.v(TAG, "activity for result");
 				Activity aContext = (Activity) context;
 				aContext.startActivityForResult(new Intent(context, Login.class), REQ_CODE_LOGIN);
 			} else
@@ -101,12 +100,21 @@ public class Downloader extends AsyncTask<String, String, Boolean> {
 		try {
 			fis = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
+            e.printStackTrace();
 			return true;
 		}
-		boolean rtrn = !MyReader.getString(fis).equals(text);
+
+        String oldText = MyReader.getString(fis).replaceAll("\\s+", "");
+        String newText = text.replaceAll("\\s+", "");
+        Log.v("Checking for changes NEW", newText);
+        Log.v("Checking for changes OLD", oldText);
+
+
+		boolean rtrn = !oldText.equals(newText);
 		try {
 			fis.close();
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 
 		return rtrn;
@@ -116,6 +124,7 @@ public class Downloader extends AsyncTask<String, String, Boolean> {
 		Log.v(TAG, "saving table");
 		File dir = context.getFilesDir();
 		File file = new File(dir, subject + ".html");
+
 		if (checkForChanges && checkForChanges(body, file)) {
 			changed++;
 			data.open();
@@ -282,7 +291,6 @@ public class Downloader extends AsyncTask<String, String, Boolean> {
 
 	// vyparsovani tabulky/tabulek z html
 	private String parseTable(String body) {
-		Log.v(TAG, "parsing html" + body);
 		Pattern p = Pattern.compile("<table class=\"inline.*</table>", Pattern.CASE_INSENSITIVE | Pattern.DOTALL | Pattern.MULTILINE);
 		Matcher m = p.matcher(body);
 		if (m.find()) {
