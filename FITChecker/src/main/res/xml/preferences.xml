@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/accounts" >
+        <Preference
+            android:key="account"
+            android:persistent="false"
+            android:selectable="true"
+            android:summary="@string/account_edux_summary"
+            android:title="@string/account_edux" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="alarm"
+            android:summary="@string/autocheck_summary"
+            android:title="@string/autocheck_title" />
+
+        <ListPreference
+            android:dialogTitle="@string/autocheck_interval_dialog"
+            android:entries="@array/autocheck_intervals"
+            android:entryValues="@array/autocheck_intervals_values"
+            android:key="alarmInterval"
+            android:title="@string/autocheck_interval" />
+
+        <RingtonePreference
+            android:key="ringtone"
+            android:ringtoneType="notification"
+            android:showSilent="true"
+            android:title="@string/ringtone" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="led"
+            android:summary="@string/led_summary"
+            android:title="@string/led" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="vibrate"
+            android:summary="@string/vibrate_summary"
+            android:title="@string/vibrate" />
+
+        <Preference
+            android:enabled="false"
+            android:key="alarmLastRun"
+            android:persistent="false"
+            android:shouldDisableView="true"
+            android:summary="@string/autocheck_last_run_not"
+            android:title="@string/autocheck_last_run" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="course_prefixes">
+        <item>BI-</item>
+        <item>MI-</item>
+        <item>FI-</item>
+    </string-array>
+
+    <string name="app_name">FIT Checker</string>
+    <string name="refresh">Obnovit</string>
+    <string name="add">Přidat</string>
+    <string name="settings">Nastavení</string>
+    <string name="delete_title">Smazat ?</string>
+    <string name="delete_message">Opravdu chcete smazat tento předmět?</string>
+    <string name="add_subject">Přidat předmět</string>
+    <string name="username">Už. jméno:</string>
+    <string name="password">Heslo:</string>
+    <string name="auth">Způsob ověření:</string>
+    <string name="account_edux">Účet Eduxu</string>
+    <string name="accounts">Účty</string>
+    <string name="account_edux_summary">Nastavení přihlášení k Eduxu</string>
+    <string name="login">Přihlásit</string>
+    <string name="login_successful">Přihlášení proběhlo úspěšně.</string>
+    <string name="logout">Odhlásit</string>
+    <string name="logout_title">Odhlásit?</string>
+    <string name="logout_message">Opravdu se chcete odhlásit? Vaše uživatelské jméno, heslo a cookies budou z telefonu smazány. Stažené předměty však zůstanou, dokud je sami nesmažete.</string>
+    <string name="subject_open_in_browser">Otevřít předmět na eduxu</string>
+    <string name="progress_connecting">Připojování...</string>
+    <string name="progress_downloading">Stahování...</string>
+    <string name="progress_processing">Zpracovávání...</string>
+    <string name="progress_logging_in">Přihlašování...</string>
+    <string name="autocheck_title">Automatická kontrola</string>
+    <string name="autocheck_summary">Automaticky kontrolovat změny na pozadí</string>
+    <string name="autocheck_interval">Interval kontroly</string>
+    <string name="autocheck_interval_dialog">Kontrolovat každých:</string>
+    <string name="autocheck_last_run">Poslední spuštění</string>
+    <string name="autocheck_last_run_not">Dosud neproběhlo</string>
+    <string name="notification_ticker">FIT checker detekoval změny na eduxu.</string>
+    <string name="notification_message">Detekovány změny na eduxu.</string>
+    <string name="error_table_not_found_title">Tabulka s výsledky nenalezena</string>
+    <string name="error_table_not_found">Tento předmět bohužel nemá na eduxu standardní tabulku s výsledky.</string>
+    <string name="error_download">Při stahování dat z eduxu došlo k chybě.</string>
+    <string name="error_login">Nepodařilo se přihlásit.</string>
+    <string name="error_invalid_credentials">Zadali jste neplatnou kombinaci uživatelského jména a hesla.</string>
+    <string name="led">Notifikační LED</string>
+    <string name="led_summary">Blikat při notifikaci</string>
+    <string name="vibrate">Vibrovat</string>
+    <string name="vibrate_summary">Vibrovat při notifikaci</string>
+    <string name="ringtone">Vyzvánění</string>
+    <string name="other">Ostatní</string>
+    <string name="donate">Darovat</string>
+    <string name="donate_summary">Kupte autorovi pivo</string>
+    <string name="donated_1">Autor vypil Vaše pivo. Dopřejete mu ještě jedno?</string>
+
+</resources>

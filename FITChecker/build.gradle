@@ -1,0 +1,95 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:0.6.+'
+	}
+}
+apply plugin: 'android'
+
+repositories {
+	mavenCentral()
+}
+
+//to get release signing password from console
+task readPasswordFromInput << {
+	def console = System.console()
+	ext.keystorePassword = console.readLine('\n\n\n> Enter keystore password: ')
+	android.signingConfigs.release.storePassword = ext.keystorePassword
+	ext.keyPassword = console.readLine('\n\n\n> Enter key password: ')
+	android.signingConfigs.release.keyPassword = ext.keyPassword
+}
+
+//increase mBuild in gradle.properties
+task increaseVersionCode << {
+	def versionPropFile = "../gradle.properties";
+	def Properties versionProps = new Properties()
+	versionProps.load(new FileInputStream(file(versionPropFile)))
+	int versionCode = versionProps['mBuild'].toInteger()
+	versionProps['mBuild'] = (versionCode + 1) + ""
+	versionProps.store(new FileOutputStream(file(versionPropFile)), "Build properties")
+	println 'increasing version code to ' + versionProps['mBuild']
+}
+
+//do specify tasks on compile time
+tasks.whenTaskAdded { task ->
+	if (task.name == 'validateReleaseSigning') {//only once per release build (doesn't matter how many flavours)
+		task.dependsOn readPasswordFromInput
+		task.dependsOn increaseVersionCode
+	} else if (task.name.startsWith("proguard")) {//copy proguard mappings
+		task << {
+			copy {
+				from buildDir.getPath() + "/proguard"
+				into '../proguard'
+				include '**/mapping.txt'
+			}
+			println "PPROGUARD FILES COPIED"
+		}
+
+	}
+}
+
+//android config
+
+android {
+	compileSdkVersion 19
+	buildToolsVersion "19.0.0"
+
+	defaultConfig {
+		minSdkVersion 7
+		targetSdkVersion 19
+		versionName mVersion //value from gradle.properties (it is available automatically)
+		versionCode mBuild.toInteger()//value from gradle.properties
+	}
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_7
+		targetCompatibility JavaVersion.VERSION_1_7
+	}
+	signingConfigs {
+		release {
+			keyAlias mKeyAlias
+			storeFile file(mKeyFile)
+			storePassword ""
+			keyPassword ""
+		}
+	}
+
+	buildTypes {
+		debug {//automatically marks src/debug as a source folders in addition to src/main if used and if the folder exists
+			versionNameSuffix " (" + mBuild + ")"
+			packageNameSuffix ".debug"
+		}
+		release {//automatically marks src/release as a source folders in addition to src/main if used and if the folder exists
+			runProguard true
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), file('proguard-project.txt')
+			signingConfig signingConfigs.release
+		}
+	}
+}
+
+dependencies {
+	compile 'com.android.support:support-v4:19.0.0'
+	compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+}
