@@ -16,6 +16,17 @@
 # and specify the fully qualified class name to the JavaScript interface
 # class:
 
+# ActionBar Sherlock
+-keep class com.actionbarsherlock.** { *; }
+-keep interface com.actionbarsherlock.** { *; }
+-keep class android.support.v4.** { *; }
+-keep interface android.support.v4.** { *; }
+
+# Remove printstacktrace to system err stream
+-assumenosideeffects class * extends java.lang.Throwable {
+    public void printStackTrace();
+}
+
 ##---------------Begin: Remove logging  ----------
 -assumenosideeffects class android.util.Log {
     public static *** d(...);
@@ -36,5 +47,7 @@
 -renamesourcefileattribute SourceFile    
 -keepattributes SourceFile,LineNumberTable
 ##---------------------------------------------------------
+
+-keep public class * extends android.support.v4.app.Fragment
 
 
