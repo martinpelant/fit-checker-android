@@ -231,7 +231,7 @@ public class Downloader extends AsyncTask<String, String, Boolean> {
 		String rtrn = "courses/" + subject;
 		if (!fullVersion)
 			rtrn += "/_export/xhtml";
-		rtrn += "/classification/student/" + PreferenceManager.getDefaultSharedPreferences(context).getString(Login.PREFERENCES_USERNAME, "") + "/start";
+		rtrn += "/classification/student/" + PreferenceManager.getDefaultSharedPreferences(context).getString(Login.PREFERENCES_USERNAME, "") + "/start?purge";
 		return rtrn;
 	}
 
