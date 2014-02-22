@@ -39,7 +39,9 @@
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:inputType="textPassword" />
-	</LinearLayout>
+        <!--android:hint="@string/universityPassword"-->
+
+    </LinearLayout>
 	<LinearLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"

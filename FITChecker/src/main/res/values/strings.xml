@@ -52,5 +52,8 @@
     <string name="donate">Darovat</string>
     <string name="donate_summary">Kupte autorovi pivo</string>
     <string name="donated_1">Autor vypil Vaše pivo. Dopřejete mu ještě jedno?</string>
+    <string name="addSubjectsFromKOS">Přidat předměty z KOSu</string>
+    <string name="universityPassword">celoškolské heslo</string>
+    <string name="loadingSubjects">Nahrávám předměty</string>
 
 </resources>

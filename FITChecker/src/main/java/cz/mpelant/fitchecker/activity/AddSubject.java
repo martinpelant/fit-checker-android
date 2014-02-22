@@ -1,6 +1,7 @@
 
 package cz.mpelant.fitchecker.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.utils.DataProvider;
 
@@ -98,6 +100,15 @@ public class AddSubject extends BaseActivity {
                 long row = data.subjectCreate(subjectType.getSelectedItem().toString() + subject.getText().toString().replace('\'', '-').toUpperCase().trim());
                 data.close();
                 Log.d(TAG, "saved " + row);
+                finish();
+            }
+        });
+
+        Button addFromKos = (Button) findViewById(R.id.addSubjectsFromKOS);
+        addFromKos.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddSubject.this, AddFromKosActivity.class));
                 finish();
             }
         });
