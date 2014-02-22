@@ -67,32 +67,32 @@ android.support.v4.app.ActionBarDrawerToggle -> android.support.v4.app.ActionBar
     int mOpenDrawerContentDescRes -> mOpenDrawerContentDescRes
     int mCloseDrawerContentDescRes -> mCloseDrawerContentDescRes
     java.lang.Object mSetIndicatorInfo -> mSetIndicatorInfo
-    223:233:void syncState() -> syncState
-    246:255:void setDrawerIndicatorEnabled(boolean) -> setDrawerIndicatorEnabled
-    262:262:boolean isDrawerIndicatorEnabled() -> isDrawerIndicatorEnabled
-    274:277:void onConfigurationChanged(android.content.res.Configuration) -> onConfigurationChanged
-    289:297:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    310:317:void onDrawerSlide(android.view.View,float) -> onDrawerSlide
-    328:332:void onDrawerOpened(android.view.View) -> onDrawerOpened
-    343:347:void onDrawerClosed(android.view.View) -> onDrawerClosed
-    358:358:void onDrawerStateChanged(int) -> onDrawerStateChanged
-    361:364:android.graphics.drawable.Drawable getThemeUpIndicator() -> getThemeUpIndicator
-    368:374:void setActionBarUpIndicator(android.graphics.drawable.Drawable,int) -> setActionBarUpIndicator
-    377:383:void setActionBarDescription(int) -> setActionBarDescription
-    56:56:android.app.Activity access$300(android.support.v4.app.ActionBarDrawerToggle) -> access$300
+    222:232:void syncState() -> syncState
+    245:254:void setDrawerIndicatorEnabled(boolean) -> setDrawerIndicatorEnabled
+    261:261:boolean isDrawerIndicatorEnabled() -> isDrawerIndicatorEnabled
+    273:276:void onConfigurationChanged(android.content.res.Configuration) -> onConfigurationChanged
+    288:296:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    309:316:void onDrawerSlide(android.view.View,float) -> onDrawerSlide
+    327:331:void onDrawerOpened(android.view.View) -> onDrawerOpened
+    342:346:void onDrawerClosed(android.view.View) -> onDrawerClosed
+    357:357:void onDrawerStateChanged(int) -> onDrawerStateChanged
+    360:363:android.graphics.drawable.Drawable getThemeUpIndicator() -> getThemeUpIndicator
+    367:373:void setActionBarUpIndicator(android.graphics.drawable.Drawable,int) -> setActionBarUpIndicator
+    376:382:void setActionBarDescription(int) -> setActionBarDescription
+    55:55:android.app.Activity access$300(android.support.v4.app.ActionBarDrawerToggle) -> access$300
 android.support.v4.app.ActionBarDrawerToggle$1 -> android.support.v4.app.ActionBarDrawerToggle$1:
 android.support.v4.app.ActionBarDrawerToggle$ActionBarDrawerToggleImpl -> android.support.v4.app.ActionBarDrawerToggle$ActionBarDrawerToggleImpl:
     android.graphics.drawable.Drawable getThemeUpIndicator(android.app.Activity) -> getThemeUpIndicator
     java.lang.Object setActionBarUpIndicator(java.lang.Object,android.app.Activity,android.graphics.drawable.Drawable,int) -> setActionBarUpIndicator
     java.lang.Object setActionBarDescription(java.lang.Object,android.app.Activity,int) -> setActionBarDescription
 android.support.v4.app.ActionBarDrawerToggle$ActionBarDrawerToggleImplBase -> android.support.v4.app.ActionBarDrawerToggle$ActionBarDrawerToggleImplBase:
-    104:104:android.graphics.drawable.Drawable getThemeUpIndicator(android.app.Activity) -> getThemeUpIndicator
-    111:111:java.lang.Object setActionBarUpIndicator(java.lang.Object,android.app.Activity,android.graphics.drawable.Drawable,int) -> setActionBarUpIndicator
-    117:117:java.lang.Object setActionBarDescription(java.lang.Object,android.app.Activity,int) -> setActionBarDescription
+    103:103:android.graphics.drawable.Drawable getThemeUpIndicator(android.app.Activity) -> getThemeUpIndicator
+    110:110:java.lang.Object setActionBarUpIndicator(java.lang.Object,android.app.Activity,android.graphics.drawable.Drawable,int) -> setActionBarUpIndicator
+    116:116:java.lang.Object setActionBarDescription(java.lang.Object,android.app.Activity,int) -> setActionBarDescription
 android.support.v4.app.ActionBarDrawerToggle$ActionBarDrawerToggleImplHC -> android.support.v4.app.ActionBarDrawerToggle$ActionBarDrawerToggleImplHC:
-    124:124:android.graphics.drawable.Drawable getThemeUpIndicator(android.app.Activity) -> getThemeUpIndicator
-    130:130:java.lang.Object setActionBarUpIndicator(java.lang.Object,android.app.Activity,android.graphics.drawable.Drawable,int) -> setActionBarUpIndicator
-    136:136:java.lang.Object setActionBarDescription(java.lang.Object,android.app.Activity,int) -> setActionBarDescription
+    123:123:android.graphics.drawable.Drawable getThemeUpIndicator(android.app.Activity) -> getThemeUpIndicator
+    129:129:java.lang.Object setActionBarUpIndicator(java.lang.Object,android.app.Activity,android.graphics.drawable.Drawable,int) -> setActionBarUpIndicator
+    135:135:java.lang.Object setActionBarDescription(java.lang.Object,android.app.Activity,int) -> setActionBarDescription
 android.support.v4.app.ActionBarDrawerToggle$Delegate -> android.support.v4.app.ActionBarDrawerToggle$Delegate:
     android.graphics.drawable.Drawable getThemeUpIndicator() -> getThemeUpIndicator
     void setActionBarUpIndicator(android.graphics.drawable.Drawable,int) -> setActionBarUpIndicator
@@ -105,10 +105,10 @@ android.support.v4.app.ActionBarDrawerToggle$SlideDrawable -> android.support.v4
     float mPosition -> mPosition
     float mOffset -> mOffset
     android.support.v4.app.ActionBarDrawerToggle this$0 -> this$0
-    408:410:void setPosition(float) -> setPosition
-    413:413:float getPosition() -> getPosition
-    424:426:void setOffset(float) -> setOffset
-    430:448:void draw(android.graphics.Canvas) -> draw
+    401:403:void setPosition(float) -> setPosition
+    406:406:float getPosition() -> getPosition
+    417:419:void setOffset(float) -> setOffset
+    423:441:void draw(android.graphics.Canvas) -> draw
 android.support.v4.app.ActionBarDrawerToggleHoneycomb -> android.support.v4.app.ActionBarDrawerToggleHoneycomb:
     java.lang.String TAG -> TAG
     int[] THEME_ATTRS -> THEME_ATTRS
@@ -1821,65 +1821,116 @@ android.support.v4.print.PrintHelper -> android.support.v4.print.PrintHelper:
     int SCALE_MODE_FILL -> SCALE_MODE_FILL
     int COLOR_MODE_MONOCHROME -> COLOR_MODE_MONOCHROME
     int COLOR_MODE_COLOR -> COLOR_MODE_COLOR
+    int ORIENTATION_LANDSCAPE -> ORIENTATION_LANDSCAPE
+    int ORIENTATION_PORTRAIT -> ORIENTATION_PORTRAIT
     android.support.v4.print.PrintHelper$PrintHelperVersionImpl mImpl -> mImpl
-    58:62:boolean systemSupportsPrint() -> systemSupportsPrint
-    185:186:void setScaleMode(int) -> setScaleMode
-    195:195:int getScaleMode() -> getScaleMode
-    207:208:void setColorMode(int) -> setColorMode
-    217:217:int getColorMode() -> getColorMode
-    227:228:void printBitmap(java.lang.String,android.graphics.Bitmap) -> printBitmap
-    240:241:void printBitmap(java.lang.String,android.net.Uri) -> printBitmap
+    68:72:boolean systemSupportsPrint() -> systemSupportsPrint
+    215:216:void setScaleMode(int) -> setScaleMode
+    225:225:int getScaleMode() -> getScaleMode
+    237:238:void setColorMode(int) -> setColorMode
+    247:247:int getColorMode() -> getColorMode
+    258:259:void setOrientation(int) -> setOrientation
+    268:268:int getOrientation() -> getOrientation
+    278:279:void printBitmap(java.lang.String,android.graphics.Bitmap) -> printBitmap
+    291:292:void printBitmap(java.lang.String,android.net.Uri) -> printBitmap
 android.support.v4.print.PrintHelper$1 -> android.support.v4.print.PrintHelper$1:
 android.support.v4.print.PrintHelper$PrintHelperKitkatImpl -> android.support.v4.print.PrintHelper$PrintHelperKitkatImpl:
-    android.support.v4.print.PrintHelperKitkat printHelper -> printHelper
-    132:133:void setScaleMode(int) -> setScaleMode
-    137:137:int getScaleMode() -> getScaleMode
-    142:143:void setColorMode(int) -> setColorMode
-    147:147:int getColorMode() -> getColorMode
-    152:153:void printBitmap(java.lang.String,android.graphics.Bitmap) -> printBitmap
-    157:158:void printBitmap(java.lang.String,android.net.Uri) -> printBitmap
+    android.support.v4.print.PrintHelperKitkat mPrintHelper -> mPrintHelper
+    152:153:void setScaleMode(int) -> setScaleMode
+    157:157:int getScaleMode() -> getScaleMode
+    162:163:void setColorMode(int) -> setColorMode
+    167:167:int getColorMode() -> getColorMode
+    172:173:void setOrientation(int) -> setOrientation
+    177:177:int getOrientation() -> getOrientation
+    182:183:void printBitmap(java.lang.String,android.graphics.Bitmap) -> printBitmap
+    187:188:void printBitmap(java.lang.String,android.net.Uri) -> printBitmap
 android.support.v4.print.PrintHelper$PrintHelperStubImpl -> android.support.v4.print.PrintHelper$PrintHelperStubImpl:
     int mScaleMode -> mScaleMode
     int mColorMode -> mColorMode
-    93:94:void setScaleMode(int) -> setScaleMode
-    98:98:int getColorMode() -> getColorMode
-    103:104:void setColorMode(int) -> setColorMode
-    108:108:int getScaleMode() -> getScaleMode
-    113:113:void printBitmap(java.lang.String,android.graphics.Bitmap) -> printBitmap
-    117:117:void printBitmap(java.lang.String,android.net.Uri) -> printBitmap
+    int mOrientation -> mOrientation
+    107:108:void setScaleMode(int) -> setScaleMode
+    112:112:int getColorMode() -> getColorMode
+    117:118:void setColorMode(int) -> setColorMode
+    121:121:void setOrientation(int) -> setOrientation
+    124:124:int getOrientation() -> getOrientation
+    128:128:int getScaleMode() -> getScaleMode
+    133:133:void printBitmap(java.lang.String,android.graphics.Bitmap) -> printBitmap
+    137:137:void printBitmap(java.lang.String,android.net.Uri) -> printBitmap
 android.support.v4.print.PrintHelper$PrintHelperVersionImpl -> android.support.v4.print.PrintHelper$PrintHelperVersionImpl:
     void setScaleMode(int) -> setScaleMode
     int getScaleMode() -> getScaleMode
     void setColorMode(int) -> setColorMode
     int getColorMode() -> getColorMode
+    void setOrientation(int) -> setOrientation
+    int getOrientation() -> getOrientation
     void printBitmap(java.lang.String,android.graphics.Bitmap) -> printBitmap
     void printBitmap(java.lang.String,android.net.Uri) -> printBitmap
 android.support.v4.print.PrintHelperKitkat -> android.support.v4.print.PrintHelperKitkat:
     java.lang.String LOG_TAG -> LOG_TAG
     int MAX_PRINT_SIZE -> MAX_PRINT_SIZE
     android.content.Context mContext -> mContext
+    android.graphics.BitmapFactory$Options mDecodeOptions -> mDecodeOptions
+    java.lang.Object mLock -> mLock
     int SCALE_MODE_FIT -> SCALE_MODE_FIT
     int SCALE_MODE_FILL -> SCALE_MODE_FILL
+    int ORIENTATION_LANDSCAPE -> ORIENTATION_LANDSCAPE
+    int ORIENTATION_PORTRAIT -> ORIENTATION_PORTRAIT
     int COLOR_MODE_MONOCHROME -> COLOR_MODE_MONOCHROME
     int COLOR_MODE_COLOR -> COLOR_MODE_COLOR
     int mScaleMode -> mScaleMode
     int mColorMode -> mColorMode
-    87:88:void setScaleMode(int) -> setScaleMode
-    97:97:int getScaleMode() -> getScaleMode
-    109:110:void setColorMode(int) -> setColorMode
-    119:119:int getColorMode() -> getColorMode
-    129:224:void printBitmap(java.lang.String,android.graphics.Bitmap) -> printBitmap
-    235:237:void printBitmap(java.lang.String,android.net.Uri) -> printBitmap
-    248:280:android.graphics.Bitmap loadConstrainedBitmap(android.net.Uri,int) -> loadConstrainedBitmap
-    288:301:android.graphics.Bitmap loadBitmap(android.net.Uri,android.graphics.BitmapFactory$Options) -> loadBitmap
+    int mOrientation -> mOrientation
+    102:103:void setScaleMode(int) -> setScaleMode
+    112:112:int getScaleMode() -> getScaleMode
+    124:125:void setColorMode(int) -> setColorMode
+    134:135:void setOrientation(int) -> setOrientation
+    144:144:int getOrientation() -> getOrientation
+    154:154:int getColorMode() -> getColorMode
+    164:245:void printBitmap(java.lang.String,android.graphics.Bitmap) -> printBitmap
+    257:274:android.graphics.Matrix getMatrix(int,int,android.graphics.RectF,int) -> getMatrix
+    287:446:void printBitmap(java.lang.String,android.net.Uri) -> printBitmap
+    457:498:android.graphics.Bitmap loadConstrainedBitmap(android.net.Uri,int) -> loadConstrainedBitmap
+    507:520:android.graphics.Bitmap loadBitmap(android.net.Uri,android.graphics.BitmapFactory$Options) -> loadBitmap
+    46:46:android.graphics.Matrix access$000(android.support.v4.print.PrintHelperKitkat,int,int,android.graphics.RectF,int) -> access$000
+    46:46:android.graphics.Bitmap access$200(android.support.v4.print.PrintHelperKitkat,android.net.Uri,int) -> access$200
+    46:46:java.lang.Object access$300(android.support.v4.print.PrintHelperKitkat) -> access$300
 android.support.v4.print.PrintHelperKitkat$1 -> android.support.v4.print.PrintHelperKitkat$1:
     android.print.PrintAttributes mAttributes -> mAttributes
     java.lang.String val$jobName -> val$jobName
     android.graphics.Bitmap val$bitmap -> val$bitmap
     int val$fittingMode -> val$fittingMode
     android.support.v4.print.PrintHelperKitkat this$0 -> this$0
-    154:162:void onLayout(android.print.PrintAttributes,android.print.PrintAttributes,android.os.CancellationSignal,android.print.PrintDocumentAdapter$LayoutResultCallback,android.os.Bundle) -> onLayout
-    168:222:void onWrite(android.print.PageRange[],android.os.ParcelFileDescriptor,android.os.CancellationSignal,android.print.PrintDocumentAdapter$WriteResultCallback) -> onWrite
+    189:197:void onLayout(android.print.PrintAttributes,android.print.PrintAttributes,android.os.CancellationSignal,android.print.PrintDocumentAdapter$LayoutResultCallback,android.os.Bundle) -> onLayout
+    203:243:void onWrite(android.print.PageRange[],android.os.ParcelFileDescriptor,android.os.CancellationSignal,android.print.PrintDocumentAdapter$WriteResultCallback) -> onWrite
+android.support.v4.print.PrintHelperKitkat$2 -> android.support.v4.print.PrintHelperKitkat$2:
+    android.print.PrintAttributes mAttributes -> mAttributes
+    android.os.AsyncTask loadBitmap -> loadBitmap
+    android.graphics.Bitmap mBitmap -> mBitmap
+    java.lang.String val$jobName -> val$jobName
+    android.net.Uri val$imageFile -> val$imageFile
+    int val$fittingMode -> val$fittingMode
+    android.support.v4.print.PrintHelperKitkat this$0 -> this$0
+    300:368:void onLayout(android.print.PrintAttributes,android.print.PrintAttributes,android.os.CancellationSignal,android.print.PrintDocumentAdapter$LayoutResultCallback,android.os.Bundle) -> onLayout
+    371:376:void cancelLoad() -> cancelLoad
+    381:384:void onFinish() -> onFinish
+    390:431:void onWrite(android.print.PageRange[],android.os.ParcelFileDescriptor,android.os.CancellationSignal,android.print.PrintDocumentAdapter$WriteResultCallback) -> onWrite
+    289:289:void access$100(android.support.v4.print.PrintHelperKitkat$2) -> access$100
+android.support.v4.print.PrintHelperKitkat$2$1 -> android.support.v4.print.PrintHelperKitkat$2$1:
+    android.os.CancellationSignal val$cancellationSignal -> val$cancellationSignal
+    android.print.PrintAttributes val$newPrintAttributes -> val$newPrintAttributes
+    android.print.PrintAttributes val$oldPrintAttributes -> val$oldPrintAttributes
+    android.print.PrintDocumentAdapter$LayoutResultCallback val$layoutResultCallback -> val$layoutResultCallback
+    android.support.v4.print.PrintHelperKitkat$2 this$1 -> this$1
+    321:329:void onPreExecute() -> onPreExecute
+    334:338:android.graphics.Bitmap doInBackground(android.net.Uri[]) -> doInBackground
+    343:357:void onPostExecute(android.graphics.Bitmap) -> onPostExecute
+    362:363:void onCancelled(android.graphics.Bitmap) -> onCancelled
+    316:316:void onCancelled(java.lang.Object) -> onCancelled
+    316:316:void onPostExecute(java.lang.Object) -> onPostExecute
+    316:316:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+android.support.v4.print.PrintHelperKitkat$2$1$1 -> android.support.v4.print.PrintHelperKitkat$2$1$1:
+    android.support.v4.print.PrintHelperKitkat$2$1 this$2 -> this$2
+    325:327:void onCancel() -> onCancel
 android.support.v4.text.BidiFormatter -> android.support.v4.text.BidiFormatter:
     android.support.v4.text.TextDirectionHeuristicCompat DEFAULT_TEXT_DIRECTION_HEURISTIC -> DEFAULT_TEXT_DIRECTION_HEURISTIC
     char LRE -> LRE
@@ -9325,6 +9376,664 @@ com.actionbarsherlock.widget.SuggestionsAdapter$ChildViewCache -> com.actionbars
     android.widget.ImageView mIcon1 -> mIcon1
     android.widget.ImageView mIcon2 -> mIcon2
     android.widget.ImageView mIconRefine -> mIconRefine
+com.google.gson.DefaultDateTypeAdapter -> com.a.a.a:
+    java.text.DateFormat enUsFormat -> a
+    java.text.DateFormat localFormat -> b
+    java.text.DateFormat iso8601Format -> c
+    71:74:com.google.gson.JsonElement serialize$107ba52a(java.util.Date) -> a
+    114:117:java.lang.String toString() -> toString
+    35:35:com.google.gson.JsonElement serialize$117eb95b(java.lang.Object) -> a
+com.google.gson.ExclusionStrategy -> com.a.a.b:
+    boolean shouldSkipField$6e8224bb() -> a
+    boolean shouldSkipClass$1b2d8b94() -> b
+com.google.gson.FieldAttributes -> com.a.a.c:
+    java.lang.reflect.Field field -> a
+com.google.gson.FieldNamingPolicy -> com.a.a.d:
+    com.google.gson.FieldNamingPolicy IDENTITY -> a
+    com.google.gson.FieldNamingPolicy UPPER_CAMEL_CASE -> b
+    com.google.gson.FieldNamingPolicy UPPER_CAMEL_CASE_WITH_SPACES -> c
+    com.google.gson.FieldNamingPolicy LOWER_CASE_WITH_UNDERSCORES -> d
+    com.google.gson.FieldNamingPolicy LOWER_CASE_WITH_DASHES -> e
+    com.google.gson.FieldNamingPolicy[] $VALUES -> f
+    30:30:com.google.gson.FieldNamingPolicy[] values() -> values
+    30:30:com.google.gson.FieldNamingPolicy valueOf(java.lang.String) -> valueOf
+    30:30:java.lang.String access$100(java.lang.String) -> a
+    30:30:java.lang.String access$200(java.lang.String,java.lang.String) -> a
+com.google.gson.FieldNamingPolicy$1 -> com.a.a.e:
+    38:38:java.lang.String translateName(java.lang.reflect.Field) -> a
+com.google.gson.FieldNamingPolicy$2 -> com.a.a.f:
+    54:54:java.lang.String translateName(java.lang.reflect.Field) -> a
+com.google.gson.FieldNamingPolicy$3 -> com.a.a.g:
+    73:73:java.lang.String translateName(java.lang.reflect.Field) -> a
+com.google.gson.FieldNamingPolicy$4 -> com.a.a.h:
+    91:91:java.lang.String translateName(java.lang.reflect.Field) -> a
+com.google.gson.FieldNamingPolicy$5 -> com.a.a.i:
+    114:114:java.lang.String translateName(java.lang.reflect.Field) -> a
+com.google.gson.FieldNamingStrategy -> com.a.a.j:
+    java.lang.String translateName(java.lang.reflect.Field) -> a
+com.google.gson.Gson -> com.a.a.k:
+    java.lang.ThreadLocal calls -> c
+    java.util.Map typeTokenCache -> d
+    java.util.List factories -> e
+    com.google.gson.internal.ConstructorConstructor constructorConstructor -> f
+    boolean serializeNulls -> g
+    boolean htmlSafe -> h
+    boolean generateNonExecutableJson -> i
+    boolean prettyPrinting -> j
+    com.google.gson.JsonDeserializationContext deserializationContext -> a
+    com.google.gson.JsonSerializationContext serializationContext -> b
+    332:368:com.google.gson.TypeAdapter getAdapter(com.google.gson.reflect.TypeToken) -> a
+    420:435:com.google.gson.TypeAdapter getDelegateAdapter(com.google.gson.TypeAdapterFactory,com.google.gson.reflect.TypeToken) -> a
+    445:445:com.google.gson.TypeAdapter getAdapter(java.lang.Class) -> a
+    898:898:java.lang.String toString() -> toString
+    97:97:void access$000$6417f241(double) -> a
+com.google.gson.Gson$1 -> com.a.a.l:
+    com.google.gson.Gson this$0 -> a
+com.google.gson.Gson$2 -> com.a.a.m:
+    com.google.gson.Gson this$0 -> a
+com.google.gson.Gson$3 -> com.a.a.n:
+    com.google.gson.Gson this$0 -> a
+    250:250:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.Gson$4 -> com.a.a.o:
+    com.google.gson.Gson this$0 -> a
+    274:274:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.Gson$5 -> com.a.a.p:
+    com.google.gson.Gson this$0 -> a
+    306:306:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.Gson$FutureTypeAdapter -> com.a.a.q:
+    com.google.gson.TypeAdapter delegate -> a
+    889:893:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.GsonBuilder -> com.a.a.r:
+    com.google.gson.internal.Excluder excluder -> a
+    com.google.gson.LongSerializationPolicy longSerializationPolicy -> b
+    com.google.gson.FieldNamingStrategy fieldNamingPolicy -> c
+    java.util.Map instanceCreators -> d
+    java.util.List factories -> e
+    java.util.List hierarchyFactories -> f
+    boolean serializeNulls -> g
+    java.lang.String datePattern -> h
+    int dateStyle -> i
+    int timeStyle -> j
+    boolean complexMapKeySerialization -> k
+    boolean serializeSpecialFloatingPointValues -> l
+    boolean escapeHtmlChars -> m
+    boolean prettyPrinting -> n
+    boolean generateNonExecutableJson -> o
+com.google.gson.InstanceCreator -> com.a.a.s:
+com.google.gson.JsonArray -> com.a.a.t:
+    java.util.List elements -> a
+    58:62:void add(com.google.gson.JsonElement) -> a
+    89:89:java.util.Iterator iterator() -> iterator
+    114:117:java.lang.Number getAsNumber() -> a
+    130:133:java.lang.String getAsString() -> b
+    276:279:boolean getAsBoolean() -> c
+    284:284:boolean equals(java.lang.Object) -> equals
+    289:289:int hashCode() -> hashCode
+com.google.gson.JsonDeserializationContext -> com.a.a.u:
+com.google.gson.JsonDeserializer -> com.a.a.v:
+com.google.gson.JsonElement -> com.a.a.w:
+    46:46:boolean isJsonArray() -> d
+    55:55:boolean isJsonObject() -> e
+    64:64:boolean isJsonPrimitive() -> f
+    74:74:boolean isJsonNull() -> g
+    87:90:com.google.gson.JsonObject getAsJsonObject() -> h
+    103:106:com.google.gson.JsonArray getAsJsonArray() -> i
+    119:122:com.google.gson.JsonPrimitive getAsJsonPrimitive() -> j
+    152:152:boolean getAsBoolean() -> c
+    178:178:java.lang.Number getAsNumber() -> a
+    191:191:java.lang.String getAsString() -> b
+    321:327:java.lang.String toString() -> toString
+com.google.gson.JsonIOException -> com.a.a.x:
+com.google.gson.JsonNull -> com.a.a.y:
+    com.google.gson.JsonNull INSTANCE -> a
+    53:53:int hashCode() -> hashCode
+    61:61:boolean equals(java.lang.Object) -> equals
+com.google.gson.JsonObject -> com.a.a.z:
+    com.google.gson.internal.LinkedTreeMap members -> a
+    54:58:void add(java.lang.String,com.google.gson.JsonElement) -> a
+    132:132:java.util.Set entrySet() -> k
+    187:187:boolean equals(java.lang.Object) -> equals
+    193:193:int hashCode() -> hashCode
+com.google.gson.JsonParseException -> com.a.a.aa:
+com.google.gson.JsonPrimitive -> com.a.a.ab:
+    java.lang.Class[] PRIMITIVE_TYPES -> a
+    java.lang.Object value -> b
+    94:104:void setValue(java.lang.Object) -> a
+    112:112:boolean isBoolean() -> k
+    132:136:boolean getAsBoolean() -> c
+    146:146:boolean isNumber() -> l
+    157:157:java.lang.Number getAsNumber() -> a
+    166:166:boolean isString() -> m
+    176:181:java.lang.String getAsString() -> b
+    289:301:int hashCode() -> hashCode
+    306:326:boolean equals(java.lang.Object) -> equals
+    334:339:boolean isIntegral(com.google.gson.JsonPrimitive) -> a
+com.google.gson.JsonSerializationContext -> com.a.a.ac:
+com.google.gson.JsonSerializer -> com.a.a.ad:
+    com.google.gson.JsonElement serialize$117eb95b(java.lang.Object) -> a
+com.google.gson.LongSerializationPolicy -> com.a.a.ae:
+    com.google.gson.LongSerializationPolicy DEFAULT -> a
+    com.google.gson.LongSerializationPolicy STRING -> b
+    com.google.gson.LongSerializationPolicy[] $VALUES -> c
+    27:27:com.google.gson.LongSerializationPolicy[] values() -> values
+    27:27:com.google.gson.LongSerializationPolicy valueOf(java.lang.String) -> valueOf
+com.google.gson.LongSerializationPolicy$1 -> com.a.a.af:
+com.google.gson.LongSerializationPolicy$2 -> com.a.a.ag:
+com.google.gson.TreeTypeAdapter -> com.a.a.ah:
+    com.google.gson.JsonSerializer serializer -> a
+    com.google.gson.JsonDeserializer deserializer -> b
+    com.google.gson.Gson gson -> c
+    com.google.gson.reflect.TypeToken typeToken -> d
+    com.google.gson.TypeAdapterFactory skipPast -> e
+    com.google.gson.TypeAdapter delegate -> f
+    62:72:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+    85:85:com.google.gson.TypeAdapterFactory newFactory(com.google.gson.reflect.TypeToken,java.lang.Object) -> a
+com.google.gson.TreeTypeAdapter$SingleTypeFactory -> com.a.a.ai:
+    com.google.gson.reflect.TypeToken exactType -> a
+    boolean matchRawType -> b
+    java.lang.Class hierarchyType -> c
+    com.google.gson.JsonSerializer serializer -> d
+    com.google.gson.JsonDeserializer deserializer -> e
+    131:134:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.TypeAdapter -> com.a.a.aj:
+    void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+    229:233:com.google.gson.JsonElement toJsonTree(java.lang.Object) -> a
+com.google.gson.TypeAdapterFactory -> com.a.a.ak:
+    com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.annotations.Expose -> com.a.a.a.a:
+    boolean serialize() -> a
+    boolean deserialize() -> b
+com.google.gson.annotations.SerializedName -> com.a.a.a.b:
+    java.lang.String value() -> a
+com.google.gson.annotations.Since -> com.a.a.a.c:
+    double value() -> a
+com.google.gson.annotations.Until -> com.a.a.a.d:
+    double value() -> a
+com.google.gson.internal.$Gson$Preconditions -> com.a.a.b.a:
+    34:37:java.lang.Object checkNotNull(java.lang.Object) -> a
+    41:44:void checkArgument(boolean) -> a
+com.google.gson.internal.$Gson$Types -> com.a.a.b.b:
+    java.lang.reflect.Type[] EMPTY_TYPE_ARRAY -> a
+    65:65:java.lang.reflect.GenericArrayType arrayOf(java.lang.reflect.Type) -> f
+    93:112:java.lang.reflect.Type canonicalize(java.lang.reflect.Type) -> a
+    117:145:java.lang.Class getRawType(java.lang.reflect.Type) -> b
+    158:208:boolean equals(java.lang.reflect.Type,java.lang.reflect.Type) -> a
+    217:217:java.lang.String typeToString(java.lang.reflect.Type) -> c
+    226:256:java.lang.reflect.Type getGenericSupertype(java.lang.reflect.Type,java.lang.Class,java.lang.Class) -> a
+    267:268:java.lang.reflect.Type getSupertype(java.lang.reflect.Type,java.lang.Class,java.lang.Class) -> b
+    277:277:java.lang.reflect.Type getArrayComponentType(java.lang.reflect.Type) -> d
+    287:295:java.lang.reflect.Type getCollectionElementType(java.lang.reflect.Type,java.lang.Class) -> a
+    308:318:java.lang.reflect.Type[] getMapKeyAndValueTypes(java.lang.reflect.Type,java.lang.Class) -> b
+    324:388:java.lang.reflect.Type resolve(java.lang.reflect.Type,java.lang.Class,java.lang.reflect.Type) -> a
+    42:42:void access$000(java.lang.reflect.Type) -> e
+    42:42:int access$100(java.lang.Object) -> a
+com.google.gson.internal.$Gson$Types$GenericArrayTypeImpl -> com.a.a.b.c:
+    java.lang.reflect.Type componentType -> a
+    506:506:java.lang.reflect.Type getGenericComponentType() -> getGenericComponentType
+    510:510:boolean equals(java.lang.Object) -> equals
+    515:515:int hashCode() -> hashCode
+    519:519:java.lang.String toString() -> toString
+com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl -> com.a.a.b.d:
+    java.lang.reflect.Type ownerType -> a
+    java.lang.reflect.Type rawType -> b
+    java.lang.reflect.Type[] typeArguments -> c
+    458:458:java.lang.reflect.Type[] getActualTypeArguments() -> getActualTypeArguments
+    462:462:java.lang.reflect.Type getRawType() -> getRawType
+    466:466:java.lang.reflect.Type getOwnerType() -> getOwnerType
+    470:470:boolean equals(java.lang.Object) -> equals
+    475:475:int hashCode() -> hashCode
+    481:492:java.lang.String toString() -> toString
+com.google.gson.internal.$Gson$Types$WildcardTypeImpl -> com.a.a.b.e:
+    java.lang.reflect.Type upperBound -> a
+    java.lang.reflect.Type lowerBound -> b
+    554:554:java.lang.reflect.Type[] getUpperBounds() -> getUpperBounds
+    558:558:java.lang.reflect.Type[] getLowerBounds() -> getLowerBounds
+    562:562:boolean equals(java.lang.Object) -> equals
+    568:568:int hashCode() -> hashCode
+    573:578:java.lang.String toString() -> toString
+com.google.gson.internal.ConstructorConstructor -> com.a.a.b.f:
+    java.util.Map instanceCreators -> a
+    52:90:com.google.gson.internal.ObjectConstructor get(com.google.gson.reflect.TypeToken) -> a
+    95:119:com.google.gson.internal.ObjectConstructor newDefaultConstructor(java.lang.Class) -> a
+    218:218:java.lang.String toString() -> toString
+com.google.gson.internal.ConstructorConstructor$1 -> com.a.a.b.g:
+    com.google.gson.InstanceCreator val$typeCreator -> a
+    java.lang.reflect.Type val$type -> b
+    com.google.gson.internal.ConstructorConstructor this$0 -> c
+com.google.gson.internal.ConstructorConstructor$10 -> com.a.a.b.h:
+    com.google.gson.internal.ConstructorConstructor this$0 -> a
+com.google.gson.internal.ConstructorConstructor$11 -> com.a.a.b.i:
+    com.google.gson.internal.ConstructorConstructor this$0 -> a
+com.google.gson.internal.ConstructorConstructor$12 -> com.a.a.b.j:
+    com.google.gson.internal.UnsafeAllocator unsafeAllocator -> d
+    java.lang.Class val$rawType -> a
+    java.lang.reflect.Type val$type -> b
+    com.google.gson.internal.ConstructorConstructor this$0 -> c
+com.google.gson.internal.ConstructorConstructor$2 -> com.a.a.b.k:
+    com.google.gson.InstanceCreator val$rawTypeCreator -> a
+    java.lang.reflect.Type val$type -> b
+    com.google.gson.internal.ConstructorConstructor this$0 -> c
+com.google.gson.internal.ConstructorConstructor$3 -> com.a.a.b.l:
+    java.lang.reflect.Constructor val$constructor -> a
+    com.google.gson.internal.ConstructorConstructor this$0 -> b
+com.google.gson.internal.ConstructorConstructor$4 -> com.a.a.b.m:
+    com.google.gson.internal.ConstructorConstructor this$0 -> a
+com.google.gson.internal.ConstructorConstructor$5 -> com.a.a.b.n:
+    java.lang.reflect.Type val$type -> a
+    com.google.gson.internal.ConstructorConstructor this$0 -> b
+com.google.gson.internal.ConstructorConstructor$6 -> com.a.a.b.o:
+    com.google.gson.internal.ConstructorConstructor this$0 -> a
+com.google.gson.internal.ConstructorConstructor$7 -> com.a.a.b.p:
+    com.google.gson.internal.ConstructorConstructor this$0 -> a
+com.google.gson.internal.ConstructorConstructor$8 -> com.a.a.b.q:
+    com.google.gson.internal.ConstructorConstructor this$0 -> a
+com.google.gson.internal.ConstructorConstructor$9 -> com.a.a.b.r:
+    com.google.gson.internal.ConstructorConstructor this$0 -> a
+com.google.gson.internal.Excluder -> com.a.a.b.s:
+    com.google.gson.internal.Excluder DEFAULT -> a
+    double version -> b
+    int modifiers -> c
+    boolean serializeInnerClasses -> d
+    boolean requireExpose -> e
+    java.util.List serializationStrategies -> f
+    java.util.List deserializationStrategies -> g
+    63:65:com.google.gson.internal.Excluder clone() -> a
+    112:120:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+    150:188:boolean excludeField(java.lang.reflect.Field,boolean) -> a
+    192:212:boolean excludeClass(java.lang.Class,boolean) -> a
+    216:216:boolean isAnonymousOrLocal(java.lang.Class) -> a
+    221:221:boolean isInnerClass(java.lang.Class) -> b
+    229:229:boolean isValidVersion(com.google.gson.annotations.Since,com.google.gson.annotations.Until) -> a
+    50:50:java.lang.Object clone() -> clone
+com.google.gson.internal.Excluder$1 -> com.a.a.b.t:
+    com.google.gson.TypeAdapter delegate -> f
+    boolean val$skipDeserialize -> a
+    boolean val$skipSerialize -> b
+    com.google.gson.Gson val$gson -> c
+    com.google.gson.reflect.TypeToken val$type -> d
+    com.google.gson.internal.Excluder this$0 -> e
+    133:138:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.LazilyParsedNumber -> com.a.a.b.u:
+    java.lang.String value -> a
+    36:41:int intValue() -> intValue
+    49:51:long longValue() -> longValue
+    57:57:float floatValue() -> floatValue
+    62:62:double doubleValue() -> doubleValue
+    67:67:java.lang.String toString() -> toString
+com.google.gson.internal.LinkedTreeMap -> com.a.a.b.v:
+    java.util.Comparator NATURAL_ORDER -> g
+    java.util.Comparator comparator -> a
+    com.google.gson.internal.LinkedTreeMap$Node root -> b
+    int size -> c
+    int modCount -> d
+    com.google.gson.internal.LinkedTreeMap$Node header -> e
+    com.google.gson.internal.LinkedTreeMap$EntrySet entrySet -> h
+    com.google.gson.internal.LinkedTreeMap$KeySet keySet -> i
+    boolean $assertionsDisabled -> f
+    78:78:int size() -> size
+    82:83:java.lang.Object get(java.lang.Object) -> get
+    87:87:boolean containsKey(java.lang.Object) -> containsKey
+    91:97:java.lang.Object put(java.lang.Object,java.lang.Object) -> put
+    101:108:void clear() -> clear
+    111:112:java.lang.Object remove(java.lang.Object) -> remove
+    122:180:com.google.gson.internal.LinkedTreeMap$Node find(java.lang.Object,boolean) -> a
+    186:188:com.google.gson.internal.LinkedTreeMap$Node findByObject(java.lang.Object) -> b
+    202:204:com.google.gson.internal.LinkedTreeMap$Node findByEntry(java.util.Map$Entry) -> a
+    218:274:void removeInternal(com.google.gson.internal.LinkedTreeMap$Node,boolean) -> a
+    277:281:com.google.gson.internal.LinkedTreeMap$Node removeInternalByKey(java.lang.Object) -> a
+    285:301:void replaceInParent(com.google.gson.internal.LinkedTreeMap$Node,com.google.gson.internal.LinkedTreeMap$Node) -> a
+    311:368:void rebalance(com.google.gson.internal.LinkedTreeMap$Node,boolean) -> b
+    374:396:void rotateLeft(com.google.gson.internal.LinkedTreeMap$Node) -> a
+    402:424:void rotateRight(com.google.gson.internal.LinkedTreeMap$Node) -> b
+    430:431:java.util.Set entrySet() -> entrySet
+    435:436:java.util.Set keySet() -> keySet
+com.google.gson.internal.LinkedTreeMap$1 -> com.a.a.b.w:
+    40:40:int compare(java.lang.Object,java.lang.Object) -> compare
+com.google.gson.internal.LinkedTreeMap$EntrySet -> com.a.a.b.x:
+    com.google.gson.internal.LinkedTreeMap this$0 -> a
+    559:559:int size() -> size
+    563:563:java.util.Iterator iterator() -> iterator
+    571:571:boolean contains(java.lang.Object) -> contains
+    575:584:boolean remove(java.lang.Object) -> remove
+    588:589:void clear() -> clear
+com.google.gson.internal.LinkedTreeMap$EntrySet$1 -> com.a.a.b.y:
+    com.google.gson.internal.LinkedTreeMap$EntrySet this$1 -> a
+    563:563:java.lang.Object next() -> next
+com.google.gson.internal.LinkedTreeMap$KeySet -> com.a.a.b.z:
+    com.google.gson.internal.LinkedTreeMap this$0 -> a
+    594:594:int size() -> size
+    598:598:java.util.Iterator iterator() -> iterator
+    606:606:boolean contains(java.lang.Object) -> contains
+    610:610:boolean remove(java.lang.Object) -> remove
+    614:615:void clear() -> clear
+com.google.gson.internal.LinkedTreeMap$KeySet$1 -> com.a.a.b.aa:
+    com.google.gson.internal.LinkedTreeMap$KeySet this$1 -> a
+    600:600:java.lang.Object next() -> next
+com.google.gson.internal.LinkedTreeMap$LinkedTreeMapIterator -> com.a.a.b.ab:
+    com.google.gson.internal.LinkedTreeMap$Node next -> b
+    com.google.gson.internal.LinkedTreeMap$Node lastReturned -> c
+    int expectedModCount -> d
+    com.google.gson.internal.LinkedTreeMap this$0 -> e
+    532:532:boolean hasNext() -> hasNext
+    536:544:com.google.gson.internal.LinkedTreeMap$Node nextNode() -> a
+    548:554:void remove() -> remove
+com.google.gson.internal.LinkedTreeMap$Node -> com.a.a.b.ac:
+    com.google.gson.internal.LinkedTreeMap$Node parent -> a
+    com.google.gson.internal.LinkedTreeMap$Node left -> b
+    com.google.gson.internal.LinkedTreeMap$Node right -> c
+    com.google.gson.internal.LinkedTreeMap$Node next -> d
+    com.google.gson.internal.LinkedTreeMap$Node prev -> e
+    java.lang.Object key -> f
+    java.lang.Object value -> g
+    int height -> h
+    467:467:java.lang.Object getKey() -> getKey
+    471:471:java.lang.Object getValue() -> getValue
+    475:477:java.lang.Object setValue(java.lang.Object) -> setValue
+    482:487:boolean equals(java.lang.Object) -> equals
+    491:491:int hashCode() -> hashCode
+    496:496:java.lang.String toString() -> toString
+    503:509:com.google.gson.internal.LinkedTreeMap$Node first() -> a
+    516:522:com.google.gson.internal.LinkedTreeMap$Node last() -> b
+com.google.gson.internal.ObjectConstructor -> com.a.a.b.ad:
+com.google.gson.internal.Primitives -> com.a.a.b.ae:
+    java.util.Map PRIMITIVE_TO_WRAPPER_TYPE -> a
+    java.util.Map WRAPPER_TO_PRIMITIVE_TYPE -> b
+    62:64:void add(java.util.Map,java.util.Map,java.lang.Class,java.lang.Class) -> a
+    70:70:boolean isPrimitive(java.lang.reflect.Type) -> a
+com.google.gson.internal.Streams -> com.a.a.b.af:
+    68:69:void write(com.google.gson.JsonElement,com.google.gson.stream.JsonWriter) -> a
+com.google.gson.internal.UnsafeAllocator -> com.a.a.b.ag:
+    39:97:com.google.gson.internal.UnsafeAllocator create() -> a
+com.google.gson.internal.UnsafeAllocator$1 -> com.a.a.b.ah:
+    java.lang.reflect.Method val$allocateInstance -> a
+    java.lang.Object val$unsafe -> b
+com.google.gson.internal.UnsafeAllocator$2 -> com.a.a.b.ai:
+    java.lang.reflect.Method val$newInstance -> a
+com.google.gson.internal.UnsafeAllocator$3 -> com.a.a.b.aj:
+    java.lang.reflect.Method val$newInstance -> a
+    int val$constructorId -> b
+com.google.gson.internal.UnsafeAllocator$4 -> com.a.a.b.ak:
+com.google.gson.internal.bind.ArrayTypeAdapter -> com.a.a.b.a.a:
+    com.google.gson.TypeAdapterFactory FACTORY -> a
+    java.lang.Class componentType -> b
+    com.google.gson.TypeAdapter componentTypeAdapter -> c
+    85:96:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.ArrayTypeAdapter$1 -> com.a.a.b.a.b:
+    42:49:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.internal.bind.CollectionTypeAdapterFactory -> com.a.a.b.a.c:
+    com.google.gson.internal.ConstructorConstructor constructorConstructor -> a
+    44:57:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.internal.bind.CollectionTypeAdapterFactory$Adapter -> com.a.a.b.a.d:
+    com.google.gson.TypeAdapter elementTypeAdapter -> a
+    com.google.gson.internal.ObjectConstructor constructor -> b
+    60:60:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.DateTypeAdapter -> com.a.a.b.a.e:
+    com.google.gson.TypeAdapterFactory FACTORY -> a
+    java.text.DateFormat enUsFormat -> b
+    java.text.DateFormat localFormat -> c
+    java.text.DateFormat iso8601Format -> d
+    86:92:void write(com.google.gson.stream.JsonWriter,java.util.Date) -> a
+    41:41:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.DateTypeAdapter$1 -> com.a.a.b.a.f:
+    45:45:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.internal.bind.JsonTreeWriter -> com.a.a.b.a.g:
+    java.io.Writer UNWRITABLE_WRITER -> c
+    com.google.gson.JsonPrimitive SENTINEL_CLOSED -> d
+    java.util.List stack -> e
+    java.lang.String pendingName -> f
+    com.google.gson.JsonElement product -> g
+    65:68:com.google.gson.JsonElement get() -> a
+    72:72:com.google.gson.JsonElement peek() -> h
+    76:89:void put(com.google.gson.JsonElement) -> a
+    95:98:com.google.gson.stream.JsonWriter beginArray() -> b
+    102:110:com.google.gson.stream.JsonWriter endArray() -> c
+    114:117:com.google.gson.stream.JsonWriter beginObject() -> d
+    121:129:com.google.gson.stream.JsonWriter endObject() -> e
+    133:141:com.google.gson.stream.JsonWriter name(java.lang.String) -> a
+    145:149:com.google.gson.stream.JsonWriter value(java.lang.String) -> b
+    153:154:com.google.gson.stream.JsonWriter nullValue() -> f
+    158:159:com.google.gson.stream.JsonWriter value(boolean) -> a
+    171:172:com.google.gson.stream.JsonWriter value(long) -> a
+    176:188:com.google.gson.stream.JsonWriter value(java.lang.Number) -> a
+    192:192:void flush() -> flush
+    195:199:void close() -> close
+com.google.gson.internal.bind.JsonTreeWriter$1 -> com.a.a.b.a.h:
+    36:36:void write(char[],int,int) -> write
+    39:39:void flush() -> flush
+    42:42:void close() -> close
+com.google.gson.internal.bind.MapTypeAdapterFactory -> com.a.a.b.a.i:
+    com.google.gson.internal.ConstructorConstructor constructorConstructor -> b
+    boolean complexMapKeySerialization -> a
+    116:133:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter -> com.a.a.b.a.j:
+    com.google.gson.TypeAdapter keyTypeAdapter -> b
+    com.google.gson.TypeAdapter valueTypeAdapter -> c
+    com.google.gson.internal.ObjectConstructor constructor -> d
+    com.google.gson.internal.bind.MapTypeAdapterFactory this$0 -> a
+    145:145:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.ObjectTypeAdapter -> com.a.a.b.a.k:
+    com.google.gson.TypeAdapterFactory FACTORY -> a
+    com.google.gson.Gson gson -> b
+    95:108:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.ObjectTypeAdapter$1 -> com.a.a.b.a.l:
+    41:44:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory -> com.a.a.b.a.m:
+    com.google.gson.internal.ConstructorConstructor constructorConstructor -> a
+    com.google.gson.FieldNamingStrategy fieldNamingPolicy -> b
+    com.google.gson.internal.Excluder excluder -> c
+    56:56:boolean excludeField(java.lang.reflect.Field,boolean) -> a
+    65:72:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+    102:129:java.util.Map getBoundFields(com.google.gson.Gson,com.google.gson.reflect.TypeToken,java.lang.Class) -> a
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$1 -> com.a.a.b.a.n:
+    com.google.gson.TypeAdapter typeAdapter -> a
+    com.google.gson.Gson val$context -> b
+    com.google.gson.reflect.TypeToken val$fieldType -> c
+    java.lang.reflect.Field val$field -> d
+    boolean val$isPrimitive -> e
+    com.google.gson.internal.bind.ReflectiveTypeAdapterFactory this$0 -> f
+    86:90:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter -> com.a.a.b.a.o:
+    com.google.gson.internal.ObjectConstructor constructor -> a
+    java.util.Map boundFields -> b
+    185:202:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$BoundField -> com.a.a.b.a.p:
+    java.lang.String name -> g
+    boolean serialized -> h
+    boolean deserialized -> i
+    void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.SqlDateTypeAdapter -> com.a.a.b.a.q:
+    com.google.gson.TypeAdapterFactory FACTORY -> a
+    java.text.DateFormat format -> b
+    65:66:void write(com.google.gson.stream.JsonWriter,java.sql.Date) -> a
+    38:38:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.SqlDateTypeAdapter$1 -> com.a.a.b.a.r:
+    42:42:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.internal.bind.TimeTypeAdapter -> com.a.a.b.a.s:
+    com.google.gson.TypeAdapterFactory FACTORY -> a
+    java.text.DateFormat format -> b
+    64:65:void write(com.google.gson.stream.JsonWriter,java.sql.Time) -> a
+    40:40:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TimeTypeAdapter$1 -> com.a.a.b.a.t:
+    44:44:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper -> com.a.a.b.a.u:
+    com.google.gson.Gson context -> a
+    com.google.gson.TypeAdapter delegate -> b
+    java.lang.reflect.Type type -> c
+    52:69:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters -> com.a.a.b.a.v:
+    com.google.gson.TypeAdapter CLASS -> a
+    com.google.gson.TypeAdapterFactory CLASS_FACTORY -> b
+    com.google.gson.TypeAdapter BIT_SET -> c
+    com.google.gson.TypeAdapterFactory BIT_SET_FACTORY -> d
+    com.google.gson.TypeAdapter BOOLEAN -> e
+    com.google.gson.TypeAdapter BOOLEAN_AS_STRING -> f
+    com.google.gson.TypeAdapterFactory BOOLEAN_FACTORY -> g
+    com.google.gson.TypeAdapter BYTE -> h
+    com.google.gson.TypeAdapterFactory BYTE_FACTORY -> i
+    com.google.gson.TypeAdapter SHORT -> j
+    com.google.gson.TypeAdapterFactory SHORT_FACTORY -> k
+    com.google.gson.TypeAdapter INTEGER -> l
+    com.google.gson.TypeAdapterFactory INTEGER_FACTORY -> m
+    com.google.gson.TypeAdapter LONG -> n
+    com.google.gson.TypeAdapter FLOAT -> o
+    com.google.gson.TypeAdapter DOUBLE -> p
+    com.google.gson.TypeAdapter NUMBER -> q
+    com.google.gson.TypeAdapterFactory NUMBER_FACTORY -> r
+    com.google.gson.TypeAdapter CHARACTER -> s
+    com.google.gson.TypeAdapterFactory CHARACTER_FACTORY -> t
+    com.google.gson.TypeAdapter STRING -> u
+    com.google.gson.TypeAdapter BIG_DECIMAL -> v
+    com.google.gson.TypeAdapter BIG_INTEGER -> w
+    com.google.gson.TypeAdapterFactory STRING_FACTORY -> x
+    com.google.gson.TypeAdapter STRING_BUILDER -> y
+    com.google.gson.TypeAdapterFactory STRING_BUILDER_FACTORY -> z
+    com.google.gson.TypeAdapter STRING_BUFFER -> A
+    com.google.gson.TypeAdapterFactory STRING_BUFFER_FACTORY -> B
+    com.google.gson.TypeAdapter URL -> C
+    com.google.gson.TypeAdapterFactory URL_FACTORY -> D
+    com.google.gson.TypeAdapter URI -> E
+    com.google.gson.TypeAdapterFactory URI_FACTORY -> F
+    com.google.gson.TypeAdapter INET_ADDRESS -> G
+    com.google.gson.TypeAdapterFactory INET_ADDRESS_FACTORY -> H
+    com.google.gson.TypeAdapter UUID -> I
+    com.google.gson.TypeAdapterFactory UUID_FACTORY -> J
+    com.google.gson.TypeAdapterFactory TIMESTAMP_FACTORY -> K
+    com.google.gson.TypeAdapter CALENDAR -> L
+    com.google.gson.TypeAdapterFactory CALENDAR_FACTORY -> M
+    com.google.gson.TypeAdapter LOCALE -> N
+    com.google.gson.TypeAdapterFactory LOCALE_FACTORY -> O
+    com.google.gson.TypeAdapter JSON_ELEMENT -> P
+    com.google.gson.TypeAdapterFactory JSON_ELEMENT_FACTORY -> Q
+    com.google.gson.TypeAdapterFactory ENUM_FACTORY -> R
+    779:779:com.google.gson.TypeAdapterFactory newFactory(java.lang.Class,com.google.gson.TypeAdapter) -> a
+    792:792:com.google.gson.TypeAdapterFactory newFactory(java.lang.Class,java.lang.Class,com.google.gson.TypeAdapter) -> a
+    822:822:com.google.gson.TypeAdapterFactory newTypeHierarchyFactory(java.lang.Class,com.google.gson.TypeAdapter) -> b
+com.google.gson.internal.bind.TypeAdapters$1 -> com.a.a.b.a.w:
+    61:61:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$10 -> com.a.a.b.a.x:
+    287:287:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$11 -> com.a.a.b.a.y:
+    302:302:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$12 -> com.a.a.b.a.z:
+    324:324:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$13 -> com.a.a.b.a.aa:
+    346:346:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$14 -> com.a.a.b.a.ab:
+    366:366:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$15 -> com.a.a.b.a.ac:
+    384:384:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$16 -> com.a.a.b.a.ad:
+    404:404:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$17 -> com.a.a.b.a.ae:
+    422:422:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$18 -> com.a.a.b.a.af:
+    440:440:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$19 -> com.a.a.b.a.ag:
+    458:458:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$2 -> com.a.a.b.a.ah:
+    84:84:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$20 -> com.a.a.b.a.ai:
+    480:480:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$21 -> com.a.a.b.a.aj:
+    499:499:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$22 -> com.a.a.b.a.ak:
+    519:524:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.internal.bind.TypeAdapters$22$1 -> com.a.a.b.a.al:
+    com.google.gson.TypeAdapter val$dateTypeAdapter -> a
+    com.google.gson.internal.bind.TypeAdapters$22 this$0 -> b
+    524:524:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$23 -> com.a.a.b.a.am:
+    537:537:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$24 -> com.a.a.b.a.an:
+    605:605:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$25 -> com.a.a.b.a.ao:
+    681:709:void write(com.google.gson.stream.JsonWriter,com.google.gson.JsonElement) -> a
+    642:642:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$26 -> com.a.a.b.a.ap:
+    755:762:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+com.google.gson.internal.bind.TypeAdapters$28 -> com.a.a.b.a.aq:
+    java.lang.Class val$type -> a
+    com.google.gson.TypeAdapter val$typeAdapter -> b
+    782:782:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+    785:785:java.lang.String toString() -> toString
+com.google.gson.internal.bind.TypeAdapters$29 -> com.a.a.b.a.ar:
+    java.lang.Class val$unboxed -> a
+    java.lang.Class val$boxed -> b
+    com.google.gson.TypeAdapter val$typeAdapter -> c
+    795:796:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+    799:799:java.lang.String toString() -> toString
+com.google.gson.internal.bind.TypeAdapters$3 -> com.a.a.b.a.as:
+    143:143:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$30 -> com.a.a.b.a.at:
+    java.lang.Class val$base -> a
+    java.lang.Class val$sub -> b
+    com.google.gson.TypeAdapter val$typeAdapter -> c
+    810:811:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+    814:814:java.lang.String toString() -> toString
+com.google.gson.internal.bind.TypeAdapters$31 -> com.a.a.b.a.au:
+    java.lang.Class val$clazz -> a
+    com.google.gson.TypeAdapter val$typeAdapter -> b
+    825:825:com.google.gson.TypeAdapter create(com.google.gson.Gson,com.google.gson.reflect.TypeToken) -> a
+    828:828:java.lang.String toString() -> toString
+com.google.gson.internal.bind.TypeAdapters$4 -> com.a.a.b.a.av:
+    169:169:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$5 -> com.a.a.b.a.aw:
+    186:186:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$6 -> com.a.a.b.a.ax:
+    209:209:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$7 -> com.a.a.b.a.ay:
+    231:231:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$8 -> com.a.a.b.a.az:
+    253:253:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$9 -> com.a.a.b.a.ba:
+    272:272:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.internal.bind.TypeAdapters$EnumTypeAdapter -> com.a.a.b.a.bb:
+    java.util.Map nameToConstant -> a
+    java.util.Map constantToName -> b
+    717:717:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> a
+com.google.gson.reflect.TypeToken -> com.a.a.c.a:
+    java.lang.Class rawType -> a
+    java.lang.reflect.Type type -> b
+    int hashCode -> c
+    280:280:int hashCode() -> hashCode
+    284:284:boolean equals(java.lang.Object) -> equals
+    289:289:java.lang.String toString() -> toString
+    296:296:com.google.gson.reflect.TypeToken get(java.lang.reflect.Type) -> a
+    303:303:com.google.gson.reflect.TypeToken get(java.lang.Class) -> a
+com.google.gson.stream.JsonWriter -> com.a.a.d.a:
+    java.lang.String[] REPLACEMENT_CHARS -> c
+    java.lang.String[] HTML_SAFE_REPLACEMENT_CHARS -> d
+    java.io.Writer out -> e
+    int[] stack -> f
+    int stackSize -> g
+    java.lang.String indent -> h
+    java.lang.String separator -> i
+    boolean lenient -> a
+    boolean htmlSafe -> j
+    java.lang.String deferredName -> k
+    boolean serializeNulls -> b
+    235:236:void setLenient$1385ff() -> g
+    287:288:com.google.gson.stream.JsonWriter beginArray() -> b
+    297:297:com.google.gson.stream.JsonWriter endArray() -> c
+    307:308:com.google.gson.stream.JsonWriter beginObject() -> d
+    317:317:com.google.gson.stream.JsonWriter endObject() -> e
+    325:328:com.google.gson.stream.JsonWriter open(int,java.lang.String) -> a
+    337:350:com.google.gson.stream.JsonWriter close(int,int,java.lang.String) -> a
+    354:360:void push(int) -> a
+    366:369:int peek() -> a
+    376:377:void replaceTop(int) -> b
+    386:396:com.google.gson.stream.JsonWriter name(java.lang.String) -> a
+    400:405:void writeDeferredName() -> h
+    414:420:com.google.gson.stream.JsonWriter value(java.lang.String) -> b
+    429:439:com.google.gson.stream.JsonWriter nullValue() -> f
+    448:451:com.google.gson.stream.JsonWriter value(boolean) -> a
+    477:480:com.google.gson.stream.JsonWriter value(long) -> a
+    491:503:com.google.gson.stream.JsonWriter value(java.lang.Number) -> a
+    511:515:void flush() -> flush
+    523:530:void close() -> close
+    533:562:void string(java.lang.String) -> c
+    565:573:void newline() -> i
+    600:631:void beforeValue(boolean) -> b
 cz.mpelant.fitchecker.BootReceiver -> cz.mpelant.fitchecker.BootReceiver:
     java.lang.String TAG -> a
     16:23:void onReceive(android.content.Context,android.content.Intent) -> onReceive
@@ -9340,31 +10049,45 @@ cz.mpelant.fitchecker.UpdateService$MyDownloader -> cz.mpelant.fitchecker.a:
     cz.mpelant.fitchecker.UpdateService this$0 -> a
     85:88:void onPreExecute() -> onPreExecute
     78:78:void onPostExecute(java.lang.Object) -> onPostExecute
+cz.mpelant.fitchecker.activity.AddFromKosActivity -> cz.mpelant.fitchecker.activity.AddFromKosActivity:
+    42:50:void onCreate(android.os.Bundle) -> onCreate
+    54:58:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+cz.mpelant.fitchecker.activity.AddFromKosActivity$DownloadAsynctask -> cz.mpelant.fitchecker.activity.a:
+    int OK -> b
+    int ERROR -> c
+    java.lang.String TAG -> d
+    cz.mpelant.fitchecker.activity.AddFromKosActivity this$0 -> a
+    72:101:java.lang.Integer doInBackground$9ecd34e() -> a
+    60:60:void onPostExecute(java.lang.Object) -> onPostExecute
+    60:60:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 cz.mpelant.fitchecker.activity.AddSubject -> cz.mpelant.fitchecker.activity.AddSubject:
     java.lang.String TAG -> a
     android.widget.Spinner subjectType -> c
     android.widget.Button save -> d
     android.widget.EditText subject -> e
     android.content.SharedPreferences sp -> f
-    35:105:void onCreate(android.os.Bundle) -> onCreate
-    25:25:android.content.SharedPreferences access$000(cz.mpelant.fitchecker.activity.AddSubject) -> a
-    25:25:android.widget.Button access$100(cz.mpelant.fitchecker.activity.AddSubject) -> b
-    25:25:android.widget.Spinner access$200(cz.mpelant.fitchecker.activity.AddSubject) -> c
-    25:25:android.widget.EditText access$300(cz.mpelant.fitchecker.activity.AddSubject) -> d
-cz.mpelant.fitchecker.activity.AddSubject$1 -> cz.mpelant.fitchecker.activity.a:
+    37:116:void onCreate(android.os.Bundle) -> onCreate
+    27:27:android.content.SharedPreferences access$000(cz.mpelant.fitchecker.activity.AddSubject) -> a
+    27:27:android.widget.Button access$100(cz.mpelant.fitchecker.activity.AddSubject) -> b
+    27:27:android.widget.Spinner access$200(cz.mpelant.fitchecker.activity.AddSubject) -> c
+    27:27:android.widget.EditText access$300(cz.mpelant.fitchecker.activity.AddSubject) -> d
+cz.mpelant.fitchecker.activity.AddSubject$1 -> cz.mpelant.fitchecker.activity.b:
     cz.mpelant.fitchecker.activity.AddSubject this$0 -> a
-    47:51:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
-    55:55:void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-cz.mpelant.fitchecker.activity.AddSubject$2 -> cz.mpelant.fitchecker.activity.b:
+    49:53:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
+    57:57:void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
+cz.mpelant.fitchecker.activity.AddSubject$2 -> cz.mpelant.fitchecker.activity.c:
     cz.mpelant.fitchecker.activity.AddSubject this$0 -> a
-    60:64:boolean onKey(android.view.View,int,android.view.KeyEvent) -> onKey
-cz.mpelant.fitchecker.activity.AddSubject$3 -> cz.mpelant.fitchecker.activity.c:
+    62:66:boolean onKey(android.view.View,int,android.view.KeyEvent) -> onKey
+cz.mpelant.fitchecker.activity.AddSubject$3 -> cz.mpelant.fitchecker.activity.d:
     cz.mpelant.fitchecker.activity.AddSubject this$0 -> a
-    70:87:java.lang.CharSequence filter(java.lang.CharSequence,int,int,android.text.Spanned,int,int) -> filter
-cz.mpelant.fitchecker.activity.AddSubject$4 -> cz.mpelant.fitchecker.activity.d:
+    72:89:java.lang.CharSequence filter(java.lang.CharSequence,int,int,android.text.Spanned,int,int) -> filter
+cz.mpelant.fitchecker.activity.AddSubject$4 -> cz.mpelant.fitchecker.activity.e:
     cz.mpelant.fitchecker.activity.AddSubject this$0 -> a
-    96:102:void onClick(android.view.View) -> onClick
-cz.mpelant.fitchecker.activity.BaseActivity -> cz.mpelant.fitchecker.activity.e:
+    98:104:void onClick(android.view.View) -> onClick
+cz.mpelant.fitchecker.activity.AddSubject$5 -> cz.mpelant.fitchecker.activity.f:
+    cz.mpelant.fitchecker.activity.AddSubject this$0 -> a
+    111:113:void onClick(android.view.View) -> onClick
+cz.mpelant.fitchecker.activity.BaseActivity -> cz.mpelant.fitchecker.activity.g:
     boolean isRefreshing -> b
     17:22:void onCreate(android.os.Bundle) -> onCreate
     25:28:void setRefreshing(boolean) -> a
@@ -9386,13 +10109,13 @@ cz.mpelant.fitchecker.activity.DisplaySubject -> cz.mpelant.fitchecker.activity.
     26:26:java.lang.String access$100(cz.mpelant.fitchecker.activity.DisplaySubject) -> a
     26:26:cz.mpelant.fitchecker.downloader.Downloader access$000() -> a
     26:26:void access$200(cz.mpelant.fitchecker.activity.DisplaySubject) -> b
-cz.mpelant.fitchecker.activity.DisplaySubject$1 -> cz.mpelant.fitchecker.activity.f:
+cz.mpelant.fitchecker.activity.DisplaySubject$1 -> cz.mpelant.fitchecker.activity.h:
     cz.mpelant.fitchecker.activity.DisplaySubject this$0 -> a
     109:111:boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem) -> onMenuItemClick
-cz.mpelant.fitchecker.activity.DisplaySubject$2 -> cz.mpelant.fitchecker.activity.g:
+cz.mpelant.fitchecker.activity.DisplaySubject$2 -> cz.mpelant.fitchecker.activity.i:
     cz.mpelant.fitchecker.activity.DisplaySubject this$0 -> a
     122:123:boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem) -> onMenuItemClick
-cz.mpelant.fitchecker.activity.DisplaySubject$MyDownloader -> cz.mpelant.fitchecker.activity.h:
+cz.mpelant.fitchecker.activity.DisplaySubject$MyDownloader -> cz.mpelant.fitchecker.activity.j:
     cz.mpelant.fitchecker.activity.DisplaySubject this$0 -> a
     169:173:void onPreExecute() -> onPreExecute
     161:161:void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
@@ -9417,26 +10140,26 @@ cz.mpelant.fitchecker.activity.ListSubjects -> cz.mpelant.fitchecker.activity.Li
     36:36:cz.mpelant.fitchecker.activity.ListSubjects$MyDownloader access$302(cz.mpelant.fitchecker.activity.ListSubjects$MyDownloader) -> a
     36:36:java.lang.String[] access$400(cz.mpelant.fitchecker.activity.ListSubjects) -> d
     36:36:cz.mpelant.fitchecker.activity.ListSubjects$MyDownloader access$300() -> a
-cz.mpelant.fitchecker.activity.ListSubjects$1 -> cz.mpelant.fitchecker.activity.i:
+cz.mpelant.fitchecker.activity.ListSubjects$1 -> cz.mpelant.fitchecker.activity.k:
     cz.mpelant.fitchecker.activity.ListSubjects this$0 -> a
     116:121:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-cz.mpelant.fitchecker.activity.ListSubjects$2 -> cz.mpelant.fitchecker.activity.j:
+cz.mpelant.fitchecker.activity.ListSubjects$2 -> cz.mpelant.fitchecker.activity.l:
     cz.mpelant.fitchecker.activity.ListSubjects this$0 -> a
     128:147:boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
-cz.mpelant.fitchecker.activity.ListSubjects$2$1 -> cz.mpelant.fitchecker.activity.k:
+cz.mpelant.fitchecker.activity.ListSubjects$2$1 -> cz.mpelant.fitchecker.activity.m:
     int val$position -> a
     cz.mpelant.fitchecker.activity.ListSubjects$2 this$1 -> b
     135:143:void onClick(android.content.DialogInterface,int) -> onClick
-cz.mpelant.fitchecker.activity.ListSubjects$3 -> cz.mpelant.fitchecker.activity.l:
+cz.mpelant.fitchecker.activity.ListSubjects$3 -> cz.mpelant.fitchecker.activity.n:
     cz.mpelant.fitchecker.activity.ListSubjects this$0 -> a
     206:208:boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem) -> onMenuItemClick
-cz.mpelant.fitchecker.activity.ListSubjects$4 -> cz.mpelant.fitchecker.activity.m:
+cz.mpelant.fitchecker.activity.ListSubjects$4 -> cz.mpelant.fitchecker.activity.o:
     cz.mpelant.fitchecker.activity.ListSubjects this$0 -> a
     219:220:boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem) -> onMenuItemClick
-cz.mpelant.fitchecker.activity.ListSubjects$5 -> cz.mpelant.fitchecker.activity.n:
+cz.mpelant.fitchecker.activity.ListSubjects$5 -> cz.mpelant.fitchecker.activity.p:
     cz.mpelant.fitchecker.activity.ListSubjects this$0 -> a
     230:231:boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem) -> onMenuItemClick
-cz.mpelant.fitchecker.activity.ListSubjects$MyAdapter -> cz.mpelant.fitchecker.activity.o:
+cz.mpelant.fitchecker.activity.ListSubjects$MyAdapter -> cz.mpelant.fitchecker.activity.q:
     java.util.List elements -> b
     android.content.Context mContext -> c
     cz.mpelant.fitchecker.activity.ListSubjects this$0 -> a
@@ -9444,13 +10167,13 @@ cz.mpelant.fitchecker.activity.ListSubjects$MyAdapter -> cz.mpelant.fitchecker.a
     71:71:java.lang.Object getItem(int) -> getItem
     76:76:long getItemId(int) -> getItemId
     82:97:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-cz.mpelant.fitchecker.activity.ListSubjects$MyDownloader -> cz.mpelant.fitchecker.activity.p:
+cz.mpelant.fitchecker.activity.ListSubjects$MyDownloader -> cz.mpelant.fitchecker.activity.r:
     int stage -> g
     cz.mpelant.fitchecker.activity.ListSubjects this$0 -> a
     299:305:void onPreExecute() -> onPreExecute
     289:289:void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
     289:289:void onPostExecute(java.lang.Object) -> onPostExecute
-cz.mpelant.fitchecker.activity.ListSubjects$Subject -> cz.mpelant.fitchecker.activity.q:
+cz.mpelant.fitchecker.activity.ListSubjects$Subject -> cz.mpelant.fitchecker.activity.s:
     java.lang.String name -> a
     int changed -> b
     cz.mpelant.fitchecker.activity.ListSubjects this$0 -> c
@@ -9474,22 +10197,22 @@ cz.mpelant.fitchecker.activity.Login -> cz.mpelant.fitchecker.activity.Login:
     27:27:cz.mpelant.fitchecker.activity.Login$LoginCheck access$402(cz.mpelant.fitchecker.activity.Login$LoginCheck) -> a
     27:27:cz.mpelant.fitchecker.activity.Login$LoginCheck access$400() -> b
     27:27:android.content.SharedPreferences access$500(cz.mpelant.fitchecker.activity.Login) -> d
-cz.mpelant.fitchecker.activity.Login$1 -> cz.mpelant.fitchecker.activity.r:
+cz.mpelant.fitchecker.activity.Login$1 -> cz.mpelant.fitchecker.activity.t:
     cz.mpelant.fitchecker.activity.Login this$0 -> a
     112:116:boolean onKey(android.view.View,int,android.view.KeyEvent) -> onKey
-cz.mpelant.fitchecker.activity.Login$2 -> cz.mpelant.fitchecker.activity.s:
+cz.mpelant.fitchecker.activity.Login$2 -> cz.mpelant.fitchecker.activity.u:
     cz.mpelant.fitchecker.activity.Login this$0 -> a
     126:127:void onClick(android.view.View) -> onClick
-cz.mpelant.fitchecker.activity.Login$3 -> cz.mpelant.fitchecker.activity.t:
+cz.mpelant.fitchecker.activity.Login$3 -> cz.mpelant.fitchecker.activity.v:
     cz.mpelant.fitchecker.activity.Login this$0 -> a
     134:140:void onClick(android.view.View) -> onClick
-cz.mpelant.fitchecker.activity.Login$4 -> cz.mpelant.fitchecker.activity.u:
+cz.mpelant.fitchecker.activity.Login$4 -> cz.mpelant.fitchecker.activity.w:
     cz.mpelant.fitchecker.activity.Login this$0 -> a
     155:163:void onCancel(android.content.DialogInterface) -> onCancel
-cz.mpelant.fitchecker.activity.Login$5 -> cz.mpelant.fitchecker.activity.v:
+cz.mpelant.fitchecker.activity.Login$5 -> cz.mpelant.fitchecker.activity.x:
     cz.mpelant.fitchecker.activity.Login this$0 -> a
     174:182:void onClick(android.content.DialogInterface,int) -> onClick
-cz.mpelant.fitchecker.activity.Login$LoginCheck -> cz.mpelant.fitchecker.activity.w:
+cz.mpelant.fitchecker.activity.Login$LoginCheck -> cz.mpelant.fitchecker.activity.y:
     cz.mpelant.fitchecker.activity.Login this$0 -> a
     50:53:void onPreExecute() -> onPreExecute
     57:75:java.lang.Boolean doInBackground(java.lang.String[]) -> a
@@ -9512,10 +10235,10 @@ cz.mpelant.fitchecker.activity.Settings -> cz.mpelant.fitchecker.activity.Settin
     173:179:void setNotificationOptions() -> b
     184:194:void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
     32:32:android.preference.Preference access$000(cz.mpelant.fitchecker.activity.Settings) -> a
-cz.mpelant.fitchecker.activity.Settings$1 -> cz.mpelant.fitchecker.activity.x:
+cz.mpelant.fitchecker.activity.Settings$1 -> cz.mpelant.fitchecker.activity.z:
     cz.mpelant.fitchecker.activity.Settings this$0 -> a
     82:83:boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-cz.mpelant.fitchecker.activity.Settings$2 -> cz.mpelant.fitchecker.activity.y:
+cz.mpelant.fitchecker.activity.Settings$2 -> cz.mpelant.fitchecker.activity.aa:
     cz.mpelant.fitchecker.activity.Settings this$0 -> a
     136:143:boolean onPreferenceChange(android.preference.Preference,java.lang.Object) -> onPreferenceChange
 cz.mpelant.fitchecker.downloader.Downloader -> cz.mpelant.fitchecker.a.a:
@@ -9552,7 +10275,18 @@ cz.mpelant.fitchecker.downloader.MyCookie -> cz.mpelant.fitchecker.a.b:
     boolean secure -> h
     42:49:org.apache.http.cookie.Cookie getCookie() -> a
     55:55:java.lang.String toString() -> toString
-cz.mpelant.fitchecker.utils.DataProvider -> cz.mpelant.fitchecker.b.a:
+cz.mpelant.fitchecker.utils.Base64 -> cz.mpelant.fitchecker.b.a:
+    byte[] _STANDARD_ALPHABET -> b
+    byte[] _STANDARD_DECODABET -> c
+    byte[] _URL_SAFE_ALPHABET -> d
+    byte[] _URL_SAFE_DECODABET -> e
+    byte[] _ORDERED_ALPHABET -> f
+    byte[] _ORDERED_DECODABET -> g
+    boolean $assertionsDisabled -> a
+    500:541:byte[] encode3to4$45536f7a(byte[],int,int,byte[],int) -> a
+    719:726:java.lang.String encodeBytes(byte[]) -> a
+    832:839:java.lang.String encodeBytes$5fb0bea7(byte[],int) -> a
+cz.mpelant.fitchecker.utils.DataProvider -> cz.mpelant.fitchecker.b.b:
     java.lang.String TAG -> a
     cz.mpelant.fitchecker.utils.DataProvider$DatabaseHelper mDbHelper -> b
     android.database.sqlite.SQLiteDatabase mDb -> c
@@ -9564,11 +10298,36 @@ cz.mpelant.fitchecker.utils.DataProvider -> cz.mpelant.fitchecker.b.a:
     78:80:boolean subjectChanged(java.lang.String) -> c
     84:84:boolean subjectDelete(java.lang.String) -> d
     88:88:android.database.Cursor subjectFetchAll() -> c
-cz.mpelant.fitchecker.utils.DataProvider$DatabaseHelper -> cz.mpelant.fitchecker.b.b:
+cz.mpelant.fitchecker.utils.DataProvider$DatabaseHelper -> cz.mpelant.fitchecker.b.c:
     36:39:void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     43:46:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
-cz.mpelant.fitchecker.utils.MyReader -> cz.mpelant.fitchecker.b.c:
+cz.mpelant.fitchecker.utils.MyReader -> cz.mpelant.fitchecker.b.d:
     10:20:java.lang.String getString(java.io.InputStream) -> a
-cz.mpelant.fitchecker.utils.NotifcationHelper -> cz.mpelant.fitchecker.b.d:
+cz.mpelant.fitchecker.utils.NotifcationHelper -> cz.mpelant.fitchecker.b.e:
     android.content.Context mCtx -> a
     android.content.SharedPreferences sp -> b
+cz.mpelant.fitchecker.utils.RestClient -> cz.mpelant.fitchecker.b.f:
+    java.lang.String mUri -> b
+    org.apache.http.params.HttpParams mBasicParams -> c
+    org.apache.http.client.HttpClient mClient -> d
+    java.lang.Integer mStatusCode -> a
+    org.apache.http.Header[] mHeaders -> e
+    org.apache.http.HttpResponse mHttpResponse -> f
+    com.google.gson.Gson gson -> g
+    org.apache.http.message.BasicHeader mContentType -> h
+    97:160:org.apache.http.HttpResponse call$2a3dbc85(java.lang.String,cz.mpelant.fitchecker.utils.RestClient$Methods,java.util.ArrayList,java.util.ArrayList) -> a
+    164:166:void setBody$2feb4b09(org.apache.http.client.methods.HttpEntityEnclosingRequestBase,java.util.ArrayList) -> a
+    220:243:org.apache.http.HttpResponse callServer(org.apache.http.client.methods.HttpRequestBase) -> a
+    251:254:void setSignalizedDefaultError() -> a
+    260:269:void closeCennection() -> b
+cz.mpelant.fitchecker.utils.RestClient$1 -> cz.mpelant.fitchecker.b.g:
+    int[] $SwitchMap$cz$mpelant$fitchecker$utils$RestClient$Methods -> a
+cz.mpelant.fitchecker.utils.RestClient$Methods -> cz.mpelant.fitchecker.b.h:
+    cz.mpelant.fitchecker.utils.RestClient$Methods GET -> a
+    cz.mpelant.fitchecker.utils.RestClient$Methods POST -> b
+    cz.mpelant.fitchecker.utils.RestClient$Methods PUT -> c
+    cz.mpelant.fitchecker.utils.RestClient$Methods DELETE -> d
+    cz.mpelant.fitchecker.utils.RestClient$Methods PATCH -> e
+    cz.mpelant.fitchecker.utils.RestClient$Methods[] $VALUES -> f
+    66:66:cz.mpelant.fitchecker.utils.RestClient$Methods[] values() -> values
+    66:66:cz.mpelant.fitchecker.utils.RestClient$Methods valueOf(java.lang.String) -> valueOf
