@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Xml;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,14 +21,21 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.xml.sax.InputSource;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.List;
 
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.utils.DataProvider;
 import cz.mpelant.fitchecker.utils.RestClient;
 import cz.mpelant.fitchecker.utils.Base64;
+import cz.mpelant.fitchecker.utils.SubjectParser;
 
 /**
  * Activity that downloads subjects of student from KOS API and store it as student subjects
@@ -84,7 +92,7 @@ public class AddFromKosActivity extends BaseActivity {
                 if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_OK) {
                     String xmlResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
                     Log.d(TAG, xmlResponse);
-                    String[] subjects = xmlResponse.split(",");
+                    List<String> subjects = SubjectParser.parseSubjects(xmlResponse);
                     DataProvider data = new DataProvider(AddFromKosActivity.this);
                     data.open();
                     for (String subject : subjects) {
@@ -101,6 +109,9 @@ public class AddFromKosActivity extends BaseActivity {
                 return ERROR;
             }
         }
+
+
+
 
         @Override
         protected void onPostExecute(Integer integer) {
