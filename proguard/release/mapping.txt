@@ -10050,16 +10050,16 @@ cz.mpelant.fitchecker.UpdateService$MyDownloader -> cz.mpelant.fitchecker.a:
     85:88:void onPreExecute() -> onPreExecute
     78:78:void onPostExecute(java.lang.Object) -> onPostExecute
 cz.mpelant.fitchecker.activity.AddFromKosActivity -> cz.mpelant.fitchecker.activity.AddFromKosActivity:
-    42:50:void onCreate(android.os.Bundle) -> onCreate
-    54:58:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    51:59:void onCreate(android.os.Bundle) -> onCreate
+    63:67:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
 cz.mpelant.fitchecker.activity.AddFromKosActivity$DownloadAsynctask -> cz.mpelant.fitchecker.activity.a:
     int OK -> b
     int ERROR -> c
     java.lang.String TAG -> d
     cz.mpelant.fitchecker.activity.AddFromKosActivity this$0 -> a
-    72:101:java.lang.Integer doInBackground$9ecd34e() -> a
-    60:60:void onPostExecute(java.lang.Object) -> onPostExecute
-    60:60:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    81:119:java.lang.Integer doInBackground$9ecd34e() -> a
+    69:69:void onPostExecute(java.lang.Object) -> onPostExecute
+    69:69:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 cz.mpelant.fitchecker.activity.AddSubject -> cz.mpelant.fitchecker.activity.AddSubject:
     java.lang.String TAG -> a
     android.widget.Spinner subjectType -> c
@@ -10331,3 +10331,7 @@ cz.mpelant.fitchecker.utils.RestClient$Methods -> cz.mpelant.fitchecker.b.h:
     cz.mpelant.fitchecker.utils.RestClient$Methods[] $VALUES -> f
     66:66:cz.mpelant.fitchecker.utils.RestClient$Methods[] values() -> values
     66:66:cz.mpelant.fitchecker.utils.RestClient$Methods valueOf(java.lang.String) -> valueOf
+cz.mpelant.fitchecker.utils.SubjectParser -> cz.mpelant.fitchecker.b.i:
+    28:43:java.util.List readSubjects(org.xmlpull.v1.XmlPullParser) -> a
+    49:62:java.lang.String readSubject(org.xmlpull.v1.XmlPullParser) -> b
+    87:101:void skip(org.xmlpull.v1.XmlPullParser) -> c
