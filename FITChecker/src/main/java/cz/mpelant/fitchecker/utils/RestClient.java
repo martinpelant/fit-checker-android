@@ -61,7 +61,7 @@ public class RestClient {
     private static final int CONNECTION_TIMEOUT = 100000;
     private static final int SOCKET_TIMEOUT = 100000;
 
-    private BasicHeader mContentType = new BasicHeader(HTTP.CONTENT_TYPE, "application/json;charset=UTF-8");
+    private BasicHeader mContentType = new BasicHeader(HTTP.CONTENT_TYPE, "application/xml;charset=UTF-8");
 
     public static enum Methods {
         GET, POST, PUT, DELETE, PATCH

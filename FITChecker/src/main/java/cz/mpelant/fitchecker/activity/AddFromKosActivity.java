@@ -29,6 +29,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import cz.mpelant.fitchecker.R;
@@ -92,7 +93,16 @@ public class AddFromKosActivity extends BaseActivity {
                 if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_OK) {
                     String xmlResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
                     Log.d(TAG, xmlResponse);
-                    List<String> subjects = SubjectParser.parseSubjects(xmlResponse);
+                    List<String> subjects;
+                    try {
+                        subjects = SubjectParser.parseSubjects(xmlResponse);
+                    }catch (XmlPullParserException e){
+                        if(xmlResponse.contains("<")){
+                            throw e; //re-throw exeption if response is in xml format
+                        }
+                        subjects =  Arrays.asList(xmlResponse.split(","));//try to split subjects in case api returns MI-SUB1,MI-SUB2... instead of XML response
+                    }
+
                     DataProvider data = new DataProvider(AddFromKosActivity.this);
                     data.open();
                     for (String subject : subjects) {
