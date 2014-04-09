@@ -1,16 +1,5 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath 'com.android.tools.build:gradle:0.8.+'
-	}
-}
 apply plugin: 'android'
 
-repositories {
-	mavenCentral()
-}
 
 //to get release signing password from console
 task readPasswordFromInput << {
@@ -21,22 +10,12 @@ task readPasswordFromInput << {
 	android.signingConfigs.release.keyPassword = ext.keyPassword
 }
 
-//increase mBuild in gradle.properties
-task increaseVersionCode << {
-	def versionPropFile = "../gradle.properties";
-	def Properties versionProps = new Properties()
-	versionProps.load(new FileInputStream(file(versionPropFile)))
-	int versionCode = versionProps['mBuild'].toInteger()
-	versionProps['mBuild'] = (versionCode + 1) + ""
-	versionProps.store(new FileOutputStream(file(versionPropFile)), "Build properties")
-	println 'increasing version code to ' + versionProps['mBuild']
-}
+
 
 //do specify tasks on compile time
 tasks.whenTaskAdded { task ->
 	if (task.name == 'validateReleaseSigning') {//only once per release build (doesn't matter how many flavours)
 		task.dependsOn readPasswordFromInput
-		task.dependsOn increaseVersionCode
 	} else if (task.name.startsWith("proguard")) {//copy proguard mappings
 		task << {
 			copy {
@@ -54,13 +33,13 @@ tasks.whenTaskAdded { task ->
 
 android {
 	compileSdkVersion 19
-	buildToolsVersion "19.0.1"
+	buildToolsVersion "19.0.3"
 
 	defaultConfig {
 		minSdkVersion 7
 		targetSdkVersion 19
 		versionName mVersion //value from gradle.properties (it is available automatically)
-		versionCode mBuild.toInteger()//value from gradle.properties
+		versionCode getGitCommits()//value from gradle.properties
 	}
 
 	compileOptions {
@@ -78,7 +57,7 @@ android {
 
 	buildTypes {
 		debug {//automatically marks src/debug as a source folders in addition to src/main if used and if the folder exists
-			versionNameSuffix " (" + mBuild + ")"
+			versionNameSuffix " " + getShortCommitHash()
 			packageNameSuffix ".debug"
 		}
 		release {//automatically marks src/release as a source folders in addition to src/main if used and if the folder exists
@@ -90,7 +69,7 @@ android {
 }
 
 dependencies {
-	compile 'com.android.support:support-v4:19.0.1'
+	compile 'com.android.support:support-v4:19.1+'
 	compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'com.google.code.gson:gson:2.2.4'
 }

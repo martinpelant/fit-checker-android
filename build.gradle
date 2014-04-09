@@ -1,1 +1,41 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:0.9.+'
+	}
+}
+
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+}
+
+def getGitCommits() {
+	def stdout = new ByteArrayOutputStream()
+	exec {
+		commandLine 'git', 'rev-list', 'HEAD', '--count'
+		standardOutput = stdout
+	}
+	println stdout.toString().trim()
+	return Integer.parseInt(stdout.toString().trim())
+}
+
+def getShortCommitHash() {
+	def stdout = new ByteArrayOutputStream()
+	exec {
+		commandLine 'git', 'rev-parse', '--short', 'HEAD'
+		standardOutput = stdout
+	}
+	println stdout.toString().trim()
+	return stdout.toString().trim();
+}
+
+
+

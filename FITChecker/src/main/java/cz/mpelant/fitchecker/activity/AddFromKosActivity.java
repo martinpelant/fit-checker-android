@@ -1,42 +1,27 @@
 package cz.mpelant.fitchecker.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.util.Xml;
-import android.view.View;
-import android.widget.Toast;
-
+import cz.mpelant.fitchecker.R;
+import cz.mpelant.fitchecker.utils.Base64;
+import cz.mpelant.fitchecker.utils.DataProvider;
+import cz.mpelant.fitchecker.utils.RestClient;
+import cz.mpelant.fitchecker.utils.SubjectParser;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.xml.sax.InputSource;
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import cz.mpelant.fitchecker.R;
-import cz.mpelant.fitchecker.utils.DataProvider;
-import cz.mpelant.fitchecker.utils.RestClient;
-import cz.mpelant.fitchecker.utils.Base64;
-import cz.mpelant.fitchecker.utils.SubjectParser;
 
 /**
  * Activity that downloads subjects of student from KOS API and store it as student subjects
