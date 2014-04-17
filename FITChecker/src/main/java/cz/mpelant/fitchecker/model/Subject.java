@@ -40,6 +40,10 @@ public class Subject extends AbstractEntity implements Parcelable {
         return name;
     }
 
+    public void setRead(boolean read) {
+        this.read = read;
+    }
+
     public Subject(Cursor c) {
         super(c);
         name = c.getString(c.getColumnIndex(NAME));
@@ -88,4 +92,6 @@ public class Subject extends AbstractEntity implements Parcelable {
             return new Subject[size];
         }
     };
+
+
 }

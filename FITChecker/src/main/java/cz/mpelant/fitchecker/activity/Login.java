@@ -25,9 +25,9 @@ import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.downloader.Downloader;
 
 public class Login extends BaseActivity {
-	public static final String PREFERENCES_USERNAME = "username";
-	public static final String PREFERENCES_PASSWORD = "password";
-	public static final String PREFERENCES_AUTH = "auth";
+	@Deprecated public static final String PREFERENCES_USERNAME = "username";
+    @Deprecated  public static final String PREFERENCES_PASSWORD = "password";
+    @Deprecated	public static final String PREFERENCES_AUTH = "auth";
 	private EditText username;
 	private EditText password;
 	private Button save;

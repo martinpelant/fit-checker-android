@@ -17,7 +17,7 @@ import cz.mpelant.fitchecker.model.Subject;
  */
 public class DataProvider extends ContentProvider {
 
-    private static final String AUTHORITY = "cz.eman.fitchecker";
+    private static final String AUTHORITY = "cz.mpelant.fitchecker.subjectsprovider";
 
     private static final String SUBJECTS_BASE_PATH = "subjects";
 
@@ -144,7 +144,6 @@ public class DataProvider extends ContentProvider {
         } else {// update by args
             updateRows = sqlDB.update(table, values, selection, selectionArgs);
         }
-        getContext().getContentResolver().notifyChange(uri, null);
         return updateRows;
 
     }

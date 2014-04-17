@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
+            android:name=".App"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:icon="@drawable/ic_launcher"
             android:allowBackup="true"
@@ -29,6 +30,15 @@
         <activity android:name=".activity.BaseFragmentActivity"/>
         <activity android:name=".activity.ListSubjects"/>
 
+        <service
+                android:name=".service.UpdateSubjectsService"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="cz.mpelant.fitchecker.UPDATE_SUBJECTS"/>
+            </intent-filter>
+
+        </service>
+
         <service android:name=".UpdateService"/>
 
         <receiver android:name=".BootReceiver">
@@ -41,7 +51,7 @@
 
         <provider
                 android:name=".db.DataProvider"
-                android:authorities="cz.mpelant.fitchecker"
+                android:authorities="cz.mpelant.fitchecker.subjectsprovider"
                 android:exported="true">
         </provider>
 

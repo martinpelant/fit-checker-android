@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -17,13 +16,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.activity.AddSubject;
-import cz.mpelant.fitchecker.activity.ListSubjects;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.adapter.SubjectAdapter;
 import cz.mpelant.fitchecker.db.DataProvider;
-import cz.mpelant.fitchecker.downloader.Downloader;
+import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
 /**
  * SubjectsList.java
@@ -35,12 +36,34 @@ import cz.mpelant.fitchecker.downloader.Downloader;
  */
 public class SubjectsList extends BaseListFragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private SubjectAdapter mAdapter;
+    private Bus bus;
     private static final int ADD = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bus = App.getInstance().getBus();
         mAdapter = new SubjectAdapter(getActivity(), null, Context.BIND_ADJUST_WITH_ACTIVITY);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        bus.register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        bus.unregister(this);
+    }
+
+    @Subscribe
+    public void onUpdateServiceChanged(UpdateSubjectsService.UpdateSubjectsStatus status) {
+        boolean refreshing = status.getStatus() == UpdateSubjectsService.UpdateSubjectsStatus.Status.STARTED;
+       setRefreshing(refreshing);
+
     }
 
     @Override
@@ -62,7 +85,6 @@ public class SubjectsList extends BaseListFragment implements LoaderManager.Load
     protected void onHomeAsUpSet() {
         ((ActionBarActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(false);
         ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @Override
@@ -76,7 +98,7 @@ public class SubjectsList extends BaseListFragment implements LoaderManager.Load
         mAdapter.changeCursor(data);
         if (data != null && data.getCount() == 0) {
             Toast.makeText(getActivity(), "Data empty", Toast.LENGTH_SHORT).show();
-            //TODO: empty data
+            //TODO: empty data, open add subject list
         }
     }
 
@@ -96,9 +118,6 @@ public class SubjectsList extends BaseListFragment implements LoaderManager.Load
         return false; //TODO:
     }
 
-    private boolean isRefreshing() {
-        return false; //TODO:
-    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -111,7 +130,8 @@ public class SubjectsList extends BaseListFragment implements LoaderManager.Load
             menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    //TODO:
+                    UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectsUri());
+                    App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
                     return true;
                 }
             });

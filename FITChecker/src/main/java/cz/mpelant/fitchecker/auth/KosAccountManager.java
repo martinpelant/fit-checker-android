@@ -1,0 +1,40 @@
+package cz.mpelant.fitchecker.auth;
+
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import cz.mpelant.fitchecker.App;
+import cz.mpelant.fitchecker.activity.Login;
+
+/**
+ * KosAccountManager.java
+ *
+ * @author eMan s.r.o.
+ * @project FITChecker
+ * @package cz.mpelant.fitchecker.auth
+ * @since 4/17/2014
+ */
+public class KosAccountManager {
+    private static final String PREFERENCES_USERNAME = "username";
+    private static final String PREFERENCES_PASSWORD = "password";
+    private static final int AUTH_OPTION = 3;
+
+
+    public static void saveAccount(KosAccount account) {//TODO: encrypt using device UUID
+        SharedPreferences.Editor ed = getSp().edit();
+        ed.putString(PREFERENCES_USERNAME, account.getUsername());
+        ed.putString(PREFERENCES_PASSWORD, account.getPassword());
+        ed.commit();
+    }
+
+    public static boolean isAccount() {
+        return getSp().contains(Login.PREFERENCES_USERNAME) && getSp().contains(Login.PREFERENCES_PASSWORD);
+    }
+
+    public static KosAccount getAccount() {
+        return new KosAccount(getSp().getString(PREFERENCES_USERNAME, null), getSp().getString(PREFERENCES_PASSWORD, null), AUTH_OPTION);
+    }
+
+    private static SharedPreferences getSp() {
+        return PreferenceManager.getDefaultSharedPreferences(App.getInstance());
+    }
+}

@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarActivity;
  * @since 3/30/2014
  */
 public class BaseFragment extends Fragment {
+    protected boolean mRefreshing;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -20,18 +21,27 @@ public class BaseFragment extends Fragment {
         onHomeAsUpSet();
     }
 
-    protected void onHomeAsUpSet(){
+    protected void onHomeAsUpSet() {
         ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
     }
 
-    protected void setTitle(String title){
+    protected void setTitle(String title) {
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(title);
     }
 
-    protected void setTitle(int titleRes){
+    protected void setTitle(int titleRes) {
         setTitle(getString(titleRes));
     }
 
+    protected void setRefreshing(boolean refreshing) {
+        mRefreshing = refreshing;
+        ((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(refreshing);
+        getActivity().supportInvalidateOptionsMenu();
+    }
+
+    protected boolean isRefreshing() {
+        return mRefreshing;
+    }
 
 }

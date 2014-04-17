@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import cz.mpelant.fitchecker.R;
@@ -147,6 +148,7 @@ public class BaseFragmentActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         mContentView = onCreateContentView();
         // we need to set SERVER_ID to this container
         mContentView.setId(CONTENT_VIEW_ID);

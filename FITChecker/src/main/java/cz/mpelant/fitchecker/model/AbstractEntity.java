@@ -31,4 +31,20 @@ public abstract class AbstractEntity {
     public AbstractEntity(Cursor c){
         internalId=c.getLong(c.getColumnIndex(INTERNAL_ID_COLUMN_NAME));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AbstractEntity that = (AbstractEntity) o;
+
+        return internalId == that.internalId;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (internalId ^ (internalId >>> 32));
+    }
 }
