@@ -24,7 +24,7 @@ import android.widget.Spinner;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.utils.DataProvider;
 
-public class AddSubject extends BaseActivity {
+@Deprecated public class AddSubject extends BaseActivity {
     public static String TAG = "fitchecker";
     private Spinner subjectType;
     private Button save;

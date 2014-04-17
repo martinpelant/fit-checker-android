@@ -214,7 +214,7 @@ public class BaseFragmentActivity extends ActionBarActivity {
             transaction.addToBackStack(name);
         }
 
-        transaction.commitAllowingStateLoss();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commitAllowingStateLoss();
     }
 
     protected void setContentViewInternal(View view, ViewGroup.LayoutParams params) {

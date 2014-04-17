@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DataProvider {
+@Deprecated public class DataProvider {
 	public static String TAG = "fitchecker";
 
 	private static final String DATABASE_NAME = "data";

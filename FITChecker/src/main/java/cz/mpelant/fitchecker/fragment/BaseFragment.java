@@ -3,6 +3,7 @@ package cz.mpelant.fitchecker.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
 
 /**
  * BaseFragment.java
@@ -42,6 +43,14 @@ public class BaseFragment extends Fragment {
 
     protected boolean isRefreshing() {
         return mRefreshing;
+    }
+
+    public void finish() {
+        if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getActivity().getSupportFragmentManager().popBackStack();
+        } else {
+            getActivity().finish();
+        }
     }
 
 }

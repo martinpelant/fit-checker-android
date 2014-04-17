@@ -32,6 +32,11 @@ public class Subject extends AbstractEntity implements Parcelable {
     public Subject() {
     }
 
+    public Subject(String name) {
+        this.name=name;
+        read=false;
+    }
+
     public boolean isRead() {
         return read;
     }

@@ -41,7 +41,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class Downloader extends AsyncTask<String, String, Boolean> {
+@Deprecated public class Downloader extends AsyncTask<String, String, Boolean> {
 	private Context context;
 	protected boolean cancelled;
 	public static final String TAG = "fitchecker";

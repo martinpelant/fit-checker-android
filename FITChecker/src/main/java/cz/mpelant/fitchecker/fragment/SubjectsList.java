@@ -21,6 +21,7 @@ import com.squareup.otto.Subscribe;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.activity.AddSubject;
+import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.adapter.SubjectAdapter;
 import cz.mpelant.fitchecker.db.DataProvider;
@@ -62,7 +63,7 @@ public class SubjectsList extends BaseListFragment implements LoaderManager.Load
     @Subscribe
     public void onUpdateServiceChanged(UpdateSubjectsService.UpdateSubjectsStatus status) {
         boolean refreshing = status.getStatus() == UpdateSubjectsService.UpdateSubjectsStatus.Status.STARTED;
-       setRefreshing(refreshing);
+        setRefreshing(refreshing);
 
     }
 
@@ -97,8 +98,7 @@ public class SubjectsList extends BaseListFragment implements LoaderManager.Load
         setListShown(true);
         mAdapter.changeCursor(data);
         if (data != null && data.getCount() == 0) {
-            Toast.makeText(getActivity(), "Data empty", Toast.LENGTH_SHORT).show();
-            //TODO: empty data, open add subject list
+            //TODO: empty data, display empty text
         }
     }
 
@@ -143,7 +143,7 @@ public class SubjectsList extends BaseListFragment implements LoaderManager.Load
         menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                startActivityForResult(new Intent(getActivity(), AddSubject.class), ADD);
+                ((BaseFragmentActivity) getActivity()).replaceFragment(new AddSubjectFragment());
                 return true;
             }
         });
