@@ -41,6 +41,12 @@
             </intent-filter>
         </receiver>
 
+        <provider
+                android:name=".db.DataProvider"
+                android:authorities="cz.mpelant.fitchecker"
+                android:exported="true">
+        </provider>
+
     </application>
 
 </manifest>
