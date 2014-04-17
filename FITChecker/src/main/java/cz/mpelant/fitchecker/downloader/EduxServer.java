@@ -4,6 +4,7 @@ import android.accounts.AuthenticatorException;
 import android.content.Context;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.activity.Login;
 import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
@@ -53,8 +54,8 @@ public class EduxServer {
         localContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
     }
 
-    private File getSubejctFile(String subject) {
-        File dir = context.getFilesDir();
+    public static File getSubejctFile(String subject) {
+        File dir = App.getInstance().getFilesDir();
         return new File(dir, subject + ".html");
     }
 

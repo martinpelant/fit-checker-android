@@ -1,6 +1,6 @@
 package cz.mpelant.fitchecker.activity;
 
-import cz.mpelant.fitchecker.fragment.SubjectsList;
+import cz.mpelant.fitchecker.fragment.SubjectsListFragment;
 
 /**
  * MainActivity.java
@@ -13,6 +13,6 @@ import cz.mpelant.fitchecker.fragment.SubjectsList;
 public class MainActivity extends BaseFragmentActivity {
     @Override
     protected String getFragmentName() {
-        return SubjectsList.class.getName();
+        return SubjectsListFragment.class.getName();
     }
 }

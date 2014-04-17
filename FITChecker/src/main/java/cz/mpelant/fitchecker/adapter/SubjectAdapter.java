@@ -39,5 +39,6 @@ public class SubjectAdapter extends CursorAdapter {
 
         name.setText(item.getName());
         changed.setVisibility(item.isRead() ? View.INVISIBLE : View.VISIBLE);
+        view.setTag(item);
     }
 }

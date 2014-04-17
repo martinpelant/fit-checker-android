@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.downloader.Downloader;
+import cz.mpelant.fitchecker.downloader.EduxServer;
 import cz.mpelant.fitchecker.utils.DataProvider;
 import cz.mpelant.fitchecker.utils.MyReader;
 
@@ -27,7 +28,6 @@ public class DisplaySubject extends BaseActivity {
     public static final String INTENT_NAME = "name";
     public static final int DIALOG_REFRESH = 1;
     private WebView webView;
-    private static ProgressDialog mProgressBar;
     private static Downloader myDownloader;
     private String head;
     public static String TAG = "fitchecker";
@@ -87,14 +87,6 @@ public class DisplaySubject extends BaseActivity {
         }
     }
 
-    @Override
-    protected void onPause() {
-        try {
-            mProgressBar.dismiss();
-        } catch (Exception e) {
-        }
-        super.onPause();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

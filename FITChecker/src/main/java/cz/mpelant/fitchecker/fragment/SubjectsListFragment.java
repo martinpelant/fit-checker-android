@@ -15,27 +15,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
-import cz.mpelant.fitchecker.activity.AddSubject;
 import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.adapter.SubjectAdapter;
 import cz.mpelant.fitchecker.db.DataProvider;
+import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
 /**
- * SubjectsList.java
+ * SubjectsListFragment.java
  *
  * @author eMan s.r.o.
  * @project FITChecker
  * @package cz.mpelant.fitchecker.fragment
  * @since 4/17/2014
  */
-public class SubjectsList extends BaseListFragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+public class SubjectsListFragment extends BaseListFragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private SubjectAdapter mAdapter;
     private Bus bus;
     private static final int ADD = 1;
@@ -110,7 +109,8 @@ public class SubjectsList extends BaseListFragment implements LoaderManager.Load
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //TODO:
+        Subject subject = (Subject) view.findViewById(R.id.list_item).getTag();
+        ((BaseFragmentActivity) getActivity()).replaceFragment(DisplaySybjectFragment.newInstance(subject));
     }
 
     @Override
