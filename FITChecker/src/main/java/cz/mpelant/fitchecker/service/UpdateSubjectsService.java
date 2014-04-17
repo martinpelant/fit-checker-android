@@ -262,7 +262,7 @@ public class UpdateSubjectsService extends Service {
     }
 
     @Produce
-    public static UpdateSubjectsStatus produceStatus() {
+    public static UpdateSubjectsStatus getLastStatus() {
         if(lastStatus==null){
             return new UpdateSubjectsStatus(UpdateSubjectsStatus.Status.FINISHED);
         }

@@ -68,7 +68,7 @@ public class EduxServer {
         try {
             fis = new FileInputStream(getSubejctFile(subject));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Log.w(TAG, "File for " + subject + " not found");
             return true;
         }
 
@@ -82,7 +82,7 @@ public class EduxServer {
         try {
             fis.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.w(TAG, e.getMessage() + "");
         }
 
         return rtrn;

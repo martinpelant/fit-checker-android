@@ -9,6 +9,7 @@ import android.widget.Toast;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
 import cz.mpelant.fitchecker.activity.LoginActivity;
+import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
 /**
  * BaseFragment.java
@@ -57,6 +58,12 @@ public class BaseFragment extends Fragment {
         } else {
             getActivity().finish();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setRefreshing(UpdateSubjectsService.getLastStatus().getStatus().equals(UpdateSubjectsService.UpdateSubjectsStatus.Status.STARTED));
     }
 
     protected void onAuthError() {
