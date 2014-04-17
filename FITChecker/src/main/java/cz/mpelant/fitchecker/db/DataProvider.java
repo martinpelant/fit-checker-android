@@ -107,7 +107,7 @@ public class DataProvider extends ContentProvider {
         Cursor toReturn = null;
         switch (uriMatcher.match(uri)) {
             case SUBJECTS:
-                toReturn = dbHelper.getReadableDatabase().query(Subject.TABLE_NAME, projection, selection, selectionArgs, null, null, Subject.NAME);
+                toReturn = dbHelper.getReadableDatabase().query(Subject.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder != null ? sortOrder : Subject.NAME);
                 break;
             case SUBJECT_SINGLE_ROW:
                 toReturn = dbHelper.getReadableDatabase().query(Subject.TABLE_NAME, projection, Subject.INTERNAL_ID_COLUMN_NAME + "=?", new String[]{uri.getLastPathSegment()}, null, null, null);

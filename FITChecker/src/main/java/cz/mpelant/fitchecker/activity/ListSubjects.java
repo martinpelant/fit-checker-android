@@ -29,6 +29,7 @@ import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.downloader.Downloader;
 import cz.mpelant.fitchecker.utils.DataProvider;
 
+@Deprecated
 public class ListSubjects extends BaseActivity {
     private List<Subject> subjects;
     private static final int ADD = 1;

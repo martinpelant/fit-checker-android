@@ -14,22 +14,20 @@
             android:allowBackup="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
-        <activity android:name=".activity.ListSubjects">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DisplaySubject">
-        </activity>
-        <activity android:name=".activity.AddSubject">
-        </activity>
-        <activity android:name=".activity.Login">
-        </activity>
-        <activity android:name=".activity.Settings">
-        </activity>
+        <activity android:name=".activity.DisplaySubject"/>
+        <activity android:name=".activity.AddSubject"/>
+        <activity android:name=".activity.Login"/>
+        <activity android:name=".activity.Settings"/>
         <activity android:name=".activity.AddFromKosActivity"/>
+        <activity android:name=".activity.BaseFragmentActivity"/>
+        <activity android:name=".activity.ListSubjects"/>
 
         <service android:name=".UpdateService"/>
 
