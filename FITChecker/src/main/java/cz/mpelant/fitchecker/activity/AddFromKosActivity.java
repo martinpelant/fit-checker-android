@@ -74,7 +74,7 @@ public class AddFromKosActivity extends BaseActivity {
                 headers.add(new BasicNameValuePair("Authorization", "Basic " + base64EncodedCredentials));
                 ArrayList<NameValuePair> params = new ArrayList<>();
                 params.add(new BasicNameValuePair("fields", "entry(content(course))"));
-                HttpResponse response = client.call(COURSES_METHOD, RestClient.Methods.GET, params, null, headers);
+                HttpResponse response = client.call(COURSES_METHOD, RestClient.Methods.GET, params, headers);
                 if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_OK) {
                     String xmlResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
                     Log.d(TAG, xmlResponse);
