@@ -3,13 +3,12 @@ package cz.mpelant.fitchecker.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.Window;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuItem;
 
-public class BaseActivity extends SherlockFragmentActivity {
+public class BaseActivity extends ActionBarActivity {
     protected boolean isRefreshing;
 
     @Override
@@ -24,7 +23,7 @@ public class BaseActivity extends SherlockFragmentActivity {
     protected void setRefreshing(boolean isRefreshing) {
         setSupportProgressBarIndeterminateVisibility(isRefreshing);
         this.isRefreshing = isRefreshing;
-        invalidateOptionsMenu();
+        supportInvalidateOptionsMenu();
     }
 
     @Override

@@ -14,22 +14,23 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import com.actionbarsherlock.view.MenuItem;
 
+import android.view.MenuItem;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.UpdateService;
 
-public class Settings extends SherlockPreferenceActivity implements OnSharedPreferenceChangeListener {
+public class Settings extends PreferenceActivity implements OnSharedPreferenceChangeListener {
     public static final String PREF_ALARM = "alarm";
     public static final String PREF_ALARM_INTERVAL = "alarmInterval";
     public static final String PREF_ALARM_LAST_RUN = "alarmLastRun";
@@ -51,8 +52,11 @@ public class Settings extends SherlockPreferenceActivity implements OnSharedPref
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (Build.VERSION.SDK_INT >= 11) {
+            getActionBar().setHomeButtonEnabled(true);
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         setTitle(getResources().getString(R.string.settings));
         sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -115,6 +119,7 @@ public class Settings extends SherlockPreferenceActivity implements OnSharedPref
             String name = ringtone.getTitle(this);
             this.ringtone.setSummary(name);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -138,6 +143,7 @@ public class Settings extends SherlockPreferenceActivity implements OnSharedPref
                     String name = ringtone.getTitle(Settings.this);
                     Settings.this.ringtone.setSummary(name);
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
                 return true;
@@ -153,6 +159,7 @@ public class Settings extends SherlockPreferenceActivity implements OnSharedPref
         try {
             interval = Integer.parseInt(sp.getString(PREF_ALARM_INTERVAL, "60"));
         } catch (Exception e) {
+            e.printStackTrace();
         }
         if (interval < 1)
             interval = 60;

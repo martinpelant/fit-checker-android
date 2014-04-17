@@ -81,15 +81,16 @@ public class AddFromKosActivity extends BaseActivity {
                     List<String> subjects;
                     try {
                         subjects = SubjectParser.parseSubjects(xmlResponse);
-                    }catch (XmlPullParserException e){
-                        if(xmlResponse.contains("<")){
+                    } catch (XmlPullParserException e) {
+                        if (xmlResponse.contains("<")) {
                             throw e; //re-throw exeption if response is in xml format
                         }
-                        subjects =  Arrays.asList(xmlResponse.split(","));//try to split subjects in case api returns MI-SUB1,MI-SUB2... instead of XML response
+                        subjects = Arrays.asList(xmlResponse.split(","));//try to split subjects in case api returns MI-SUB1,MI-SUB2... instead of XML response
                     }
 
                     DataProvider data = new DataProvider(AddFromKosActivity.this);
                     data.open();
+                    Log.v("subjects count", subjects.size() + "");
                     for (String subject : subjects) {
                         long row = data.subjectCreate(subject.toUpperCase().trim());
                         Log.d(TAG, "saved " + row);
@@ -104,8 +105,6 @@ public class AddFromKosActivity extends BaseActivity {
                 return ERROR;
             }
         }
-
-
 
 
         @Override

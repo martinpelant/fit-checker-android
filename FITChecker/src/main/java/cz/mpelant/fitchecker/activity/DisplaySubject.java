@@ -9,14 +9,14 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.downloader.Downloader;
@@ -102,8 +102,8 @@ public class DisplaySubject extends BaseActivity {
         if (!isRefreshing) {
             menuItem = menu.add(R.string.refresh);
             menuItem.setIcon(R.drawable.ic_refresh);
-            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+            menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
                     myDownloader = new MyDownloader(DisplaySubject.this);
@@ -115,8 +115,8 @@ public class DisplaySubject extends BaseActivity {
 
         menuItem = menu.add(R.string.settings);
         menuItem.setIcon(R.drawable.ic_settings);
-        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+        MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 startActivity(new Intent(DisplaySubject.this, Settings.class));
@@ -126,29 +126,7 @@ public class DisplaySubject extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    // @Override
-    // protected Dialog onCreateDialog(int id) {
-    // switch (id) {
-    // case DIALOG_REFRESH:
-    // mProgressBar = new ProgressDialog(DisplaySubject.this);
-    // mProgressBar.setOnCancelListener(new OnCancelListener() {
-    //
-    // @Override
-    // public void onCancel(DialogInterface dialog) {
-    // myDownloader.cancel();
-    // try {
-    // removeDialog(DIALOG_REFRESH);
-    // } catch (Exception e) {
-    // }
-    // }
-    // });
-    // break;
-    //
-    // default:
-    // break;
-    // }
-    // return mProgressBar;
-    // }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
