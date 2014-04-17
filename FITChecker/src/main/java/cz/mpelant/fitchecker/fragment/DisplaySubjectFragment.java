@@ -1,5 +1,6 @@
 package cz.mpelant.fitchecker.fragment;
 
+import android.accounts.AuthenticatorException;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.view.*;
 import android.webkit.WebView;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.squareup.otto.Bus;
@@ -25,16 +27,17 @@ import cz.mpelant.fitchecker.utils.MyReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
- * DisplaySybjectFragment.java
+ * DisplaySubjectFragment.java
  *
  * @author eMan s.r.o.
  * @project FITChecker
  * @package cz.mpelant.fitchecker.fragment
  * @since 4/17/2014
  */
-public class DisplaySybjectFragment extends BaseFragment {
+public class DisplaySubjectFragment extends BaseFragment {
     public static final String SUBEJCT = "subject";
 
     private class HtmlLoader extends AsyncTask<Void, Void, Boolean> {
@@ -118,8 +121,8 @@ public class DisplaySybjectFragment extends BaseFragment {
         return b;
     }
 
-    public static DisplaySybjectFragment newInstance(Subject subject) {
-        DisplaySybjectFragment f = new DisplaySybjectFragment();
+    public static DisplaySubjectFragment newInstance(Subject subject) {
+        DisplaySubjectFragment f = new DisplaySubjectFragment();
         f.setArguments(generateArgs(subject));
         return f;
     }
@@ -168,7 +171,7 @@ public class DisplaySybjectFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.inject(this, view);
-        if(webContent==null){
+        if (webContent == null) {
             loadData();
         }
     }
@@ -195,6 +198,19 @@ public class DisplaySybjectFragment extends BaseFragment {
     public void onUpdateServiceChanged(UpdateSubjectsService.UpdateSubjectsStatus status) {
         boolean refreshing = status.getStatus() == UpdateSubjectsService.UpdateSubjectsStatus.Status.STARTED;
         setRefreshing(refreshing);
+    }
+
+    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
+    @Subscribe
+    public void onException(UpdateSubjectsService.UpdateSubjectsException exception) {
+        if (exception.getException() instanceof AuthenticatorException) {
+            onAuthError();
+            return;
+        }
+        if (exception.getException() instanceof IOException) {
+            onIOError();
+        }
+
     }
 
 

@@ -1,5 +1,6 @@
 package cz.mpelant.fitchecker.fragment;
 
+import android.accounts.AuthenticatorException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +27,8 @@ import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
+import java.io.IOException;
+
 /**
  * SubjectsListFragment.java
  *
@@ -37,7 +40,6 @@ import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 public class SubjectsListFragment extends BaseListFragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private SubjectAdapter mAdapter;
     private Bus bus;
-    private static final int ADD = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,19 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
     public void onUpdateServiceChanged(UpdateSubjectsService.UpdateSubjectsStatus status) {
         boolean refreshing = status.getStatus() == UpdateSubjectsService.UpdateSubjectsStatus.Status.STARTED;
         setRefreshing(refreshing);
+
+    }
+
+    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
+    @Subscribe
+    public void onException(UpdateSubjectsService.UpdateSubjectsException exception) {
+        if (exception.getException() instanceof AuthenticatorException) {
+            onAuthError();
+            return;
+        }
+        if (exception.getException() instanceof IOException) {
+            onIOError();
+        }
 
     }
 
@@ -110,7 +125,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Subject subject = (Subject) view.findViewById(R.id.list_item).getTag();
-        ((BaseFragmentActivity) getActivity()).replaceFragment(DisplaySybjectFragment.newInstance(subject));
+        ((BaseFragmentActivity) getActivity()).replaceFragment(DisplaySubjectFragment.newInstance(subject));
     }
 
     @Override
@@ -160,13 +175,5 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
         });
 
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ADD && resultCode == Activity.RESULT_CANCELED) {
-            getActivity().finish();
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }

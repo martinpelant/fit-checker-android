@@ -168,6 +168,7 @@ public class UpdateSubjectsService extends Service {
                 } catch (IOException e) {
                     e.printStackTrace();
                     onTaskException(mRequest, e);
+                    break;
                 } catch (EduxServer.CancelledException e) {
                     e.printStackTrace();
                     break;
@@ -198,7 +199,7 @@ public class UpdateSubjectsService extends Service {
 
 
     private int lastId;
-    private UpdateSubjectsStatus lastStatus;
+    private static UpdateSubjectsStatus lastStatus;
     private MainThreadBus bus;
     private int tasksCount;
 
@@ -261,7 +262,11 @@ public class UpdateSubjectsService extends Service {
     }
 
     @Produce
-    public UpdateSubjectsStatus produceStatus() {
+    public static UpdateSubjectsStatus produceStatus() {
+        if(lastStatus==null){
+            return new UpdateSubjectsStatus(UpdateSubjectsStatus.Status.FINISHED);
+        }
+
         return lastStatus;
     }
 

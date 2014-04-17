@@ -24,7 +24,7 @@ import cz.mpelant.fitchecker.downloader.EduxServer;
 import cz.mpelant.fitchecker.utils.DataProvider;
 import cz.mpelant.fitchecker.utils.MyReader;
 
-public class DisplaySubject extends BaseActivity {
+@Deprecated public class DisplaySubject extends BaseActivity {
     public static final String INTENT_NAME = "name";
     public static final int DIALOG_REFRESH = 1;
     private WebView webView;

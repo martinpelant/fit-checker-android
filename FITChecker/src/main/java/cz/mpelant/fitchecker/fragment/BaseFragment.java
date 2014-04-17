@@ -1,9 +1,14 @@
 package cz.mpelant.fitchecker.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.widget.Toast;
+import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
+import cz.mpelant.fitchecker.activity.LoginActivity;
 
 /**
  * BaseFragment.java
@@ -14,6 +19,7 @@ import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
  * @since 3/30/2014
  */
 public class BaseFragment extends Fragment {
+    public static final int REQ_LOGIN = 165;
     protected boolean mRefreshing;
 
     @Override
@@ -53,4 +59,20 @@ public class BaseFragment extends Fragment {
         }
     }
 
+    protected void onAuthError() {
+        startActivityForResult(new Intent(getActivity(), LoginActivity.class), REQ_LOGIN);
+    }
+
+    protected void onIOError() {
+        Toast.makeText(getActivity(), R.string.error_download, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQ_LOGIN && resultCode == Activity.RESULT_CANCELED) {
+            getActivity().finish();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

@@ -19,6 +19,11 @@ public class KosAccount {
         this.password = password;
         this.authType=authType;
     }
+    public KosAccount(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.authType=KosAccountManager.AUTH_OPTION;
+    }
 
     public String getUsername() {
         return username;

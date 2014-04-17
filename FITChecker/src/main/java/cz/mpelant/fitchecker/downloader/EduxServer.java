@@ -14,6 +14,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
@@ -49,6 +50,7 @@ public class EduxServer {
     public EduxServer(Context context) {
         this.context = context;
         client = new DefaultHttpClient();
+        client.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
         localContext = new BasicHttpContext();
         cookieStore = new BasicCookieStore();
         localContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);

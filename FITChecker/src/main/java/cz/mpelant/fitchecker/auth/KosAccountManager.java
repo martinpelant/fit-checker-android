@@ -16,7 +16,7 @@ import cz.mpelant.fitchecker.activity.Login;
 public class KosAccountManager {
     private static final String PREFERENCES_USERNAME = "username";
     private static final String PREFERENCES_PASSWORD = "password";
-    private static final int AUTH_OPTION = 3;
+    static final int AUTH_OPTION = 3;
 
 
     public static void saveAccount(KosAccount account) {//TODO: encrypt using device UUID
