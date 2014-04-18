@@ -52,7 +52,7 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
             App.getInstance().getContentResolver().notifyChange(mSubjectUri, myObserver);
 
             //load html from resources
-            String head = MyReader.getString(getResources().openRawResource(R.raw.head));
+            String head = MyReader.getString(App.getInstance().getResources().openRawResource(R.raw.head));
             File file = EduxServer.getSubejctFile(getSubject().getName());
             FileInputStream fis;
             try {
@@ -63,9 +63,9 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
             }
             String text = MyReader.getString(fis);
             if (text.equals(EduxServer.ERROR_PATTERN_NOT_FOUND)) {
-                text = MyReader.getString(getResources().openRawResource(R.raw.errorpage));
-                text += "<h1>" + getResources().getString(R.string.error_table_not_found_title) + "</h1>";
-                text += "<p>" + getResources().getString(R.string.error_table_not_found) + "</p>";
+                text = MyReader.getString(App.getInstance().getResources().openRawResource(R.raw.errorpage));
+                text += "<h1>" + App.getInstance().getResources().getString(R.string.error_table_not_found_title) + "</h1>";
+                text += "<p>" + App.getInstance().getResources().getString(R.string.error_table_not_found) + "</p>";
             } else {
                 text = head + text;
                 text += "<br>";
@@ -73,7 +73,7 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
             }
 
             text += "<a target=\"_blank\" href=\"" + EduxServer.URL_EDUX + EduxServer.getSubjectClassificationURL(getSubject().getName()) + "\">";
-            text += getResources().getString(R.string.subject_open_in_browser) + "</a>";
+            text += App.getInstance().getResources().getString(R.string.subject_open_in_browser) + "</a>";
             mWebContent = text;
             try {
                 fis.close();
