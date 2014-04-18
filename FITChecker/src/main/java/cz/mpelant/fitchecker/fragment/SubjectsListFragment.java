@@ -149,7 +149,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
 
         menuItem = menu.add(R.string.add);
-        menuItem.setIcon(R.drawable.ic_new);
+        menuItem.setIcon(R.drawable.ic_action_add);
         MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
         menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -162,7 +162,6 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
         if (!isRefreshing()) {
             menuItem = menu.add(R.string.refresh);
-            menuItem.setIcon(R.drawable.ic_refresh);
             MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
             menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
@@ -175,7 +174,6 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
 
         menuItem = menu.add(R.string.settings);
-        menuItem.setIcon(R.drawable.ic_settings);
         MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
         menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override

@@ -258,7 +258,6 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
         MenuItem menuItem;
         if (!isRefreshing()) {
             menuItem = menu.add(R.string.refresh);
-            menuItem.setIcon(R.drawable.ic_refresh);
             MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
             menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
@@ -270,7 +269,6 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
         }
 
         menuItem = menu.add(R.string.settings);
-        menuItem.setIcon(R.drawable.ic_settings);
         MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
         menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
