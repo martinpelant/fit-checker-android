@@ -1,10 +1,10 @@
 package cz.mpelant.fitchecker.downloader;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
+
+import java.io.Serializable;
+import java.util.Date;
 
 public class MyCookie implements Serializable{
 	private static final long serialVersionUID = -423988528614135363L;

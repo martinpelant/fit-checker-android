@@ -5,7 +5,6 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import cz.mpelant.fitchecker.App;
-import cz.mpelant.fitchecker.activity.Login;
 import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
 import cz.mpelant.fitchecker.utils.MyReader;
@@ -181,15 +180,15 @@ public class EduxServer {
         cancelled = true;
     }
 
-    public static String getSubjectClassificationURL(String subject, Context context) {
-        return getSubjectClassificationURL(subject, context, true);
+    public static String getSubjectClassificationURL(String subject) {
+        return getSubjectClassificationURL(subject, true);
     }
 
-    public static String getSubjectClassificationURL(String subject, Context context, boolean fullVersion) {
+    public static String getSubjectClassificationURL(String subject, boolean fullVersion) {
         String rtrn = "courses/" + subject;
         if (!fullVersion)
             rtrn += "/_export/xhtml";
-        rtrn += "/classification/student/" + PreferenceManager.getDefaultSharedPreferences(context).getString(Login.PREFERENCES_USERNAME, "") + "/start?purge";
+        rtrn += "/classification/student/" + KosAccountManager.getAccount().getUsername() + "/start?purge";
         return rtrn;
     }
 
@@ -199,8 +198,8 @@ public class EduxServer {
             Log.e(TAG, "cookies not found");
             return ERROR_COOKIES;
         }
-        Log.v(TAG, getSubjectClassificationURL(subject, context, false));
-        HttpGet get = new HttpGet(URL_EDUX + getSubjectClassificationURL(subject, context, false));
+        Log.v(TAG, getSubjectClassificationURL(subject, false));
+        HttpGet get = new HttpGet(URL_EDUX + getSubjectClassificationURL(subject, false));
 
         Log.v(TAG, "executing get - " + subject);
         HttpResponse response = client.execute(get, localContext);

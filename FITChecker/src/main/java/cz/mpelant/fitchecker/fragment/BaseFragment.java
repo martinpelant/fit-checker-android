@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 import cz.mpelant.fitchecker.R;
-import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
 import cz.mpelant.fitchecker.activity.LoginActivity;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 

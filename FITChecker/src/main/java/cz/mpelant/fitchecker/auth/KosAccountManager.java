@@ -3,7 +3,6 @@ package cz.mpelant.fitchecker.auth;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import cz.mpelant.fitchecker.App;
-import cz.mpelant.fitchecker.activity.Login;
 
 /**
  * KosAccountManager.java

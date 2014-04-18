@@ -72,7 +72,7 @@ public class DisplaySubjectFragment extends BaseFragment {
                 text += "<center>";
             }
 
-            text += "<a target=\"_blank\" href=\"" + EduxServer.URL_EDUX + EduxServer.getSubjectClassificationURL(getSubject().getName(), App.getInstance()) + "\">";
+            text += "<a target=\"_blank\" href=\"" + EduxServer.URL_EDUX + EduxServer.getSubjectClassificationURL(getSubject().getName()) + "\">";
             text += getResources().getString(R.string.subject_open_in_browser) + "</a>";
             mWebContent = text;
             try {

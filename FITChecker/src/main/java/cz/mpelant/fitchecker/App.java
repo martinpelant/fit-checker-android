@@ -1,7 +1,6 @@
 package cz.mpelant.fitchecker;
 
 import android.app.Application;
-import com.squareup.otto.Bus;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
 
 /**

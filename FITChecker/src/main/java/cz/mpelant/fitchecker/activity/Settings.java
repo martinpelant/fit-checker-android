@@ -1,10 +1,6 @@
 
 package cz.mpelant.fitchecker.activity;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -24,13 +20,14 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
-
-
 import android.view.MenuItem;
 import cz.mpelant.fitchecker.R;
-import cz.mpelant.fitchecker.UpdateService;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
+
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Settings extends PreferenceActivity implements OnSharedPreferenceChangeListener {
     public static final String PREF_ALARM = "alarm";
@@ -171,7 +168,8 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
     }
 
     public static void stopAlarm(Context context) {
-        PendingIntent pi = PendingIntent.getService(context, 0, new Intent(context, UpdateService.class), 0);
+        Intent serviceIntent = UpdateSubjectsService.generateIntent(new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectsUri(), true));
+        PendingIntent pi = PendingIntent.getService(context, 0, serviceIntent, 0);
         AlarmManager am = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         am.cancel(pi);
     }

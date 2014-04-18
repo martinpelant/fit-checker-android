@@ -1,12 +1,12 @@
 
 package cz.mpelant.fitchecker;
 
-import cz.mpelant.fitchecker.activity.Settings;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import cz.mpelant.fitchecker.activity.Settings;
 
 public class BootReceiver extends BroadcastReceiver {
     public static String TAG = "fitchecker";
