@@ -146,18 +146,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         MenuItem menuItem;
-        if (!isRefreshing()) {
-            menuItem = menu.add(R.string.refresh);
-            menuItem.setIcon(R.drawable.ic_refresh);
-            MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-            menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    onRefresh();
-                    return true;
-                }
-            });
-        }
+
 
         menuItem = menu.add(R.string.add);
         menuItem.setIcon(R.drawable.ic_new);
@@ -170,9 +159,24 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
             }
         });
 
+
+        if (!isRefreshing()) {
+            menuItem = menu.add(R.string.refresh);
+            menuItem.setIcon(R.drawable.ic_refresh);
+            MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
+            menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    onRefresh();
+                    return true;
+                }
+            });
+        }
+
+
         menuItem = menu.add(R.string.settings);
         menuItem.setIcon(R.drawable.ic_settings);
-        MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+        MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
         menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -180,6 +184,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
                 return true;
             }
         });
+
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -195,6 +200,9 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
     @Override
     protected boolean isRefreshing() {
+        if(mSwipeRefreshLayout==null){
+            return false;
+        }
         return mSwipeRefreshLayout.isRefreshing();
     }
 

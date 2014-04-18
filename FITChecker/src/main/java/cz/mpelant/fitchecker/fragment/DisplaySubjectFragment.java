@@ -240,6 +240,9 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
 
     @Override
     protected boolean isRefreshing() {
+        if (mSwipeRefreshLayout == null) {
+            return false;
+        }
         return mSwipeRefreshLayout.isRefreshing();
     }
 
@@ -256,7 +259,7 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
         if (!isRefreshing()) {
             menuItem = menu.add(R.string.refresh);
             menuItem.setIcon(R.drawable.ic_refresh);
-            MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+            MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
             menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
@@ -268,7 +271,7 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
 
         menuItem = menu.add(R.string.settings);
         menuItem.setIcon(R.drawable.ic_settings);
-        MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+        MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
         menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
