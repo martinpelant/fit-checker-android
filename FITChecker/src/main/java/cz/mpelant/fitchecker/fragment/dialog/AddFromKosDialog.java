@@ -71,7 +71,6 @@ public class AddFromKosDialog extends BaseDialogFragment {
         String errorMessage = null;
         if (exception.getException() instanceof AuthenticatorException) {
             errorMessage = getString(R.string.kos_login_error);
-            return;
         }
         if (exception.getException() instanceof IOException) {
             errorMessage = getString(R.string.error_kos_download);
