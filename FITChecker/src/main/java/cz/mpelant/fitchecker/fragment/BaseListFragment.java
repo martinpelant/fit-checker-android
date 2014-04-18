@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TextView;
+import butterknife.ButterKnife;
 import cz.mpelant.fitchecker.R;
 
 /**
@@ -17,8 +18,9 @@ import cz.mpelant.fitchecker.R;
  * @package cz.eman.shoplist.fragment
  * @since 8/14/13
  */
-public abstract class BaseListFragment extends BaseFragment{
+public abstract class BaseListFragment extends BaseFragment {
     private View mProgressContainer;
+    protected View listViewContainer;
     private TextView mEmptyTextView;
     boolean mListShown = true;
     private ListView mListView;
@@ -26,18 +28,20 @@ public abstract class BaseListFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(getLayoutId(), null);
-        mProgressContainer = layout.findViewById(R.id.progressContainer);
-        mListView = (ListView) layout.findViewById(android.R.id.list);
-        mEmptyTextView = (TextView) layout.findViewById(android.R.id.empty);
+        listViewContainer = ButterKnife.findById(layout, R.id.listContainer);
+        mProgressContainer = ButterKnife.findById(layout, R.id.progressContainer);
+        mListView = ButterKnife.findById(layout, android.R.id.list);
+        mEmptyTextView = ButterKnife.findById(layout, android.R.id.empty);
+
         setListShown(false);
         return layout;
     }
 
-    protected int getLayoutId(){
+    protected int getLayoutId() {
         return R.layout.activity_lists;
     }
 
-    protected ListView getListView(){
+    protected ListView getListView() {
         return mListView;
     }
 

@@ -44,7 +44,7 @@ public class BaseFragment extends Fragment {
 
     protected void setRefreshing(boolean refreshing) {
         mRefreshing = refreshing;
-        ((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(refreshing);
+//        ((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(refreshing);
         getActivity().supportInvalidateOptionsMenu();
     }
 

@@ -30,7 +30,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
     </ScrollView>
 
-    <FrameLayout
+    <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/listContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -39,11 +39,11 @@
         <ListView
                 android:cacheColorHint="#00000000"
                 android:id="@android:id/list"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 />
 
 
-    </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

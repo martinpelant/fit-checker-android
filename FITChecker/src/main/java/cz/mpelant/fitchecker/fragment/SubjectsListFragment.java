@@ -9,6 +9,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,9 +38,10 @@ import java.io.IOException;
  * @package cz.mpelant.fitchecker.fragment
  * @since 4/17/2014
  */
-public class SubjectsListFragment extends BaseListFragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+public class SubjectsListFragment extends BaseListFragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, SwipeRefreshLayout.OnRefreshListener {
     private SubjectAdapter mAdapter;
     private Bus bus;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,9 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
         getListView().setAdapter(mAdapter);
         getListView().setOnItemClickListener(this);
         getListView().setOnItemLongClickListener(this);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) listViewContainer;
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorScheme(R.color.refresh_color1, R.color.refresh_color2, R.color.refresh_color3, R.color.refresh_color4);
     }
 
     @Override
@@ -148,8 +153,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
             menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectsUri());
-                    App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
+                    onRefresh();
                     return true;
                 }
             });
@@ -178,5 +182,25 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
         });
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    protected void setRefreshing(boolean refreshing) {
+        super.setRefreshing(refreshing);
+        if (mSwipeRefreshLayout.isRefreshing() != refreshing)
+            mSwipeRefreshLayout.setRefreshing(refreshing);
+    }
+
+
+    @Override
+    protected boolean isRefreshing() {
+        return mSwipeRefreshLayout.isRefreshing();
+    }
+
+    @Override
+    public void onRefresh() {
+        UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectsUri());
+        App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
     }
 }

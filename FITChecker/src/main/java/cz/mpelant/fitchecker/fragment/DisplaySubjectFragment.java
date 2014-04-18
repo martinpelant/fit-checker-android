@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.*;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
@@ -37,7 +38,7 @@ import java.io.IOException;
  * @package cz.mpelant.fitchecker.fragment
  * @since 4/17/2014
  */
-public class DisplaySubjectFragment extends BaseFragment {
+public class DisplaySubjectFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     public static final String SUBEJCT = "subject";
 
     private class HtmlLoader extends AsyncTask<Void, Void, Boolean> {
@@ -57,8 +58,7 @@ public class DisplaySubjectFragment extends BaseFragment {
             try {
                 fis = new FileInputStream(file);
             } catch (FileNotFoundException e) {
-                UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(mSubjectUri);
-                App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
+                onRefresh();
                 return false;
             }
             String text = MyReader.getString(fis);
@@ -111,7 +111,7 @@ public class DisplaySubjectFragment extends BaseFragment {
     @InjectView(R.id.progressContainer)
     View mProgressContainer;
     @InjectView(R.id.content)
-    View mContent;
+    SwipeRefreshLayout mSwipeRefreshLayout;
     boolean mContentShown = true;
 
     private String mWebContent;
@@ -177,10 +177,12 @@ public class DisplaySubjectFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.inject(this, view);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorScheme(R.color.refresh_color1, R.color.refresh_color2, R.color.refresh_color3, R.color.refresh_color4);
         if (mWebContent == null) {
             setContentShown(false);
             loadData();
-        }else{
+        } else {
             onLoadFinished();
         }
     }
@@ -229,6 +231,26 @@ public class DisplaySubjectFragment extends BaseFragment {
 
 
     @Override
+    protected void setRefreshing(boolean refreshing) {
+        super.setRefreshing(refreshing);
+        if (mSwipeRefreshLayout.isRefreshing() != refreshing)
+            mSwipeRefreshLayout.setRefreshing(refreshing);
+    }
+
+
+    @Override
+    protected boolean isRefreshing() {
+        return mSwipeRefreshLayout.isRefreshing();
+    }
+
+    @Override
+    public void onRefresh() {
+        UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(mSubjectUri);
+        App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
+    }
+
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem menuItem;
         if (!isRefreshing()) {
@@ -238,8 +260,7 @@ public class DisplaySubjectFragment extends BaseFragment {
             menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(mSubjectUri);
-                    App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
+                    onRefresh();
                     return true;
                 }
             });
@@ -266,14 +287,14 @@ public class DisplaySubjectFragment extends BaseFragment {
         mContentShown = shown;
         if (shown) {
             mProgressContainer.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
-            mContent.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
-            mProgressContainer.setVisibility(View.GONE);
-            mContent.setVisibility(View.VISIBLE);
+            mWebView.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
+            mProgressContainer.setVisibility(View.INVISIBLE);
+            mWebView.setVisibility(View.VISIBLE);
         } else {
             mProgressContainer.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
-            mContent.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
+            mWebView.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
             mProgressContainer.setVisibility(View.VISIBLE);
-            mContent.setVisibility(View.GONE);
+            mWebView.setVisibility(View.INVISIBLE);
         }
     }
 
