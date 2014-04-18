@@ -174,11 +174,6 @@ public class UpdateSubjectsService extends Service {
                     break;
                 }
             }
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             c.close();
             onTaskFinished(mRequest, mResponse);
         }
@@ -263,7 +258,7 @@ public class UpdateSubjectsService extends Service {
 
     @Produce
     public static UpdateSubjectsStatus getLastStatus() {
-        if(lastStatus==null){
+        if (lastStatus == null) {
             return new UpdateSubjectsStatus(UpdateSubjectsStatus.Status.FINISHED);
         }
 

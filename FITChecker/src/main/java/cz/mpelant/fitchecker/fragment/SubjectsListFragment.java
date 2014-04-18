@@ -24,6 +24,7 @@ import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.adapter.SubjectAdapter;
 import cz.mpelant.fitchecker.db.DataProvider;
+import cz.mpelant.fitchecker.fragment.dialog.DeleteSubjectDialog;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
@@ -47,6 +48,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
         bus = App.getInstance().getBus();
         mAdapter = new SubjectAdapter(getActivity(), null, Context.BIND_ADJUST_WITH_ACTIVITY);
         setHasOptionsMenu(true);
+        setRetainInstance(true);
     }
 
     @Override
@@ -112,7 +114,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
         setListShown(true);
         mAdapter.changeCursor(data);
         if (data != null && data.getCount() == 0) {
-            //TODO: empty data, display empty text
+            setEmptyText(getString(R.string.subjects_empty_list));
         }
     }
 
@@ -130,7 +132,9 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        return false; //TODO:
+        Subject subject = (Subject) view.findViewById(R.id.list_item).getTag();
+        DeleteSubjectDialog.newInstance(subject).show(getFragmentManager(), "delete");
+        return true;
     }
 
 

@@ -12,7 +12,7 @@
     <string name="add">Přidat</string>
     <string name="settings">Nastavení</string>
     <string name="delete_title">Smazat ?</string>
-    <string name="delete_message">Opravdu chcete smazat tento předmět?</string>
+    <string name="delete_message">Opravdu chcete smazat předmět %s?</string>
     <string name="add_subject">Přidat předmět</string>
     <string name="username">Už. jméno:</string>
     <string name="password">Heslo:</string>
@@ -55,5 +55,7 @@
     <string name="addSubjectsFromKOS">Přidat předměty z KOSu</string>
     <string name="universityPassword">celoškolské heslo</string>
     <string name="loadingSubjects">Nahrávám předměty</string>
+    <string name="delete">Smazat</string>
+    <string name="subjects_empty_list">Nemáte v seznamu žádné předměty.</string>
 
 </resources>

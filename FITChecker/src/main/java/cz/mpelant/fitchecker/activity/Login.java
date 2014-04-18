@@ -24,7 +24,7 @@ import android.widget.Toast;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.downloader.Downloader;
 
-public class Login extends BaseActivity {
+@Deprecated public class Login extends BaseActivity {
 	@Deprecated public static final String PREFERENCES_USERNAME = "username";
     @Deprecated  public static final String PREFERENCES_PASSWORD = "password";
     @Deprecated	public static final String PREFERENCES_AUTH = "auth";

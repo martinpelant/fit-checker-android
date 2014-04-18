@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.view.*;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
-import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.squareup.otto.Bus;
@@ -47,8 +47,8 @@ public class DisplaySubjectFragment extends BaseFragment {
             //Set this subject as read
             Subject subject = getSubject();
             subject.setRead(true);
-            App.getInstance().getContentResolver().update(subjectUri, subject.getContentValuesReadOnly(), null, null);
-            App.getInstance().getContentResolver().notifyChange(subjectUri, myObserver);
+            App.getInstance().getContentResolver().update(mSubjectUri, subject.getContentValuesReadOnly(), null, null);
+            App.getInstance().getContentResolver().notifyChange(mSubjectUri, myObserver);
 
             //load html from resources
             String head = MyReader.getString(getResources().openRawResource(R.raw.head));
@@ -57,7 +57,7 @@ public class DisplaySubjectFragment extends BaseFragment {
             try {
                 fis = new FileInputStream(file);
             } catch (FileNotFoundException e) {
-                UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(subjectUri);
+                UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(mSubjectUri);
                 App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
                 return false;
             }
@@ -74,7 +74,7 @@ public class DisplaySubjectFragment extends BaseFragment {
 
             text += "<a target=\"_blank\" href=\"" + EduxServer.URL_EDUX + EduxServer.getSubjectClassificationURL(getSubject().getName(), App.getInstance()) + "\">";
             text += getResources().getString(R.string.subject_open_in_browser) + "</a>";
-            webContent = text;
+            mWebContent = text;
             try {
                 fis.close();
             } catch (Exception e) {
@@ -107,12 +107,17 @@ public class DisplaySubjectFragment extends BaseFragment {
 
 
     @InjectView(R.id.wvBody)
-    WebView webView;
+    WebView mWebView;
+    @InjectView(R.id.progressContainer)
+    View mProgressContainer;
+    @InjectView(R.id.content)
+    View mContent;
+    boolean mContentShown = true;
 
-    private String webContent;
+    private String mWebContent;
     private Subject mSubject;
     private Bus mBus;
-    private Uri subjectUri;
+    private Uri mSubjectUri;
 
 
     public static Bundle generateArgs(Subject subject) {
@@ -138,15 +143,16 @@ public class DisplaySubjectFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBus = App.getInstance().getBus();
-        subjectUri = DataProvider.getSubjectUri(getSubject().getId());
+        mSubjectUri = DataProvider.getSubjectUri(getSubject().getId());
         setHasOptionsMenu(true);
+        setRetainInstance(true);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mBus.register(this);
-        getActivity().getContentResolver().registerContentObserver(subjectUri, true, myObserver);
+        getActivity().getContentResolver().registerContentObserver(mSubjectUri, true, myObserver);
     }
 
     @Override
@@ -171,8 +177,11 @@ public class DisplaySubjectFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.inject(this, view);
-        if (webContent == null) {
+        if (mWebContent == null) {
+            setContentShown(false);
             loadData();
+        }else{
+            onLoadFinished();
         }
     }
 
@@ -187,10 +196,15 @@ public class DisplaySubjectFragment extends BaseFragment {
     }
 
     private void onLoadFinished() {
-        if (webContent != null && webView != null) {
-            webView.loadDataWithBaseURL("file:///android_asset/", webContent, "text/html", "utf-8", null);
-            webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        if (mWebContent != null && mWebView != null) {
+            mWebView.loadDataWithBaseURL("file:///android_asset/", mWebContent, "text/html", "utf-8", null);
+            mWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+            setContentShown(true);
+        } else {
+            setContentShown(false);
         }
+
+
     }
 
 
@@ -224,7 +238,7 @@ public class DisplaySubjectFragment extends BaseFragment {
             menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(subjectUri);
+                    UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(mSubjectUri);
                     App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
                     return true;
                 }
@@ -244,5 +258,23 @@ public class DisplaySubjectFragment extends BaseFragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+
+    public void setContentShown(boolean shown) {
+        if (mContentShown == shown) {
+            return;
+        }
+        mContentShown = shown;
+        if (shown) {
+            mProgressContainer.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
+            mContent.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
+            mProgressContainer.setVisibility(View.GONE);
+            mContent.setVisibility(View.VISIBLE);
+        } else {
+            mProgressContainer.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
+            mContent.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
+            mProgressContainer.setVisibility(View.VISIBLE);
+            mContent.setVisibility(View.GONE);
+        }
+    }
 
 }
