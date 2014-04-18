@@ -46,7 +46,6 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
     private Preference ringtone;
     private Preference led;
     private Preference vibrate;
-    private Preference donate;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -94,9 +93,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(this, ListSubjects.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

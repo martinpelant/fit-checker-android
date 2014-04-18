@@ -1,9 +1,11 @@
 package cz.mpelant.fitchecker.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
 import android.text.InputFilter;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -18,6 +20,7 @@ import butterknife.OnClick;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.db.DataProvider;
+import cz.mpelant.fitchecker.fragment.dialog.AddFromKosDialog;
 import cz.mpelant.fitchecker.model.Subject;
 
 /**
@@ -132,5 +135,12 @@ public class AddSubjectFragment extends BaseFragment {
             }
         }.start();
         finish();
+    }
+
+    @OnClick(R.id.addSubjectsFromKOS)
+    public void addFromKos() {
+        FragmentActivity activity = getActivity();
+        finish();
+        new AddFromKosDialog().show(activity.getSupportFragmentManager(), "kos");
     }
 }

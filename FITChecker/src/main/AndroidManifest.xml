@@ -1,67 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cz.mpelant.fitchecker"
-    android:installLocation="internalOnly" >
+          package="cz.mpelant.fitchecker"
+          android:installLocation="internalOnly">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
-        android:name="cz.mpelant.fitchecker.App"
-        android:allowBackup="true"
-        android:configChanges="orientation|keyboardHidden|screenSize"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity android:name="cz.mpelant.fitchecker.activity.MainActivity" >
+            android:name="cz.mpelant.fitchecker.App"
+            android:allowBackup="true"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+        <activity android:name="cz.mpelant.fitchecker.activity.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="cz.mpelant.fitchecker.activity.DisplaySubject" />
-        <activity android:name="cz.mpelant.fitchecker.activity.AddSubject" />
-        <activity android:name="cz.mpelant.fitchecker.activity.Login" />
-        <activity android:name="cz.mpelant.fitchecker.activity.Settings" />
-        <activity android:name="cz.mpelant.fitchecker.activity.AddFromKosActivity" />
-        <activity android:name="cz.mpelant.fitchecker.activity.BaseFragmentActivity" />
-        <activity android:name="cz.mpelant.fitchecker.activity.ListSubjects" />
+        <activity android:name="cz.mpelant.fitchecker.activity.DisplaySubject"/>
+        <activity android:name="cz.mpelant.fitchecker.activity.AddSubject"/>
+        <activity android:name="cz.mpelant.fitchecker.activity.Login"/>
+        <activity android:name="cz.mpelant.fitchecker.activity.Settings"/>
+        <activity android:name="cz.mpelant.fitchecker.activity.AddFromKosActivity"/>
+        <activity android:name="cz.mpelant.fitchecker.activity.BaseFragmentActivity"/>
+        <activity android:name="cz.mpelant.fitchecker.activity.ListSubjects"/>
 
         <service
-            android:name="cz.mpelant.fitchecker.service.UpdateSubjectsService"
-            android:exported="false" >
+                android:name="cz.mpelant.fitchecker.service.UpdateSubjectsService"
+                android:exported="false">
             <intent-filter>
-                <action android:name="cz.mpelant.fitchecker.UPDATE_SUBJECTS" />
+                <action android:name="cz.mpelant.fitchecker.UPDATE_SUBJECTS"/>
             </intent-filter>
         </service>
-        <service android:name="cz.mpelant.fitchecker.UpdateService" />
 
-        <receiver android:name="cz.mpelant.fitchecker.BootReceiver" >
+        <service
+                android:name="cz.mpelant.fitchecker.service.AddFromKosService"
+                android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="cz.mpelant.fitchecker.KOS_ADD_SUBJECTS"/>
+            </intent-filter>
+        </service>
 
-                <category android:name="android.intent.category.HOME" />
+
+        <service android:name="cz.mpelant.fitchecker.UpdateService"/>
+
+        <receiver android:name="cz.mpelant.fitchecker.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+
+                <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </receiver>
 
         <provider
-            android:name="cz.mpelant.fitchecker.db.DataProvider"
-            android:authorities="cz.mpelant.fitchecker.subjectsprovider"
-            android:exported="true" >
+                android:name="cz.mpelant.fitchecker.db.DataProvider"
+                android:authorities="cz.mpelant.fitchecker.subjectsprovider"
+                android:exported="true">
         </provider>
 
         <activity
-            android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+                android:name=".activity.LoginActivity"
+                android:label="@string/title_activity_login"
+                android:windowSoftInputMode="adjustResize|stateVisible">
         </activity>
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
 </manifest>

@@ -27,7 +27,7 @@ import java.util.List;
  * Activity that downloads subjects of student from KOS API and store it as student subjects
  * Created by David Bilik[david.bilik@eman.cz] on 22.2.14.
  */
-public class AddFromKosActivity extends BaseActivity {
+@Deprecated public class AddFromKosActivity extends BaseActivity {
 
     private static final int LOGIN_REQUEST = 2;
 

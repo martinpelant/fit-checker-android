@@ -147,5 +147,4 @@ public class DataProvider extends ContentProvider {
         return updateRows;
 
     }
-
 }

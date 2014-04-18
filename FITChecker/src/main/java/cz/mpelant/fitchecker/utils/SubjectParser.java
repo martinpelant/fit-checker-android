@@ -1,5 +1,6 @@
 package cz.mpelant.fitchecker.utils;
 
+import android.support.annotation.NonNull;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by David Bilik[david.bilik@eman.cz] on 25.2.14.
  */
 public class SubjectParser {
-
+    @NonNull
     public static List<String> parseSubjects(String xmlResponse) throws XmlPullParserException, IOException {
         XmlPullParser parser = Xml.newPullParser();
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -24,6 +25,7 @@ public class SubjectParser {
         return readSubjects(parser);
     }
 
+    @NonNull
     private static List<String> readSubjects(XmlPullParser parser) throws XmlPullParserException, IOException {
         ArrayList<String> subjects = new ArrayList<>();
 

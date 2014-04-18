@@ -41,6 +41,7 @@
     <string name="error_table_not_found_title">Tabulka s výsledky nenalezena</string>
     <string name="error_table_not_found">Tento předmět bohužel nemá na eduxu standardní tabulku s výsledky.</string>
     <string name="error_download">Při stahování dat z eduxu došlo k chybě.</string>
+    <string name="error_kos_download">Při stahování dat z KOSu došlo k chybě.</string>
     <string name="error_login">Nepodařilo se přihlásit.</string>
     <string name="error_invalid_credentials">Zadali jste neplatnou kombinaci uživatelského jména a hesla.</string>
     <string name="led">Notifikační LED</string>
@@ -57,5 +58,7 @@
     <string name="loadingSubjects">Nahrávám předměty</string>
     <string name="delete">Smazat</string>
     <string name="subjects_empty_list">Nemáte v seznamu žádné předměty.</string>
+    <string name="kos_login_error">Nepodařilo se přihláset do KOSu, zkontrolujte svůj login.</string>
+    <string name="unknown_error">Došlo k neznámé chybě</string>
 
 </resources>

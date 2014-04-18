@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.Window;
 
 
-public class BaseActivity extends ActionBarActivity {
+@Deprecated public class BaseActivity extends ActionBarActivity {
     protected boolean isRefreshing;
 
     @Override

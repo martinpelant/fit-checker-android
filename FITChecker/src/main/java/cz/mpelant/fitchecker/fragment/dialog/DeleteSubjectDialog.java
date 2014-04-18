@@ -7,7 +7,10 @@ import android.os.Bundle;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.db.DataProvider;
+import cz.mpelant.fitchecker.downloader.EduxServer;
 import cz.mpelant.fitchecker.model.Subject;
+
+import java.io.File;
 
 /**
  * DeleteSubjectDialog.java
@@ -46,6 +49,8 @@ public class DeleteSubjectDialog extends BaseDialogFragment {
                     @Override
                     public void run() {
                         App.getInstance().getContentResolver().delete(DataProvider.getSubjectUri(subject.getId()), null, null);
+                        File cacheFile = EduxServer.getSubejctFile(subject.getName());
+                        cacheFile.delete();
                     }
                 }.start();
             }
