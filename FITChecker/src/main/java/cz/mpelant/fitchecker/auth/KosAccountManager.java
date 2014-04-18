@@ -27,11 +27,18 @@ public class KosAccountManager {
     }
 
     public static boolean isAccount() {
-        return getSp().contains(Login.PREFERENCES_USERNAME) && getSp().contains(Login.PREFERENCES_PASSWORD);
+        return getSp().contains(PREFERENCES_USERNAME) && getSp().contains(PREFERENCES_PASSWORD);
     }
 
     public static KosAccount getAccount() {
         return new KosAccount(getSp().getString(PREFERENCES_USERNAME, null), getSp().getString(PREFERENCES_PASSWORD, null), AUTH_OPTION);
+    }
+
+    public static void deleteAccount() {
+        SharedPreferences.Editor ed = getSp().edit();
+        ed.remove(PREFERENCES_USERNAME);
+        ed.remove(PREFERENCES_PASSWORD);
+        ed.commit();
     }
 
     private static SharedPreferences getSp() {

@@ -82,7 +82,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(Settings.this, Login.class));
+                startActivity(new Intent(Settings.this, LoginActivity.class));
                 return true;
             }
         });

@@ -3,6 +3,7 @@ package cz.mpelant.fitchecker.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ public class BaseFragment extends Fragment {
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(title);
     }
 
-    protected void setTitle(int titleRes) {
+    protected void setTitle(@StringRes int titleRes) {
         setTitle(getString(titleRes));
     }
 
@@ -53,6 +54,9 @@ public class BaseFragment extends Fragment {
     }
 
     public void finish() {
+        if(getActivity()==null){
+            return;
+        }
         if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getActivity().getSupportFragmentManager().popBackStack();
         } else {
