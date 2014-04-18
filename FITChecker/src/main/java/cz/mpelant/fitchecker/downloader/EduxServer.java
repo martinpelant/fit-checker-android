@@ -37,7 +37,7 @@ public class EduxServer {
 
     private Context context;
     protected boolean cancelled;
-    public static final String TAG = "CancelledException";
+    public static final String TAG = "EduxServer";
     public static final String COOKIE_FILE = "cookies.dat";
     public static final String URL_EDUX = "https://edux.fit.cvut.cz/";
     private static final String ERROR_COOKIES = "--";
@@ -251,6 +251,7 @@ public class EduxServer {
     }
 
     public boolean downloadSubjectData(String subjectName) throws AuthenticatorException, IOException, CancelledException {
+        Log.d("downloading subject", subjectName);
         if (!KosAccountManager.isAccount()) {
             throw new AuthenticatorException("No credentials found");
         }

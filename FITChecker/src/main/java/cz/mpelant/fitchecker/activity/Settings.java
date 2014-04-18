@@ -29,6 +29,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.UpdateService;
+import cz.mpelant.fitchecker.db.DataProvider;
+import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
 public class Settings extends PreferenceActivity implements OnSharedPreferenceChangeListener {
     public static final String PREF_ALARM = "alarm";
@@ -151,7 +153,8 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 
     public static void startAlarm(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        PendingIntent pi = PendingIntent.getService(context, 0, new Intent(context, UpdateService.class), 0);
+        Intent serviceIntent = UpdateSubjectsService.generateIntent(new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectsUri(), true));
+        PendingIntent pi = PendingIntent.getService(context, 0, serviceIntent, 0);
         int interval = 0;
         try {
             interval = Integer.parseInt(sp.getString(PREF_ALARM_INTERVAL, "60"));

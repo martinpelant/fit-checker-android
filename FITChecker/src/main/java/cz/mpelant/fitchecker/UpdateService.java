@@ -3,16 +3,12 @@ package cz.mpelant.fitchecker;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.mpelant.fitchecker.activity.ListSubjects;
 import cz.mpelant.fitchecker.activity.Login;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.downloader.Downloader;
 import cz.mpelant.fitchecker.utils.DataProvider;
-import cz.mpelant.fitchecker.utils.NotifcationHelper;
+import cz.mpelant.fitchecker.utils.NotificationHelper;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +19,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class UpdateService extends Service{
+@Deprecated public class UpdateService extends Service{
 	public static String TAG = "fitchecker";
 	private DataProvider data;
 	private List<String> subjects;
@@ -91,7 +87,7 @@ public class UpdateService extends Service{
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
 			if(changed>0)
-				new NotifcationHelper(UpdateService.this).displayNotification();
+				new NotificationHelper(UpdateService.this).displayNotification(null);
 			Editor ed = PreferenceManager.getDefaultSharedPreferences(UpdateService.this).edit();
 			ed.putLong(Settings.PREF_ALARM_LAST_RUN, System.currentTimeMillis());
 			ed.commit();

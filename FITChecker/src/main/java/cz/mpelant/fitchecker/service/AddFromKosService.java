@@ -5,14 +5,11 @@ import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
-import com.squareup.otto.Produce;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.downloader.KosServer;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
-import cz.mpelant.fitchecker.utils.NotifcationHelper;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;

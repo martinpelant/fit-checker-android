@@ -10303,7 +10303,7 @@ cz.mpelant.fitchecker.utils.DataProvider$DatabaseHelper -> cz.mpelant.fitchecker
     43:46:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
 cz.mpelant.fitchecker.utils.MyReader -> cz.mpelant.fitchecker.b.d:
     10:20:java.lang.String getString(java.io.InputStream) -> a
-cz.mpelant.fitchecker.utils.NotifcationHelper -> cz.mpelant.fitchecker.b.e:
+cz.mpelant.fitchecker.utils.NotificationHelper -> cz.mpelant.fitchecker.b.e:
     android.content.Context mCtx -> a
     android.content.SharedPreferences sp -> b
 cz.mpelant.fitchecker.utils.RestClient -> cz.mpelant.fitchecker.b.f:

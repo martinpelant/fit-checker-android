@@ -3,19 +3,21 @@ package cz.mpelant.fitchecker.service;
 import android.accounts.AuthenticatorException;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.squareup.otto.Bus;
 import com.squareup.otto.Produce;
 import cz.mpelant.fitchecker.App;
+import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.downloader.EduxServer;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
-import cz.mpelant.fitchecker.utils.NotifcationHelper;
+import cz.mpelant.fitchecker.utils.NotificationHelper;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -233,9 +235,13 @@ public class UpdateSubjectsService extends Service {
 
     private synchronized void onTaskFinished(EduxRequest request, EduxResponse result) {
         tasksCount--;
-
-        if (request.showNotifications && result.isChangesDetected()) {
-            new NotifcationHelper(this).displayNotification();
+        if (request.showNotifications) {//save last run time
+            SharedPreferences.Editor ed = PreferenceManager.getDefaultSharedPreferences(this).edit();
+            ed.putLong(Settings.PREF_ALARM_LAST_RUN, System.currentTimeMillis());
+            ed.commit();
+            if (result.isChangesDetected()) {
+                new NotificationHelper(this).displayNotification(result.changedSubjects);
+            }
         }
 
         post(new UpdateSubjectsStatus(UpdateSubjectsStatus.Status.FINISHED, request));
