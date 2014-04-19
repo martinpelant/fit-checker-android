@@ -7,23 +7,25 @@
 
     <style name="_Theme.Fitchecker.Styled" parent="Theme.Fitchecker">
 
-    <item name="android:editTextBackground">@drawable/fitcheckerstyled_edit_text_holo_light</item>
+        <item name="android:editTextBackground">@drawable/fitcheckerstyled_edit_text_holo_light</item>
 
-    <item name="android:textColorHighlight">#99e77f08</item>
-    <item name="android:textSelectHandleLeft">@drawable/fitcheckerstyled_text_select_handle_left</item>
-    <item name="android:textSelectHandleRight">@drawable/fitcheckerstyled_text_select_handle_right</item>
-    <item name="android:textSelectHandle">@drawable/fitcheckerstyled_text_select_handle_middle</item>
+        <item name="android:textColorHighlight">#99e77f08</item>
+        <item name="android:textSelectHandleLeft">@drawable/fitcheckerstyled_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/fitcheckerstyled_text_select_handle_right</item>
+        <item name="android:textSelectHandle">@drawable/fitcheckerstyled_text_select_handle_middle</item>
 
-    <item name="android:buttonStyle">@style/ButtonFitcheckerStyled</item>
+        <item name="android:buttonStyle">@style/ButtonFitcheckerStyled</item>
 
-    <item name="android:imageButtonStyle">@style/ImageButtonFitcheckerStyled</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonFitcheckerStyled</item>
 
-    <item name="android:dropDownSpinnerStyle">@style/SpinnerFitcheckerStyled</item>
+        <item name="android:dropDownSpinnerStyle">@style/SpinnerFitcheckerStyled</item>
 
-    <item name="android:listChoiceBackgroundIndicator">@drawable/fitcheckerstyled_list_selector_holo_light</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/fitcheckerstyled_list_selector_holo_light</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/fitcheckerstyled_btn_check_holo_light</item>
 
-    <item name="android:activatedBackgroundIndicator">@drawable/fitcheckerstyled_activated_background_holo_light</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/fitcheckerstyled_activated_background_holo_light
+        </item>
 
-  </style>
+    </style>
 
 </resources>

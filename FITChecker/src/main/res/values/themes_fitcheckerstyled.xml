@@ -3,28 +3,30 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <style name="Theme.Fitchecker.Styled" parent="_Theme.Fitchecker.Styled"/>
+    <style name="Theme.Fitchecker.Styled" parent="_Theme.Fitchecker.Styled"/>
 
     <style name="_Theme.Fitchecker.Styled" parent="Theme.Fitchecker">
 
-    <item name="android:editTextStyle">@style/EditTextFitcheckerStyled</item>
+        <item name="android:editTextStyle">@style/EditTextFitcheckerStyled</item>
 
-    <item name="android:textColorHighlight">#99e77f08</item>
+        <item name="android:textColorHighlight">#99e77f08</item>
 
-    <item name="android:buttonStyle">@style/ButtonFitcheckerStyled</item>
+        <item name="android:buttonStyle">@style/ButtonFitcheckerStyled</item>
 
-    <item name="android:imageButtonStyle">@style/ImageButtonFitcheckerStyled</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonFitcheckerStyled</item>
 
-    <item name="android:spinnerStyle">@style/SpinnerFitcheckerStyled</item>
+        <item name="android:spinnerStyle">@style/SpinnerFitcheckerStyled</item>
 
-    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemFitcheckerStyled</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemFitcheckerStyled</item>
 
-    <item name="android:listViewStyle">@style/ListViewFitcheckerStyled</item>
+        <item name="android:listViewStyle">@style/ListViewFitcheckerStyled</item>
 
-    <item name="android:listViewWhiteStyle">@style/ListViewFitcheckerStyled.White</item>
+        <item name="android:listViewWhiteStyle">@style/ListViewFitcheckerStyled.White</item>
 
-    <item name="android:spinnerItemStyle">@style/SpinnerItemFitcheckerStyled</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItemFitcheckerStyled</item>
 
-  </style>
+        <item name="android:checkboxStyle">@style/CheckBoxfitcheckerstyled</item>
+
+    </style>
 
 </resources>
