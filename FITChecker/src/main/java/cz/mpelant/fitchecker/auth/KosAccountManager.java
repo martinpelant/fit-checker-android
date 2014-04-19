@@ -74,6 +74,7 @@ public class KosAccountManager {
         ed.remove(PREFERENCES_USERNAME);
         ed.remove(PREFERENCES_PASSWORD);
         ed.commit();
+        mAccount=null;
     }
 
     private static SharedPreferences getSp() {

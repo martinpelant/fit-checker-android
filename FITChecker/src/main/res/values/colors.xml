@@ -5,4 +5,6 @@
     <color name="refresh_color3">@color/fitcheckerstyled_color</color>
     <color name="refresh_color4">#264c6f</color>
     <color name="windowBackground">#ffffff</color>
+    <color name="divider">#18264c6f</color>
+
 </resources>

@@ -2,6 +2,10 @@
 <resources>
     <style name="BaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="listPreferredItemPaddingLeft">@dimen/listPadding</item>
+        <item name="listPreferredItemPaddingRight">@dimen/listPadding</item>
+        <item name="android:listPreferredItemPaddingLeft">@dimen/listPadding</item>
+        <item name="android:listPreferredItemPaddingRight">@dimen/listPadding</item>
 
         <!-- Customize your theme here. -->
     </style>

@@ -3,12 +3,14 @@ package cz.mpelant.fitchecker.fragment.dialog;
 import android.accounts.AuthenticatorException;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
+import cz.mpelant.fitchecker.activity.LoginActivity;
 import cz.mpelant.fitchecker.service.AddFromKosService;
 
 import java.io.IOException;
@@ -56,7 +58,7 @@ public class AddFromKosDialog extends BaseDialogFragment {
         if (serviceStarted && AddFromKosService.getLastStatus() == AddFromKosService.KosStatus.FINISHED) {
             dismissAllowingStateLoss();
         }
-        serviceStarted=true;
+        serviceStarted = true;
     }
 
     @Override
@@ -71,6 +73,7 @@ public class AddFromKosDialog extends BaseDialogFragment {
         String errorMessage = null;
         if (exception.getException() instanceof AuthenticatorException) {
             errorMessage = getString(R.string.kos_login_error);
+            startActivity(new Intent(getActivity(), LoginActivity.class));
         }
         if (exception.getException() instanceof IOException) {
             errorMessage = getString(R.string.error_kos_download);
