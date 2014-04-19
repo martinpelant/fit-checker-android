@@ -3,9 +3,15 @@
           package="cz.mpelant.fitchecker"
           android:installLocation="internalOnly">
 
+    <uses-feature
+            android:name="android.hardware.telephony"
+            android:required="false"/>
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
 
     <application
             android:hardwareAccelerated="true"
