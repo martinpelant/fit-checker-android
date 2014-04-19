@@ -1,43 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingTop="20dp" >
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:paddingTop="20dp">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <Spinner
-            android:id="@+id/course_prefix"
-            android:layout_width="wrap_content"
-            android:entries="@array/course_prefixes"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/subject"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapCharacters" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+        <Spinner
+                android:paddingRight="?listPreferredItemPaddingLeft"
+                android:id="@+id/course_prefix"
+                android:layout_width="wrap_content"
+                android:entries="@array/course_prefixes"
+                android:layout_height="wrap_content"/>
+
+        <EditText
+                android:id="@+id/subject"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapCharacters"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/add"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/add" />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/addSubjectsFromKOS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/addSubjectsFromKOS" />
+        <Button
+                android:id="@+id/addSubjectsFromKOS"
+                style="?android:textAppearanceSmall"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/addSubjectsFromKOS"
+                android:textStyle="bold"/>
+
+        <Button
+                android:id="@+id/add"
+                style="?android:textAppearanceSmall"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/add"
+                android:textStyle="bold"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>
