@@ -20,7 +20,6 @@ task readPasswordFromInput << {
 					input = passwordField()
 					button(defaultButton: true, text: 'OK', actionPerformed: {
 						android.signingConfigs.release.storePassword = new String(input.password); // Set pass variable to value of input field
-						println("Password " + android.signingConfigs.release.storePassword);
 						dispose(); // Close dialog
 					})
 				} // vbox end
@@ -41,7 +40,6 @@ task readPasswordFromInput << {
 					input = passwordField()
 					button(defaultButton: true, text: 'OK', actionPerformed: {
 						android.signingConfigs.release.keyPassword = new String(input.password); // Set pass variable to value of input field
-						println("Password 2 " + android.signingConfigs.release.keyPassword);
 						dispose(); // Close dialog
 					})
 				} // vbox end
