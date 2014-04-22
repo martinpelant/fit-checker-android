@@ -1,6 +1,7 @@
 package cz.mpelant.fitchecker.fragment;
 
 import android.accounts.AuthenticatorException;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -198,7 +199,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
     @Override
     protected boolean isRefreshing() {
-        if(mSwipeRefreshLayout==null){
+        if (mSwipeRefreshLayout == null) {
             return false;
         }
         return mSwipeRefreshLayout.isRefreshing();
@@ -208,5 +209,13 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
     public void onRefresh() {
         UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectsUri());
         App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQ_LOGIN && resultCode == Activity.RESULT_OK) {
+            onRefresh();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -1,6 +1,7 @@
 package cz.mpelant.fitchecker.fragment;
 
 import android.accounts.AuthenticatorException;
+import android.app.Activity;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -297,6 +298,14 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
             mProgressContainer.setVisibility(View.VISIBLE);
             mWebView.setVisibility(View.INVISIBLE);
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQ_LOGIN && resultCode == Activity.RESULT_OK) {
+            onRefresh();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

@@ -28,6 +28,8 @@ public class App extends Application {
         super.onCreate();
         if (!PreferenceManager.getDefaultSharedPreferences(instance).getBoolean(SP_IMPORTED, false) && OldImport.isUpgradeFromOldVersion(this)) {
             performUpgrade();
+        } else {//no need to update, save it to SP so we don't have to check it again
+            PreferenceManager.getDefaultSharedPreferences(instance).edit().putBoolean(SP_IMPORTED, true).commit();
         }
     }
 
