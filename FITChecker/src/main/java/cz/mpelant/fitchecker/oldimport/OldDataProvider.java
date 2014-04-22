@@ -11,7 +11,7 @@ import android.util.Log;
 @Deprecated public class OldDataProvider {
     public static String TAG = "fitchecker";
 
-    private static final String DATABASE_NAME = "data";
+    public static final String DATABASE_NAME = "data";
 
     public static final String SUBJECTS_DB_NAME = "subjects";
 

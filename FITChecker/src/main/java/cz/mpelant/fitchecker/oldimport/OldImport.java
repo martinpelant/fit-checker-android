@@ -11,6 +11,9 @@ import cz.mpelant.fitchecker.auth.KosAccountManager;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.model.Subject;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * OldImport.java
  *
@@ -22,6 +25,14 @@ import cz.mpelant.fitchecker.model.Subject;
 public class OldImport {
     public static final String PREFERENCES_USERNAME = "username";
     public static final String PREFERENCES_PASSWORD = "password";
+
+    public static boolean isUpgradeFromOldVersion(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String username = sp.getString(PREFERENCES_USERNAME, null);
+        String password = sp.getString(PREFERENCES_PASSWORD, null);
+
+        return username != null || password != null || Arrays.asList(context.databaseList()).contains(OldDataProvider.DATABASE_NAME);
+    }
 
     public static void importDb(Context context) {
         OldDataProvider data = new OldDataProvider(context);
@@ -37,16 +48,19 @@ public class OldImport {
             values[c.getPosition()] = subject.getContentValues();
         }
 
+        c.close();
+        data.close();
         context.getContentResolver().bulkInsert(DataProvider.getSubjectsUri(), values);
+        context.deleteDatabase(OldDataProvider.DATABASE_NAME);
     }
 
     public static void importCredentials(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         String username = sp.getString(PREFERENCES_USERNAME, null);
         String password = sp.getString(PREFERENCES_PASSWORD, null);
-        sp.edit().remove(PREFERENCES_USERNAME).remove(PREFERENCES_PASSWORD).commit();
         if (username != null && password != null) {
             KosAccountManager.saveAccount(new KosAccount(username, password));
         }
+        sp.edit().remove(PREFERENCES_USERNAME).remove(PREFERENCES_PASSWORD).commit();
     }
 }

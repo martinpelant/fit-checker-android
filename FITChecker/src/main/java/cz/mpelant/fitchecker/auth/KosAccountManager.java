@@ -27,6 +27,7 @@ public class KosAccountManager {
     private static final String PREFERENCES_USERNAME = "username";
     private static final String PREFERENCES_PASSWORD = "password";
     static final int AUTH_OPTION = 3;
+    private static final String SP_FNAME = "eduxcred";
     private static KosAccount mAccount;
 
 
@@ -78,7 +79,7 @@ public class KosAccountManager {
     }
 
     private static SharedPreferences getSp() {
-        return App.getInstance().getSharedPreferences("eduxcred", Context.MODE_PRIVATE);
+        return App.getInstance().getSharedPreferences(SP_FNAME, Context.MODE_PRIVATE);
     }
 
     private static String generateKey() throws UnsupportedEncodingException, NoSuchAlgorithmException {

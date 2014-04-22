@@ -1,7 +1,9 @@
 package cz.mpelant.fitchecker;
 
 import android.app.Application;
+import android.preference.PreferenceManager;
 import android.view.ViewConfiguration;
+import cz.mpelant.fitchecker.oldimport.OldImport;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
 
 import java.lang.reflect.Field;
@@ -14,6 +16,7 @@ import java.lang.reflect.Field;
  * @since 4/17/2014
  */
 public class App extends Application {
+    public static final String SP_IMPORTED = "imported";
     private static App instance;
     private MainThreadBus mBus;
 
@@ -23,6 +26,20 @@ public class App extends Application {
         mBus = new MainThreadBus();
         forceOverflowHack();
         super.onCreate();
+        if (!PreferenceManager.getDefaultSharedPreferences(instance).getBoolean(SP_IMPORTED, false) && OldImport.isUpgradeFromOldVersion(this)) {
+            performUpgrade();
+        }
+    }
+
+    private void performUpgrade() {
+        new Thread() {
+            @Override
+            public void run() {
+                OldImport.importCredentials(instance);
+                OldImport.importDb(instance);
+                PreferenceManager.getDefaultSharedPreferences(instance).edit().putBoolean(SP_IMPORTED, true).commit();
+            }
+        }.start();
     }
 
     private void forceOverflowHack() {
