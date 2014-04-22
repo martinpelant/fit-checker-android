@@ -37,8 +37,10 @@ public class KosServer {
 
     @NonNull
     public List<String> loadSubjects() throws IOException, AuthenticatorException, XmlPullParserException {
+        if(!KosAccountManager.isAccount()){
+            throw new AuthenticatorException("No credentials");
+        }
         KosAccount account = KosAccountManager.getAccount();
-
         RestClient client = new RestClient(String.format(KOS_API_URL, account.getUsername()), new DefaultHttpClient());
         String credentials = account.getUsername() + ":" + account.getPassword();
         ArrayList<NameValuePair> headers = new ArrayList<>();
