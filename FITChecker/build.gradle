@@ -1,13 +1,67 @@
+import groovy.swing.SwingBuilder
 apply plugin: 'android'
 
 
 //to get release signing password from console
 task readPasswordFromInput << {
-	def console = System.console()
-	ext.keystorePassword = console.readLine('\n\n\n> Enter keystore password: ')
-	android.signingConfigs.release.storePassword = ext.keystorePassword
-	ext.keyPassword = console.readLine('\n\n\n> Enter key password: ')
-	android.signingConfigs.release.keyPassword = ext.keyPassword
+	android.signingConfigs.release.storePassword=''
+	if(System.console() == null) {
+		new SwingBuilder().edt {
+			dialog(modal: true, // Otherwise the build will continue running before you closed the dialog
+					title: 'Enter keystore password', // Dialog title
+					alwaysOnTop: true, // pretty much what the name says
+					resizable: false, // Don't allow the user to resize the dialog
+					locationRelativeTo: null, // Place dialog in center of the screen
+					pack: true, // We need to pack the dialog (so it will take the size of it's children)
+					show: true // Let's show it
+			) {
+				vbox { // Put everything below each other
+					label(text: "Enter keystore password:")
+					input = passwordField()
+					button(defaultButton: true, text: 'OK', actionPerformed: {
+						android.signingConfigs.release.storePassword = new String(input.password); // Set pass variable to value of input field
+						println("Password " + android.signingConfigs.release.storePassword);
+						dispose(); // Close dialog
+					})
+				} // vbox end
+			} // dialog end
+		} // edt end
+
+		new SwingBuilder().edt {
+			dialog(modal: true, // Otherwise the build will continue running before you closed the dialog
+					title: 'Enter password', // Dialog title
+					alwaysOnTop: true, // pretty much what the name says
+					resizable: false, // Don't allow the user to resize the dialog
+					locationRelativeTo: null, // Place dialog in center of the screen
+					pack: true, // We need to pack the dialog (so it will take the size of it's children)
+					show: true // Let's show it
+			) {
+				vbox { // Put everything below each other
+					label(text: "Enter key password:")
+					input = passwordField()
+					button(defaultButton: true, text: 'OK', actionPerformed: {
+						android.signingConfigs.release.keyPassword = new String(input.password); // Set pass variable to value of input field
+						println("Password 2 " + android.signingConfigs.release.keyPassword);
+						dispose(); // Close dialog
+					})
+				} // vbox end
+			} // dialog end
+		} // edt end
+	} else {
+		def console = System.console()
+		ext.keystorePassword = console.readLine('\n\n\n> Enter keystore password: ')
+		android.signingConfigs.release.storePassword = ext.keystorePassword
+		ext.keyPassword = console.readLine('\n\n\n> Enter key password: ')
+		android.signingConfigs.release.keyPassword = ext.keyPassword
+	}
+
+	if(android.signingConfigs.release.storePassword.size() <= 0) {
+		throw new InvalidUserDataException("You must enter a password to proceed.")
+	}
+
+
+
+
 }
 
 
@@ -75,5 +129,5 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-core:4.48@jar'
     compile 'com.android.support:support-v4:19.1.+'
     compile 'com.android.support:appcompat-v7:+'
-    compile 'com.jakewharton:butterknife:4.+'
+    compile 'com.jakewharton:butterknife:5.+'
 }
