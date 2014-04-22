@@ -19,7 +19,7 @@
 
 # Remove printstacktrace to system err stream
 -dontobfuscate
--optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
+-optimizations !code/allocation/variable
 
 -assumenosideeffects class * extends java.lang.Throwable {
     public void printStackTrace();
