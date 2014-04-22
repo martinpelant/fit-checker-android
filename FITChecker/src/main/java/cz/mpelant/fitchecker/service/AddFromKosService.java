@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.os.IBinder;
 import cz.mpelant.fitchecker.App;
+import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.downloader.KosServer;
 import cz.mpelant.fitchecker.model.Subject;
@@ -24,7 +25,7 @@ import java.util.List;
  * @since 4/18/2014
  */
 public class AddFromKosService extends Service {
-    private static final String ACTION = "cz.mpelant.fitchecker.KOS_ADD_SUBJECTS";
+    private static final String ACTION = BuildConfig.PACKAGE_NAME+".KOS_ADD_SUBJECTS";
 
 
     public static class KosException {

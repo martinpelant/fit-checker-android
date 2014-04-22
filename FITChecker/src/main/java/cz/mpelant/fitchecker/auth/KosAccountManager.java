@@ -55,6 +55,7 @@ public class KosAccountManager {
         if (mAccount == null) {
 
             String encryptedPassword = getSp().getString(PREFERENCES_PASSWORD, null);
+            String username = getSp().getString(PREFERENCES_USERNAME, null);
             String password;
             try {//try to decrypt password
                 password = decrypt(generateKey(), encryptedPassword);
@@ -63,8 +64,9 @@ public class KosAccountManager {
                 Log.e("KosAccountManager", "WARNING: storing plaintext password");
                 password = encryptedPassword;
             }
-
-            mAccount = new KosAccount(getSp().getString(PREFERENCES_USERNAME, null), password, AUTH_OPTION);
+            if (username != null && password != null) {
+                mAccount = new KosAccount(username, password, AUTH_OPTION);
+            }
         }
 
         return mAccount;
@@ -75,7 +77,7 @@ public class KosAccountManager {
         ed.remove(PREFERENCES_USERNAME);
         ed.remove(PREFERENCES_PASSWORD);
         ed.commit();
-        mAccount=null;
+        mAccount = null;
     }
 
     private static SharedPreferences getSp() {

@@ -7,6 +7,8 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Build;
+import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.model.AbstractEntity;
 import cz.mpelant.fitchecker.model.Subject;
 
@@ -17,7 +19,7 @@ import cz.mpelant.fitchecker.model.Subject;
  */
 public class DataProvider extends ContentProvider {
 
-    private static final String AUTHORITY = "cz.mpelant.fitchecker.subjectsprovider";
+    private static final String AUTHORITY = BuildConfig.PACKAGE_NAME+".subjectsprovider";
 
     private static final String SUBJECTS_BASE_PATH = "subjects";
 

@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.squareup.otto.Produce;
 import cz.mpelant.fitchecker.App;
+import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.downloader.EduxServer;
@@ -34,7 +35,7 @@ import java.util.Set;
 public class UpdateSubjectsService extends Service {
 
 
-    private static final String ACTION = "cz.mpelant.fitchecker.UPDATE_SUBJECTS";
+    private static final String ACTION =  BuildConfig.PACKAGE_NAME+".UPDATE_SUBJECTS";
 
     public static class UpdateSubjectsException {
         private Exception mException;

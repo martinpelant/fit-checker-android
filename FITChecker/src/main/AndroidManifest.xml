@@ -32,22 +32,6 @@
         <activity android:name="cz.mpelant.fitchecker.activity.Settings"/>
         <activity android:name="cz.mpelant.fitchecker.activity.BaseFragmentActivity"/>
 
-        <service
-                android:name="cz.mpelant.fitchecker.service.UpdateSubjectsService"
-                android:exported="false">
-            <intent-filter>
-                <action android:name="cz.mpelant.fitchecker.UPDATE_SUBJECTS"/>
-            </intent-filter>
-        </service>
-
-        <service
-                android:name="cz.mpelant.fitchecker.service.AddFromKosService"
-                android:exported="false">
-            <intent-filter>
-                <action android:name="cz.mpelant.fitchecker.KOS_ADD_SUBJECTS"/>
-            </intent-filter>
-        </service>
-
         <receiver android:name="cz.mpelant.fitchecker.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
@@ -56,22 +40,11 @@
             </intent-filter>
         </receiver>
 
-        <provider
-                android:name="cz.mpelant.fitchecker.db.DataProvider"
-                android:authorities="cz.mpelant.fitchecker.subjectsprovider"
-                android:exported="true">
-        </provider>
-
         <activity
                 android:name=".activity.LoginActivity"
                 android:label="@string/title_activity_login"
                 android:windowSoftInputMode="adjustResize|stateVisible">
         </activity>
     </application>
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.READ_PROFILE"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
 </manifest>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="cz.mpelant.fitchecker">
+
+
+    <application>
+
+        <provider
+                android:name=".db.DataProvider"
+                android:authorities="cz.mpelant.fitchecker.subjectsprovider"
+                android:exported="true">
+        </provider>
+
+        <service
+                android:name=".service.UpdateSubjectsService"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="cz.mpelant.fitchecker.UPDATE_SUBJECTS"/>
+            </intent-filter>
+        </service>
+
+        <service
+                android:name=".service.AddFromKosService"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="cz.mpelant.fitchecker.KOS_ADD_SUBJECTS"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>
