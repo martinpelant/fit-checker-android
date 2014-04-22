@@ -32,12 +32,12 @@ import java.util.List;
 public class KosServer {
 
     private static final String KOS_API_URL = "https://kosapi.fit.cvut.cz/api/3/students/%s/";
-    private static final String COURSES_METHOD = "enrolledCourses";
+    private static final String COURSES_METHOD = "enrolledCourses.txt";
     private final String TAG = KosServer.class.getSimpleName();
 
     @NonNull
     public List<String> loadSubjects() throws IOException, AuthenticatorException, XmlPullParserException {
-        if(!KosAccountManager.isAccount()){
+        if (!KosAccountManager.isAccount()) {
             throw new AuthenticatorException("No credentials");
         }
         KosAccount account = KosAccountManager.getAccount();
@@ -53,13 +53,10 @@ public class KosServer {
             String xmlResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
             Log.d(TAG, xmlResponse);
             List<String> subjects;
-            try {
+            if (xmlResponse.contains("<")) {
                 subjects = SubjectParser.parseSubjects(xmlResponse);
-            } catch (XmlPullParserException e) {
-                if (xmlResponse.contains("<")) {
-                    throw e; //re-throw exeption if response is in xml format
-                }
-                subjects = Arrays.asList(xmlResponse.split(","));//try to split subjects in case api returns MI-SUB1,MI-SUB2... instead of XML response
+            } else {
+                subjects = Arrays.asList(xmlResponse.split(","));
             }
 
 

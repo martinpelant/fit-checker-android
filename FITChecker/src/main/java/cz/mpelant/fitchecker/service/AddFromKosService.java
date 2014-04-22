@@ -4,7 +4,9 @@ import android.accounts.AuthenticatorException;
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.IBinder;
+import android.util.Log;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.db.DataProvider;
@@ -55,11 +57,6 @@ public class AddFromKosService extends Service {
                 ContentValues[] values = new ContentValues[subjectList.size()];
                 for (int i = 0; i < subjectList.size(); i++) {
                     values[i] = new Subject(subjectList.get(i)).getContentValues();
-                }
-                try {
-                    sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
                 App.getInstance().getContentResolver().bulkInsert(DataProvider.getSubjectsUri(), values);
             } catch (IOException | AuthenticatorException | XmlPullParserException e) {

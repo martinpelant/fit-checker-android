@@ -58,6 +58,16 @@
                     android:layout_height="wrap_content">
 
                 <Button
+                        android:id="@+id/sign_out_button"
+                        style="?android:textAppearanceSmall"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/logout"
+                        android:textStyle="bold"/>
+
+                <Button
                         android:id="@+id/sign_in_button"
                         style="?android:textAppearanceSmall"
                         android:layout_weight="1"
@@ -67,15 +77,6 @@
                         android:text="@string/action_sign_in"
                         android:textStyle="bold"/>
 
-                <Button
-                        android:id="@+id/sign_out_button"
-                        style="?android:textAppearanceSmall"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/logout"
-                        android:textStyle="bold"/>
             </LinearLayout>
 
         </LinearLayout>

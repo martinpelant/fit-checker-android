@@ -251,7 +251,6 @@ public class LoginFragment extends BaseFragment implements LogoutDialog.OnLogOut
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
 
             if (success) {
                 loginSucceeded = true;
@@ -259,6 +258,7 @@ public class LoginFragment extends BaseFragment implements LogoutDialog.OnLogOut
                     getActivity().setResult(Activity.RESULT_OK);
                 finish();
             } else {
+                showProgress(false);
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
