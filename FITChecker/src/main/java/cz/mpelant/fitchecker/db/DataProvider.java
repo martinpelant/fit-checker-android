@@ -5,12 +5,16 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.model.AbstractEntity;
 import cz.mpelant.fitchecker.model.Subject;
+
 
 /**
  * Content provider for entity model in database
@@ -19,7 +23,7 @@ import cz.mpelant.fitchecker.model.Subject;
  */
 public class DataProvider extends ContentProvider {
 
-    private static final String AUTHORITY = BuildConfig.PACKAGE_NAME+".subjectsprovider";
+    private static final String AUTHORITY = BuildConfig.PACKAGE_NAME + ".subjectsprovider";
 
     private static final String SUBJECTS_BASE_PATH = "subjects";
 
@@ -65,8 +69,19 @@ public class DataProvider extends ContentProvider {
                 return null;
 
         }
+
         SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
-        long newId = sqlDB.insert(table, null, values);
+        long newId;
+        try {
+            newId = sqlDB.insertOrThrow(table, null, values);
+        } catch (SQLiteConstraintException e) {
+            Log.d("DB", "Subject already in DB: " + values);
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
 
         getContext().getContentResolver().notifyChange(uri, null);
         return Uri.parse(uri + "/" + newId);
