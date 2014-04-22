@@ -19,6 +19,7 @@
             android:allowBackup="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:icon="@drawable/ic_launcher"
+            android:logo="@drawable/ic_logo"
             android:label="@string/app_name"
             android:theme="@style/Theme.Fitchecker.Styled">
         <activity android:name="cz.mpelant.fitchecker.activity.MainActivity">

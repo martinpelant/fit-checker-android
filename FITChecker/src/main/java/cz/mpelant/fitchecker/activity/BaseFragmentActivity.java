@@ -149,6 +149,7 @@ public class BaseFragmentActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        getSupportActionBar().setLogo(R.drawable.ic_logo);
         mContentView = onCreateContentView();
         // we need to set SERVER_ID to this container
         mContentView.setId(CONTENT_VIEW_ID);
