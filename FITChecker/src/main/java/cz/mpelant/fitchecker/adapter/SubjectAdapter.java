@@ -2,6 +2,7 @@ package cz.mpelant.fitchecker.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class SubjectAdapter extends CursorAdapter {
         ImageView changed = ButterKnife.findById(view, R.id.changed);
 
         name.setText(item.getName());
+        name.setTypeface(null, item.isRead() ? Typeface.NORMAL : Typeface.BOLD);
         changed.setVisibility(item.isRead() ? View.INVISIBLE : View.VISIBLE);
         view.setTag(item);
     }
