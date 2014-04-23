@@ -183,6 +183,11 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 
     }
 
+
+    public static boolean isNotifEnabled(Context context){
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREF_ALARM, false);
+    }
+
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 

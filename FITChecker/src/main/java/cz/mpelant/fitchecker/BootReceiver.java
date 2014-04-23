@@ -13,7 +13,7 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Settings.PREF_ALARM, false)) {
+        if (Settings.isNotifEnabled(context)) {
             Settings.startAlarm(context);
             Log.d(TAG, "BOOT - alarm set");
         } else {

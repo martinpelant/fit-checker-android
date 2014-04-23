@@ -3,6 +3,7 @@ package cz.mpelant.fitchecker;
 import android.app.Application;
 import android.preference.PreferenceManager;
 import android.view.ViewConfiguration;
+import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.oldimport.OldImport;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
 
@@ -34,6 +35,10 @@ public class App extends Application {
     }
 
     private void performUpgrade() {
+        if(Settings.isNotifEnabled(this)){//reenable auto refresh if needed
+            Settings.stopAlarm(this);
+            Settings.startAlarm(this);
+        }
         new Thread() {
             @Override
             public void run() {
