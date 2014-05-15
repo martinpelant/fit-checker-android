@@ -9,7 +9,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.os.Build;
 import android.util.Log;
 import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.model.AbstractEntity;
@@ -30,7 +29,7 @@ public class DataProvider extends ContentProvider {
     private static final int SUBJECTS = 1;
     private static final int SUBJECT_SINGLE_ROW = 2;
 
-    private static final Uri CONTENT_CHECKLIST_URI = Uri.parse("content://" + AUTHORITY);
+    private static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -43,11 +42,11 @@ public class DataProvider extends ContentProvider {
 
 
     public static Uri getSubjectUri(long subjectId) {
-        return Uri.parse(DataProvider.CONTENT_CHECKLIST_URI + "/" + SUBJECTS_BASE_PATH + "/" + subjectId);
+        return Uri.parse(DataProvider.CONTENT_URI + "/" + SUBJECTS_BASE_PATH + "/" + subjectId);
     }
 
     public static Uri getSubjectsUri() {
-        return Uri.parse(DataProvider.CONTENT_CHECKLIST_URI + "/" + SUBJECTS_BASE_PATH);
+        return Uri.parse(DataProvider.CONTENT_URI + "/" + SUBJECTS_BASE_PATH);
     }
 
 

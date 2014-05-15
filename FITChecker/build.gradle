@@ -1,11 +1,11 @@
 import groovy.swing.SwingBuilder
-apply plugin: 'android'
 
+apply plugin: 'android'
 
 //to get release signing password from console
 task readPasswordFromInput << {
-	android.signingConfigs.release.storePassword=''
-	if(System.console() == null) {
+	android.signingConfigs.release.storePassword = ''
+	if (System.console() == null) {
 		new SwingBuilder().edt {
 			dialog(modal: true, // Otherwise the build will continue running before you closed the dialog
 					title: 'Enter keystore password', // Dialog title
@@ -19,7 +19,8 @@ task readPasswordFromInput << {
 					label(text: "Enter keystore password:")
 					input = passwordField()
 					button(defaultButton: true, text: 'OK', actionPerformed: {
-						android.signingConfigs.release.storePassword = new String(input.password); // Set pass variable to value of input field
+						android.signingConfigs.release.storePassword = new String(input.password);
+						// Set pass variable to value of input field
 						dispose(); // Close dialog
 					})
 				} // vbox end
@@ -39,7 +40,8 @@ task readPasswordFromInput << {
 					label(text: "Enter key password:")
 					input = passwordField()
 					button(defaultButton: true, text: 'OK', actionPerformed: {
-						android.signingConfigs.release.keyPassword = new String(input.password); // Set pass variable to value of input field
+						android.signingConfigs.release.keyPassword = new String(input.password);
+						// Set pass variable to value of input field
 						dispose(); // Close dialog
 					})
 				} // vbox end
@@ -53,16 +55,11 @@ task readPasswordFromInput << {
 		android.signingConfigs.release.keyPassword = ext.keyPassword
 	}
 
-	if(android.signingConfigs.release.storePassword.size() <= 0) {
+	if (android.signingConfigs.release.storePassword.size() <= 0) {
 		throw new InvalidUserDataException("You must enter a password to proceed.")
 	}
 
-
-
-
 }
-
-
 
 //do specify tasks on compile time
 tasks.whenTaskAdded { task ->
@@ -108,11 +105,13 @@ android {
 	}
 
 	buildTypes {
-		debug {//automatically marks src/debug as a source folders in addition to src/main if used and if the folder exists
+		debug {
+//automatically marks src/debug as a source folders in addition to src/main if used and if the folder exists
 			versionNameSuffix " " + getShortCommitHash()
 			packageNameSuffix ".debug"
 		}
-		release {//automatically marks src/release as a source folders in addition to src/main if used and if the folder exists
+		release {
+//automatically marks src/release as a source folders in addition to src/main if used and if the folder exists
 			runProguard true
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), file('proguard-project.txt')
 			signingConfig signingConfigs.release
@@ -121,11 +120,11 @@ android {
 }
 
 dependencies {
-    compile 'com.squareup:otto:1.3.4'
-    compile 'com.android.support:support-annotations:+'
-    compile 'com.j256.ormlite:ormlite-android:4.48@jar'
-    compile 'com.j256.ormlite:ormlite-core:4.48@jar'
-    compile 'com.android.support:support-v4:19.1.+'
-    compile 'com.android.support:appcompat-v7:+'
-    compile 'com.jakewharton:butterknife:5.+'
+	compile 'com.squareup:otto:1.3.4'
+	compile 'com.android.support:support-annotations:+'
+	compile 'com.j256.ormlite:ormlite-android:4.48@jar'
+	compile 'com.j256.ormlite:ormlite-core:4.48@jar'
+	compile 'com.android.support:support-v4:19.1.+'
+	compile 'com.android.support:appcompat-v7:+'
+	compile 'com.jakewharton:butterknife:5.+'
 }
