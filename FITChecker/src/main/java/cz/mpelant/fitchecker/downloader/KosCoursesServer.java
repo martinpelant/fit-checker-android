@@ -3,11 +3,13 @@ package cz.mpelant.fitchecker.downloader;
 import android.accounts.AuthenticatorException;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
 import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
 import cz.mpelant.fitchecker.utils.Base64;
 import cz.mpelant.fitchecker.utils.RestClient;
 import cz.mpelant.fitchecker.utils.SubjectParser;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -41,7 +43,7 @@ public class KosCoursesServer {
             throw new AuthenticatorException("No credentials");
         }
         KosAccount account = KosAccountManager.getAccount();
-        RestClient client = new RestClient(String.format(KOS_API_URL, "pelanma4"), new DefaultHttpClient());
+        RestClient client = new RestClient(String.format(KOS_API_URL, account.getUsername()), new DefaultHttpClient());
         String credentials = account.getUsername() + ":" + account.getPassword();
         ArrayList<NameValuePair> headers = new ArrayList<>();
         String base64EncodedCredentials = Base64.encodeBytes(credentials.getBytes());
