@@ -1,7 +1,10 @@
 package cz.mpelant.fitchecker.utils;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.util.Xml;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -10,11 +13,15 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.mpelant.fitchecker.model.Subject;
+
 /**
  * Class that parses subjects from xml server response
  * Created by David Bilik[david.bilik@eman.cz] on 25.2.14.
  */
 public class SubjectParser {
+    private static final String TAG = SubjectParser.class.getName();
+
     @NonNull
     public static List<String> parseSubjects(String xmlResponse) throws XmlPullParserException, IOException {
         XmlPullParser parser = Xml.newPullParser();
@@ -29,11 +36,19 @@ public class SubjectParser {
         ArrayList<String> subjects = new ArrayList<>();
 
         parser.require(XmlPullParser.START_TAG, null, "atom:feed");
-        while (parser.next() != XmlPullParser.END_TAG) {
+        while (true) {
+            int next = parser.next();
+            String name = parser.getName();
+            if(name != null) {
+                Log.d(TAG, name);
+            }
+            if (next == XmlPullParser.END_DOCUMENT) {
+                break;
+            }
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
-            String name = parser.getName();
+            name = parser.getName();
             // Starts by looking for the entry tag
             if (name.equals("atom:entry")) {
                 subjects.add(readSubject(parser));
@@ -49,11 +64,19 @@ public class SubjectParser {
     private static String readSubject(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, null, "atom:entry");
         String title = null;
-        while (parser.next() != XmlPullParser.END_TAG) {
+        while (true) {
+            int next = parser.next();
+            String name = parser.getName();
+            if(name != null) {
+                Log.d(TAG, name);
+            }
+            if (next == XmlPullParser.END_TAG) {
+                break;
+            }
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
-            String name = parser.getName();
+            name = parser.getName();
             if (name.equals("atom:content")) {
                 title = readTitle(parser);
             } else {
@@ -66,10 +89,19 @@ public class SubjectParser {
     // Processes title tags in the feed.
     private static String readTitle(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.nextTag();
+        Log.d(TAG, parser.getName());
+        if(!parser.getName().equals("course")) {
+            return null;
+        }
         String value = parser.getAttributeValue(null, "xlink:href");
         value = value.substring("courses/".length(), value.length() - 1);
-        parser.nextText();
         parser.next();
+//        Log.d(TAG, parser.getName());
+
+        parser.next();
+
+        Log.d(TAG, parser.getName());
+
         return value;
     }
 

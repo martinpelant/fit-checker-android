@@ -32,7 +32,7 @@ import java.util.List;
 public class KosCoursesServer {
 
     private static final String KOS_API_URL = "https://kosapi.fit.cvut.cz/api/3/students/%s/";
-    private static final String COURSES_METHOD = "enrolledCourses.txt";
+    private static final String COURSES_METHOD = "enrolledCourses";
     private final String TAG = KosCoursesServer.class.getSimpleName();
 
     @NonNull
@@ -41,7 +41,7 @@ public class KosCoursesServer {
             throw new AuthenticatorException("No credentials");
         }
         KosAccount account = KosAccountManager.getAccount();
-        RestClient client = new RestClient(String.format(KOS_API_URL, account.getUsername()), new DefaultHttpClient());
+        RestClient client = new RestClient(String.format(KOS_API_URL, "pelanma4"), new DefaultHttpClient());
         String credentials = account.getUsername() + ":" + account.getPassword();
         ArrayList<NameValuePair> headers = new ArrayList<>();
         String base64EncodedCredentials = Base64.encodeBytes(credentials.getBytes());

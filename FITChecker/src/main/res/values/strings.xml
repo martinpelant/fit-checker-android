@@ -74,5 +74,7 @@
     <string name="notification_ticker_new_exam">Byla vypsána nová zkouška</string>
     <string name="room">Místnost</string>
     <string name="notSpecified">Neurčeno</string>
+    <string name="deleteAllSubjects">Smazat všechny předměty</string>
+    <string name="delete_all_message">Opravdu chcete smazat všechny předměty?</string>
 
 </resources>

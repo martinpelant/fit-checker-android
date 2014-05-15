@@ -27,6 +27,7 @@ import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.adapter.SubjectAdapter;
 import cz.mpelant.fitchecker.db.DataProvider;
+import cz.mpelant.fitchecker.fragment.dialog.DeleteAllSubjectsDialog;
 import cz.mpelant.fitchecker.fragment.dialog.DeleteSubjectDialog;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.service.UpdateExamsService;
@@ -174,7 +175,15 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
                 }
             });
         }
-
+        menuItem = menu.add(R.string.deleteAllSubjects);
+        MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
+        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                deleteAllSubjects();
+                return true;
+            }
+        });
 
         menuItem = menu.add(R.string.settings);
         MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_NEVER);
@@ -188,6 +197,10 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private void deleteAllSubjects() {
+        new DeleteAllSubjectsDialog().show(getFragmentManager(), "deleteAll");
     }
 
 

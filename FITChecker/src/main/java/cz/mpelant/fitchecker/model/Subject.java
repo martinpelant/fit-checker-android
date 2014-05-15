@@ -21,7 +21,7 @@ public class Subject extends AbstractEntity implements Parcelable {
     public static final String NAME = "name";
     public static final String READ = "read";
 
-    @DatabaseField(unique = true, columnName = NAME)
+    @DatabaseField(unique = true, columnName = NAME, canBeNull = false)
     private String name;
 
     @DatabaseField(columnName = READ)
