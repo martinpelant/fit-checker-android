@@ -4,13 +4,12 @@ import android.accounts.AuthenticatorException;
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.IBinder;
-import android.util.Log;
+
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.db.DataProvider;
-import cz.mpelant.fitchecker.downloader.KosServer;
+import cz.mpelant.fitchecker.downloader.KosCoursesServer;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
 import org.xmlpull.v1.XmlPullParserException;
@@ -53,7 +52,7 @@ public class AddFromKosService extends Service {
         @Override
         public void run() {
             try {
-                List<String> subjectList = new KosServer().loadSubjects();
+                List<String> subjectList = new KosCoursesServer().loadSubjects();
                 ContentValues[] values = new ContentValues[subjectList.size()];
                 for (int i = 0; i < subjectList.size(); i++) {
                     values[i] = new Subject(subjectList.get(i)).getContentValues();

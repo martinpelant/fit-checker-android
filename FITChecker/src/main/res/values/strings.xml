@@ -40,6 +40,10 @@
         <item quantity="one">Detekovány změny na eduxu u 1 předmětu.</item>
         <item quantity="other">Detekovány změny na eduxu u %d předmětů.</item>
     </plurals>
+    <plurals name="notification_message_exam">
+        <item quantity="one">Nové zkoušky u 1 předmětu.</item>
+        <item quantity="other">Nové zkoušky u %d předmětů.</item>
+    </plurals>
 
     <string name="notification_message_big">Detekovány změny</string>
     <string name="error_table_not_found_title">Tabulka s výsledky nenalezena</string>
@@ -64,5 +68,11 @@
     <string name="subjects_empty_list">Nemáte v seznamu žádné předměty.</string>
     <string name="kos_login_error">Nepodařilo se přihláset do KOSu, zkontrolujte svůj login.</string>
     <string name="unknown_error">Došlo k neznámé chybě</string>
+    <string name="edux">Edux</string>
+    <string name="exams">Zkoušky</string>
+    <string name="noExams">Žádné vypsané zkoušky</string>
+    <string name="notification_ticker_new_exam">Byla vypsána nová zkouška</string>
+    <string name="room">Místnost</string>
+    <string name="notSpecified">Neurčeno</string>
 
 </resources>

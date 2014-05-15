@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.ViewGroup;
+
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.activity.MainActivity;
 import cz.mpelant.fitchecker.activity.Settings;
@@ -26,17 +28,22 @@ public class NotificationHelper {
     private static final int LEDOFF = 2000;
 
 
+    public enum NotificationType {
+        EDUX, EXAM
+    }
+
+
     public NotificationHelper(Context ctx) {
         mCtx = ctx;
         sp = PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 
-    public void displayNotification(Collection<Subject> changedSubejcts) {
+    public void displayNotification(Collection<Subject> changedSubejcts, NotificationType type) {
         Log.d("NOTIFICATION", "found changes, displaying notification");
 
         NotificationManager mNotificationManager = (NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        mNotificationManager.notify(1, getNotification(changedSubejcts));
+        mNotificationManager.notify(1, getNotification(changedSubejcts, type));
     }
 
     private PendingIntent getClickIntent() {
@@ -45,11 +52,23 @@ public class NotificationHelper {
         return PendingIntent.getActivity(mCtx, 0, notificationIntent, 0);
     }
 
-    private Notification getNotification(Collection<Subject> changedSubejcts) {
+    private Notification getNotification(Collection<Subject> changedSubejcts, NotificationType type) {
         NotificationCompat.Builder nb = new NotificationCompat.Builder(mCtx);
-        nb.setTicker(mCtx.getString(R.string.notification_ticker));
+        String ticker = "";
+        int messageResId = 0;
+        switch (type) {
+            case EDUX:
+                ticker = mCtx.getString(R.string.notification_ticker);
+                messageResId = R.plurals.notification_message;
+                break;
+            case EXAM:
+                ticker = mCtx.getString(R.string.notification_ticker_new_exam);
+                messageResId = R.plurals.notification_message_exam;
+                break;
+        }
+        nb.setTicker(ticker);
         nb.setSmallIcon(R.drawable.ic_stat_icon);
-        String text = mCtx.getResources().getQuantityString(R.plurals.notification_message, changedSubejcts.size(), changedSubejcts.size());
+        String text = mCtx.getResources().getQuantityString(messageResId, changedSubejcts.size(), changedSubejcts.size());
         nb.setContentText(text);
         nb.setContentTitle(mCtx.getString(R.string.app_name));
         nb.setContentIntent(getClickIntent());

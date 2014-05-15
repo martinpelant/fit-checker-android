@@ -10,7 +10,9 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import com.squareup.otto.Produce;
+
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.activity.Settings;
@@ -35,7 +37,7 @@ import java.util.Set;
 public class UpdateSubjectsService extends Service {
 
 
-    private static final String ACTION =  BuildConfig.PACKAGE_NAME+".UPDATE_SUBJECTS";
+    private static final String ACTION = BuildConfig.PACKAGE_NAME + ".UPDATE_SUBJECTS";
 
     public static class UpdateSubjectsException {
         private Exception mException;
@@ -224,6 +226,7 @@ public class UpdateSubjectsService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         lastId = startId;
         onNewTask(new EduxRequest(intent));
+        startService(UpdateExamsService.generateIntent(new UpdateExamsService.ExamRequest(new EduxRequest(intent).showNotifications)));
         return START_REDELIVER_INTENT;
     }
 
@@ -241,7 +244,7 @@ public class UpdateSubjectsService extends Service {
             ed.putLong(Settings.PREF_ALARM_LAST_RUN, System.currentTimeMillis());
             ed.commit();
             if (result.isChangesDetected()) {
-                new NotificationHelper(this).displayNotification(result.changedSubjects);
+                new NotificationHelper(this).displayNotification(result.changedSubjects, NotificationHelper.NotificationType.EDUX);
             }
         }
 

@@ -11,8 +11,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+
 import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.model.AbstractEntity;
+import cz.mpelant.fitchecker.model.Exam;
 import cz.mpelant.fitchecker.model.Subject;
 
 
@@ -26,9 +28,12 @@ public class DataProvider extends ContentProvider {
     private static final String AUTHORITY = BuildConfig.PACKAGE_NAME + ".subjectsprovider";
 
     private static final String SUBJECTS_BASE_PATH = "subjects";
+    private static final String EXAMS_BASE_PATH = "exams";
 
     private static final int SUBJECTS = 1;
     private static final int SUBJECT_SINGLE_ROW = 2;
+    private static final int EXAMS = 3;
+    private static final int EXAM_SINGLE_ROW = 4;
 
     private static final Uri CONTENT_CHECKLIST_URI = Uri.parse("content://" + AUTHORITY);
 
@@ -37,6 +42,9 @@ public class DataProvider extends ContentProvider {
     static {
         uriMatcher.addURI(AUTHORITY, SUBJECTS_BASE_PATH, SUBJECTS);
         uriMatcher.addURI(AUTHORITY, SUBJECTS_BASE_PATH + "/#", SUBJECT_SINGLE_ROW);
+        uriMatcher.addURI(AUTHORITY, EXAMS_BASE_PATH, EXAMS);
+        uriMatcher.addURI(AUTHORITY, EXAMS_BASE_PATH + "/#", EXAM_SINGLE_ROW);
+
     }
 
     private DatabaseHelper dbHelper;
@@ -48,6 +56,10 @@ public class DataProvider extends ContentProvider {
 
     public static Uri getSubjectsUri() {
         return Uri.parse(DataProvider.CONTENT_CHECKLIST_URI + "/" + SUBJECTS_BASE_PATH);
+    }
+
+    public static Uri getExamsUri() {
+        return Uri.parse(DataProvider.CONTENT_CHECKLIST_URI + "/" + EXAMS_BASE_PATH);
     }
 
 
@@ -65,6 +77,9 @@ public class DataProvider extends ContentProvider {
             case SUBJECTS:
                 table = Subject.TABLE_NAME;
                 break;
+            case EXAMS:
+                table = Exam.TABLE_NAME;
+                break;
             default:
                 return null;
 
@@ -75,7 +90,9 @@ public class DataProvider extends ContentProvider {
         try {
             newId = sqlDB.insertOrThrow(table, null, values);
         } catch (SQLiteConstraintException e) {
-            Log.d("DB", "Subject already in DB: " + values);
+            if (table.equals(Exam.TABLE_NAME)) {
+                sqlDB.update(table, values, Exam.COL_DATE + " = ?", new String[]{String.valueOf(values.get(Exam.COL_DATE))});
+            }
             return null;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -89,14 +106,19 @@ public class DataProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        String table = Subject.TABLE_NAME;
+        String table = null;
         String id = null;
 
         switch (uriMatcher.match(uri)) {
             case SUBJECTS:
+                table = Subject.TABLE_NAME;
                 break;
             case SUBJECT_SINGLE_ROW:
+                table = Subject.TABLE_NAME;
                 id = uri.getLastPathSegment();
+                break;
+            case EXAMS:
+                table = Exam.TABLE_NAME;
                 break;
             default:
                 return 0;
@@ -129,7 +151,11 @@ public class DataProvider extends ContentProvider {
             case SUBJECT_SINGLE_ROW:
                 toReturn = dbHelper.getReadableDatabase().query(Subject.TABLE_NAME, projection, Subject.INTERNAL_ID_COLUMN_NAME + "=?", new String[]{uri.getLastPathSegment()}, null, null, null);
                 break;
+            case EXAMS:
+                toReturn = dbHelper.getReadableDatabase().query(Exam.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                break;
             default:
+
                 return null;
         }
         toReturn.setNotificationUri(getContext().getContentResolver(), uri);
@@ -149,7 +175,9 @@ public class DataProvider extends ContentProvider {
             case SUBJECTS:
                 table = Subject.TABLE_NAME;
                 break;
-
+            case EXAMS:
+                table = Exam.TABLE_NAME;
+                break;
             default:
                 return 0;
         }

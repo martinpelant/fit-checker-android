@@ -35,6 +35,7 @@
 
     </style>
 
+
     <style name="ActionBar.Solid.Fitchecker" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@drawable/ab_solid_fitchecker</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_fitchecker</item>

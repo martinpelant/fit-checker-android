@@ -3,10 +3,13 @@ package cz.mpelant.fitchecker.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.misc.TransactionManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+
+import cz.mpelant.fitchecker.model.Exam;
 import cz.mpelant.fitchecker.model.Subject;
 
 import java.sql.SQLException;
@@ -20,7 +23,7 @@ import java.util.concurrent.Callable;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "fitchecker.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private Context mCtx;
 
@@ -42,6 +45,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                 @Override
                 public Boolean call() throws Exception {
                     TableUtils.createTableIfNotExists(connectionSource, Subject.class);
+                    TableUtils.createTableIfNotExists(connectionSource, Exam.class);
                     return true;
                 }
             });
@@ -53,13 +57,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            TableUtils.dropTable(connectionSource, Subject.class, true);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (oldVersion == 1 && newVersion == 2) {
+            try {
+                TableUtils.createTableIfNotExists(connectionSource, Exam.class);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
         }
 
-        onCreate(sqLiteDatabase, connectionSource);
     }
 
 }

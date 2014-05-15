@@ -146,7 +146,7 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
         mBus = App.getInstance().getBus();
         mSubjectUri = DataProvider.getSubjectUri(getSubject().getId());
         setHasOptionsMenu(true);
-        setRetainInstance(true);
+//        setRetainInstance(true);
     }
 
     @Override

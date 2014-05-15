@@ -128,4 +128,7 @@ dependencies {
     compile 'com.android.support:support-v4:19.1.+'
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.jakewharton:butterknife:5.+'
+    compile 'com.viewpagerindicator:library:2.4.1@aar'
+
+
 }

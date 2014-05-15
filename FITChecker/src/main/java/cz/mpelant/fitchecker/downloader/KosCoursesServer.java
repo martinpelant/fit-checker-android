@@ -29,11 +29,11 @@ import java.util.List;
  * @package cz.mpelant.fitchecker.downloader
  * @since 4/18/2014
  */
-public class KosServer {
+public class KosCoursesServer {
 
     private static final String KOS_API_URL = "https://kosapi.fit.cvut.cz/api/3/students/%s/";
     private static final String COURSES_METHOD = "enrolledCourses.txt";
-    private final String TAG = KosServer.class.getSimpleName();
+    private final String TAG = KosCoursesServer.class.getSimpleName();
 
     @NonNull
     public List<String> loadSubjects() throws IOException, AuthenticatorException, XmlPullParserException {

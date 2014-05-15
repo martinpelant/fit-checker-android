@@ -22,7 +22,9 @@
             android:logo="@drawable/ic_logo"
             android:label="@string/app_name"
             android:theme="@style/Theme.Fitchecker.Styled">
-        <activity android:name="cz.mpelant.fitchecker.activity.MainActivity">
+        <activity android:name="cz.mpelant.fitchecker.activity.MainActivity"
+                  android:theme="@style/Theme.Fitchecker.Styled"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

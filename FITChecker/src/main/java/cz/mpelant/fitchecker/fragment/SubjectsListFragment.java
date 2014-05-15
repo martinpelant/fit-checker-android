@@ -17,8 +17,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
+
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
@@ -27,6 +29,7 @@ import cz.mpelant.fitchecker.adapter.SubjectAdapter;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.fragment.dialog.DeleteSubjectDialog;
 import cz.mpelant.fitchecker.model.Subject;
+import cz.mpelant.fitchecker.service.UpdateExamsService;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
 import java.io.IOException;
@@ -69,7 +72,6 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
     public void onUpdateServiceChanged(UpdateSubjectsService.UpdateSubjectsStatus status) {
         boolean refreshing = status.getStatus() == UpdateSubjectsService.UpdateSubjectsStatus.Status.STARTED;
         setRefreshing(refreshing);
-
     }
 
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
@@ -132,7 +134,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Subject subject = (Subject) view.findViewById(R.id.list_item).getTag();
-        ((BaseFragmentActivity) getActivity()).replaceFragment(DisplaySubjectFragment.newInstance(subject));
+        ((BaseFragmentActivity) getActivity()).replaceFragment(SubjectFragment.newInstance(subject));
     }
 
     @Override
@@ -209,6 +211,8 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
     public void onRefresh() {
         UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectsUri());
         App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
+        App.getInstance().startService(UpdateExamsService.generateIntent(new UpdateExamsService.ExamRequest()));
+
     }
 
     @Override
