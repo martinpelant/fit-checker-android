@@ -9,7 +9,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.os.Build;
 import android.util.Log;
 
 import cz.mpelant.fitchecker.BuildConfig;
@@ -35,7 +34,7 @@ public class DataProvider extends ContentProvider {
     private static final int EXAMS = 3;
     private static final int EXAM_SINGLE_ROW = 4;
 
-    private static final Uri CONTENT_CHECKLIST_URI = Uri.parse("content://" + AUTHORITY);
+    private static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -51,15 +50,15 @@ public class DataProvider extends ContentProvider {
 
 
     public static Uri getSubjectUri(long subjectId) {
-        return Uri.parse(DataProvider.CONTENT_CHECKLIST_URI + "/" + SUBJECTS_BASE_PATH + "/" + subjectId);
+        return Uri.parse(DataProvider.CONTENT_URI + "/" + SUBJECTS_BASE_PATH + "/" + subjectId);
     }
 
     public static Uri getSubjectsUri() {
-        return Uri.parse(DataProvider.CONTENT_CHECKLIST_URI + "/" + SUBJECTS_BASE_PATH);
+        return Uri.parse(DataProvider.CONTENT_URI + "/" + SUBJECTS_BASE_PATH);
     }
 
     public static Uri getExamsUri() {
-        return Uri.parse(DataProvider.CONTENT_CHECKLIST_URI + "/" + EXAMS_BASE_PATH);
+        return Uri.parse(DataProvider.CONTENT_URI + "/" + EXAMS_BASE_PATH);
     }
 
 
