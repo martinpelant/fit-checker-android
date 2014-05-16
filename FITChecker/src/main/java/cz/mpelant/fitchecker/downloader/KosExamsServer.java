@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
@@ -67,7 +68,7 @@ public class KosExamsServer {
         }
     }
 
-    public List<String> getRegisteredExams() throws AuthenticatorException, IOException, XmlPullParserException {
+    public Set<String> getRegisteredExams() throws AuthenticatorException, IOException, XmlPullParserException {
         if (!KosAccountManager.isAccount()) {
             throw new AuthenticatorException("No credentials");
         }
@@ -83,7 +84,7 @@ public class KosExamsServer {
         if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_OK) {
             String xmlResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
             Log.d(TAG, xmlResponse);
-            List<String> examIds;
+            Set<String> examIds;
             examIds = ExamParser.parseRegisteredExams(xmlResponse);
             return examIds;
         } else if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {

@@ -9,7 +9,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import cz.mpelant.fitchecker.model.Exam;
 
@@ -151,7 +153,7 @@ public class ExamParser {
         }
     }
 
-    public static List<String> parseRegisteredExams(String xmlResponse) throws XmlPullParserException, IOException {
+    public static Set<String> parseRegisteredExams(String xmlResponse) throws XmlPullParserException, IOException {
         XmlPullParser parser = Xml.newPullParser();
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
         parser.setInput(new StringReader(xmlResponse));
@@ -159,11 +161,11 @@ public class ExamParser {
         return readRegisteredExams(parser);
     }
 
-    private static List<String> readRegisteredExams(XmlPullParser parser) throws IOException, XmlPullParserException {
-        ArrayList<String> exams = new ArrayList<>();
+    private static Set<String> readRegisteredExams(XmlPullParser parser) throws IOException, XmlPullParserException {
+        Set<String> exams = new HashSet<>();
 
         parser.require(XmlPullParser.START_TAG, null, "atom:feed");
-        while (parser.next() != XmlPullParser.END_TAG) {
+        while (parser.next() != XmlPullParser.END_DOCUMENT) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
@@ -198,7 +200,7 @@ public class ExamParser {
         parser.nextTag();
         parser.require(XmlPullParser.START_TAG, null, "exam");
         String id = parser.getAttributeValue(null, "xlink:href");
-        parser.next();
+//        parser.next();
         String[] parts = id.split("/");
         return parts[parts.length - 1];
     }

@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.db.DataProvider;
+import cz.mpelant.fitchecker.service.SubjectRequest;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
 import java.text.Format;
@@ -150,7 +151,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
 
     public static void startAlarm(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        Intent serviceIntent = UpdateSubjectsService.generateIntent(new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectsUri(), true));
+        Intent serviceIntent = UpdateSubjectsService.generateIntent(new SubjectRequest(DataProvider.getSubjectsUri(), true));
         PendingIntent pi = PendingIntent.getService(context, 0, serviceIntent, 0);
         int interval = 0;
         try {
@@ -168,7 +169,7 @@ public class Settings extends PreferenceActivity implements OnSharedPreferenceCh
     }
 
     public static void stopAlarm(Context context) {
-        Intent serviceIntent = UpdateSubjectsService.generateIntent(new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectsUri(), true));
+        Intent serviceIntent = UpdateSubjectsService.generateIntent(new SubjectRequest(DataProvider.getSubjectsUri(), true));
         PendingIntent pi = PendingIntent.getService(context, 0, serviceIntent, 0);
         AlarmManager am = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         am.cancel(pi);

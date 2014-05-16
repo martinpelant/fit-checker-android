@@ -60,87 +60,34 @@ public class UpdateExamsService extends Service {
         }
     }
 
-    public static class ExamRequest {
-        private static final String NOTIF = "notif";
-        @NonNull
-        private boolean showNotifications;
-
-        public ExamRequest() {
-            showNotifications = false;
-        }
-
-        public ExamRequest(boolean showNotifications) {
-            this.showNotifications = showNotifications;
-        }
-
-        ExamRequest(Intent intent) {
-            showNotifications = intent.getBooleanExtra(NOTIF, false);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            ExamRequest that = (ExamRequest) o;
-            return showNotifications == that.showNotifications;
-        }
-
-        @Override
-        public int hashCode() {
-            return (showNotifications ? 1 : 0);
-        }
-
-        void applyToIntent(Intent intent) {
-            intent.putExtra(NOTIF, showNotifications);
-        }
-    }
-
-    public static class ExamResponse {
-        private Set<Subject> changedSubjects = new HashSet<>();
-        private boolean errorOccured;
-
-        public void setSubjectChanged(Subject subject) {
-            changedSubjects.add(subject);
-        }
-
-        public boolean isChangesDetected() {
-            return changedSubjects.size() > 0;
-        }
-
-        public void setErrorsOccured() {
-            errorOccured = true;
-        }
-
-    }
 
     private class Task extends Thread {
-        private final ExamResponse mResponse;
-        private ExamRequest mRequest;
+        private final SubjectResponse mResponse;
+        private SubjectRequest mRequest;
 
-        public Task(ExamRequest request) {
+        public Task(SubjectRequest request) {
             this.mRequest = request;
-            mResponse = new ExamResponse();
+            mResponse = new SubjectResponse();
         }
 
         @Override
         public void run() {
             try {
-                Cursor subjects = App.getInstance().getContentResolver().query(DataProvider.getSubjectsUri(), null, null, null, null);
+                Cursor subjects = App.getInstance().getContentResolver().query(mRequest.mUri, null, null, null, null);
                 ArrayList<ContentValues> cvs = new ArrayList<>();
+                KosExamsServer server = new KosExamsServer();
+                Set<String> registeredExams = server.getRegisteredExams();
                 while (subjects.moveToNext()) {
                     Subject subject = new Subject(subjects);
                     Cursor tmp = App.getInstance().getContentResolver().query(DataProvider.getExamsUri(), null, Exam.COL_SUBJECT + " = ?", new String[]{subject.getName()}, null);
                     tmp.moveToFirst();
                     int examCnt = tmp.getCount();
                     tmp.close();
-                    KosExamsServer server = new KosExamsServer();
                     List<Exam> examList = server.loadExams(subject.getName());
-                    List<String> registeredExams = server.getRegisteredExams();
                     for (Exam e : examList) {
                         Log.d(TAG, e.toString());
                         e.setSubject(subject.getName());
-                        e.setIsRegistered(contains(registeredExams, e.getExamId()));
+                        e.setIsRegistered(registeredExams.contains(e.getExamId()));
                         cvs.add(e.getContentValues());
                     }
                     if (examList.size() > examCnt) {
@@ -161,14 +108,6 @@ public class UpdateExamsService extends Service {
             onTaskFinished(mRequest, mResponse);
         }
 
-        private boolean contains(List<String> registeredExams, String examId) {
-            for (String re : registeredExams) {
-                if (re.equals(examId)) {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         private void onSubjectChanged(Subject subject) {
             mResponse.setSubjectChanged(subject);
@@ -187,9 +126,9 @@ public class UpdateExamsService extends Service {
         }
 
         private Status mStatus;
-        private ExamRequest mRequest;
+        private SubjectRequest mRequest;
 
-        public UpdateExamStatus(Status status, ExamRequest request) {
+        public UpdateExamStatus(Status status, SubjectRequest request) {
             mStatus = status;
             mRequest = request;
         }
@@ -207,7 +146,7 @@ public class UpdateExamsService extends Service {
          * @return null means everything is done and the service is shutting down
          */
         @Nullable
-        public ExamRequest getRequest() {
+        public SubjectRequest getRequest() {
             return mRequest;
         }
     }
@@ -218,7 +157,7 @@ public class UpdateExamsService extends Service {
     private Task mTask;
     private MainThreadBus bus;
 
-    public static Intent generateIntent(ExamRequest request) {
+    public static Intent generateIntent(SubjectRequest request) {
         Intent i = new Intent(ACTION);
         request.applyToIntent(i);
         return i;
@@ -246,22 +185,22 @@ public class UpdateExamsService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         lastId = startId;
-        onNewTask(new ExamRequest(intent));
+        onNewTask(new SubjectRequest(intent));
         return START_REDELIVER_INTENT;
     }
 
 
-    private synchronized void onNewTask(ExamRequest request) {
+    private synchronized void onNewTask(SubjectRequest request) {
         post(new UpdateExamStatus(UpdateExamStatus.Status.STARTED, request));
         tasksCount++;
         new Task(request).start();
     }
 
-    private synchronized void onTaskFinished(ExamRequest request, ExamResponse result) {
+    private synchronized void onTaskFinished(SubjectRequest request, SubjectResponse result) {
         tasksCount--;
         if (request.showNotifications) {//save last run time
             if (result.isChangesDetected()) {
-                new NotificationHelper(this).displayNotification(result.changedSubjects, NotificationHelper.NotificationType.EXAM);
+                new NotificationHelper(this).displayNotification(result.getChangedSubjects(), NotificationHelper.NotificationType.EXAM);
             }
         }
 

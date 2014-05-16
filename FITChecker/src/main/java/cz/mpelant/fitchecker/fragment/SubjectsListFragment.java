@@ -30,7 +30,7 @@ import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.fragment.dialog.DeleteAllSubjectsDialog;
 import cz.mpelant.fitchecker.fragment.dialog.DeleteSubjectDialog;
 import cz.mpelant.fitchecker.model.Subject;
-import cz.mpelant.fitchecker.service.UpdateExamsService;
+import cz.mpelant.fitchecker.service.SubjectRequest;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
 import java.io.IOException;
@@ -222,10 +222,8 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
     @Override
     public void onRefresh() {
-        UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectsUri());
+        SubjectRequest request = new SubjectRequest(DataProvider.getSubjectsUri());
         App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
-        App.getInstance().startService(UpdateExamsService.generateIntent(new UpdateExamsService.ExamRequest()));
-
     }
 
     @Override

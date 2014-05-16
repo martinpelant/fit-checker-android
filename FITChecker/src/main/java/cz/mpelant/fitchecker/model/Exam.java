@@ -151,4 +151,8 @@ public class Exam extends AbstractEntity {
     public boolean isRegistered() {
         return isRegistered;
     }
+
+    public long getLongDate() {
+        return dateLong;
+    }
 }

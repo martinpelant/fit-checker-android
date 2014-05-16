@@ -3,13 +3,11 @@ package cz.mpelant.fitchecker.downloader;
 import android.accounts.AuthenticatorException;
 import android.support.annotation.NonNull;
 import android.util.Log;
-
 import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
 import cz.mpelant.fitchecker.utils.Base64;
 import cz.mpelant.fitchecker.utils.RestClient;
 import cz.mpelant.fitchecker.utils.SubjectParser;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;

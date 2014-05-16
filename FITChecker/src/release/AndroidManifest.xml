@@ -26,6 +26,14 @@
                 <action android:name="cz.mpelant.fitchecker.KOS_ADD_SUBJECTS"/>
             </intent-filter>
         </service>
+        <service
+            android:name=".service.UpdateExamsService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cz.mpelant.fitchecker.KOS_ADD_EXAMS"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

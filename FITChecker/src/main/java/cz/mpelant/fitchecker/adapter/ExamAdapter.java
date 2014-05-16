@@ -63,6 +63,13 @@ public class ExamAdapter extends CursorAdapter {
                 state.setTextColor(Color.parseColor("#76d91c"));
             }
         }
+
+        long now = System.currentTimeMillis();
+        if (now > exam.getLongDate()) {
+            view.setBackgroundResource(R.drawable.bgr_shade);
+        } else {
+            view.setBackground(null);
+        }
     }
 
     @Override

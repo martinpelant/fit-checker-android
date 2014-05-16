@@ -23,6 +23,7 @@ import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.downloader.EduxServer;
 import cz.mpelant.fitchecker.model.Subject;
+import cz.mpelant.fitchecker.service.SubjectRequest;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 import cz.mpelant.fitchecker.utils.MyReader;
 
@@ -249,7 +250,7 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
 
     @Override
     public void onRefresh() {
-        UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(mSubjectUri);
+        SubjectRequest request = new SubjectRequest(mSubjectUri);
         App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
     }
 

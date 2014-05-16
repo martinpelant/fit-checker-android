@@ -57,9 +57,9 @@ public class UpdateSubjectsService extends Service {
         }
 
         private Status mStatus;
-        private EduxRequest mRequest;
+        private SubjectRequest mRequest;
 
-        public UpdateSubjectsStatus(Status status, EduxRequest request) {
+        public UpdateSubjectsStatus(Status status, SubjectRequest request) {
             mStatus = status;
             mRequest = request;
         }
@@ -77,82 +77,22 @@ public class UpdateSubjectsService extends Service {
          * @return null means everything is done and the service is shutting down
          */
         @Nullable
-        public EduxRequest getRequest() {
+        public SubjectRequest getRequest() {
             return mRequest;
         }
     }
 
-    public static class EduxRequest {
-        private static final String URI = "uri";
-        private static final String NOTIF = "notif";
-        @NonNull
-        private Uri mUri;
-        private boolean showNotifications;
 
 
-        public EduxRequest(@NonNull Uri uri) {
-            this(uri, false);
-        }
 
-        public EduxRequest(@NonNull Uri uri, boolean showNotifications) {
-            mUri = uri;
-            this.showNotifications = showNotifications;
-        }
-
-        EduxRequest(Intent intent) {
-            showNotifications = intent.getBooleanExtra(NOTIF, false);
-            mUri = intent.getParcelableExtra(URI);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            EduxRequest that = (EduxRequest) o;
-            return showNotifications == that.showNotifications && mUri.equals(that.mUri);
-
-        }
-
-        @Override
-        public int hashCode() {
-            int result = mUri.hashCode();
-            result = 31 * result + (showNotifications ? 1 : 0);
-            return result;
-        }
-
-
-        void applyToIntent(Intent intent) {
-            intent.putExtra(URI, mUri);
-            intent.putExtra(NOTIF, showNotifications);
-        }
-    }
-
-    public static class EduxResponse {
-        private Set<Subject> changedSubjects = new HashSet<>();
-        private boolean errorOccured;
-
-        public void setSubjectChanged(Subject subject) {
-            changedSubjects.add(subject);
-        }
-
-        public boolean isChangesDetected() {
-            return changedSubjects.size() > 0;
-        }
-
-        public void setErrorsOccured() {
-            errorOccured = true;
-        }
-
-    }
 
     private class Task extends Thread {
-        private EduxRequest mRequest;
-        private EduxResponse mResponse;
+        private SubjectRequest mRequest;
+        private SubjectResponse mResponse;
 
-        Task(EduxRequest request) {
+        Task(SubjectRequest request) {
             mRequest = request;
-            mResponse = new EduxResponse();
+            mResponse = new SubjectResponse();
         }
 
         @Override
@@ -191,7 +131,7 @@ public class UpdateSubjectsService extends Service {
             App.getInstance().getContentResolver().notifyChange(uri, null);
         }
 
-        private void onTaskException(EduxRequest request, Exception e) {
+        private void onTaskException(SubjectRequest request, Exception e) {
             mResponse.errorOccured = true;
             bus.postOnMainThread(new UpdateSubjectsException(e));
         }
@@ -203,7 +143,7 @@ public class UpdateSubjectsService extends Service {
     private MainThreadBus bus;
     private int tasksCount;
 
-    public static Intent generateIntent(EduxRequest request) {
+    public static Intent generateIntent(SubjectRequest request) {
         Intent i = new Intent(ACTION);
         request.applyToIntent(i);
         return i;
@@ -224,27 +164,28 @@ public class UpdateSubjectsService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        SubjectRequest request = new SubjectRequest(intent);
         lastId = startId;
-        onNewTask(new EduxRequest(intent));
-        startService(UpdateExamsService.generateIntent(new UpdateExamsService.ExamRequest(new EduxRequest(intent).showNotifications)));
+        onNewTask(request);
+        startService(UpdateExamsService.generateIntent(request));
         return START_REDELIVER_INTENT;
     }
 
 
-    private synchronized void onNewTask(EduxRequest request) {
+    private synchronized void onNewTask(SubjectRequest request) {
         post(new UpdateSubjectsStatus(UpdateSubjectsStatus.Status.STARTED, request));
         tasksCount++;
         new Task(request).start();
     }
 
-    private synchronized void onTaskFinished(EduxRequest request, EduxResponse result) {
+    private synchronized void onTaskFinished(SubjectRequest request, SubjectResponse result) {
         tasksCount--;
         if (request.showNotifications) {//save last run time
             SharedPreferences.Editor ed = PreferenceManager.getDefaultSharedPreferences(this).edit();
             ed.putLong(Settings.PREF_ALARM_LAST_RUN, System.currentTimeMillis());
             ed.commit();
             if (result.isChangesDetected()) {
-                new NotificationHelper(this).displayNotification(result.changedSubjects, NotificationHelper.NotificationType.EDUX);
+                new NotificationHelper(this).displayNotification(result.getChangedSubjects(), NotificationHelper.NotificationType.EDUX);
             }
         }
 

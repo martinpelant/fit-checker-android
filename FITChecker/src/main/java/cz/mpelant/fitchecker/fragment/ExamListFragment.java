@@ -16,9 +16,6 @@ import android.view.MenuItem;
 
 import com.squareup.otto.Subscribe;
 
-import java.lang.reflect.TypeVariable;
-
-import butterknife.InjectView;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.activity.Settings;
@@ -26,6 +23,7 @@ import cz.mpelant.fitchecker.adapter.ExamAdapter;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.model.Exam;
 import cz.mpelant.fitchecker.model.Subject;
+import cz.mpelant.fitchecker.service.SubjectRequest;
 import cz.mpelant.fitchecker.service.UpdateExamsService;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
@@ -129,7 +127,7 @@ public class ExamListFragment extends BaseListFragment implements LoaderManager.
     }
 
     public void onRefresh() {
-        UpdateSubjectsService.EduxRequest request = new UpdateSubjectsService.EduxRequest(DataProvider.getSubjectUri(getSubject().getId()));
+        SubjectRequest request = new SubjectRequest(DataProvider.getSubjectUri(getSubject().getId()));
         App.getInstance().startService(UpdateSubjectsService.generateIntent(request));
     }
 
