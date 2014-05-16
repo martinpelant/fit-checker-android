@@ -68,7 +68,7 @@ public class ExamAdapter extends CursorAdapter {
         if (now > exam.getLongDate()) {
             view.setBackgroundResource(R.drawable.bgr_shade);
         } else {
-            view.setBackground(null);
+            view.setBackgroundDrawable(null);
         }
     }
 

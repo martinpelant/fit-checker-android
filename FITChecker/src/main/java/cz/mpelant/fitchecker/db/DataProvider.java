@@ -2,7 +2,10 @@
 package cz.mpelant.fitchecker.db;
 
 import android.content.ContentProvider;
+import android.content.ContentProviderOperation;
+import android.content.ContentProviderResult;
 import android.content.ContentValues;
+import android.content.OperationApplicationException;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -10,6 +13,13 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
+
+import com.j256.ormlite.misc.TransactionManager;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.Callable;
 
 import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.model.AbstractEntity;
@@ -24,7 +34,7 @@ import cz.mpelant.fitchecker.model.Subject;
  */
 public class DataProvider extends ContentProvider {
 
-    private static final String AUTHORITY = BuildConfig.PACKAGE_NAME + ".subjectsprovider";
+    public static final String AUTHORITY = BuildConfig.PACKAGE_NAME + ".subjectsprovider";
 
     private static final String SUBJECTS_BASE_PATH = "subjects";
     private static final String EXAMS_BASE_PATH = "exams";
@@ -47,6 +57,7 @@ public class DataProvider extends ContentProvider {
     }
 
     private DatabaseHelper dbHelper;
+    private boolean mBatchPerforming;
 
 
     public static Uri getSubjectUri(long subjectId) {
@@ -91,8 +102,9 @@ public class DataProvider extends ContentProvider {
         } catch (SQLiteConstraintException e) {
             if (table.equals(Exam.TABLE_NAME)) {
                 sqlDB.update(table, values, Exam.COL_DATE + " = ?", new String[]{String.valueOf(values.get(Exam.COL_DATE))});
-                getContext().getContentResolver().notifyChange(uri, null);
-
+                if (!mBatchPerforming) {
+                    getContext().getContentResolver().notifyChange(uri, null);
+                }
             }
             return null;
         } catch (SQLException e) {
@@ -100,8 +112,9 @@ public class DataProvider extends ContentProvider {
             return null;
         }
 
-
-        getContext().getContentResolver().notifyChange(uri, null);
+        if (!mBatchPerforming) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         return Uri.parse(uri + "/" + newId);
     }
 
@@ -130,9 +143,11 @@ public class DataProvider extends ContentProvider {
         if (id != null) {
             deleted = sqlDB.delete(table, AbstractEntity.INTERNAL_ID_COLUMN_NAME + " = ?", new String[]{id});
         } else {
-            deleted = sqlDB.delete(table, null, null);
+            deleted = sqlDB.delete(table, selection, selectionArgs);
         }
-        getContext().getContentResolver().notifyChange(uri, null);
+        if (!mBatchPerforming) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         return deleted;
     }
 
@@ -192,5 +207,35 @@ public class DataProvider extends ContentProvider {
         }
         return updateRows;
 
+    }
+
+    @Override
+    public synchronized ContentProviderResult[] applyBatch(final ArrayList<ContentProviderOperation> operations) throws OperationApplicationException {
+        try {
+            final Set<Uri> notifyingUri = new HashSet<>();
+            ContentProviderResult[] result = TransactionManager.callInTransaction(dbHelper.getConnectionSource(), new Callable<ContentProviderResult[]>() {
+                @Override
+                public ContentProviderResult[] call() throws Exception {
+                    mBatchPerforming = true;
+                    int numOperations = operations.size();
+                    ContentProviderResult[] results = new ContentProviderResult[numOperations];
+
+                    for (int i = 0; i < numOperations; i++) {
+                        notifyingUri.add(operations.get(i).getUri());
+                        results[i] = operations.get(i).apply(DataProvider.this, results, i);
+                    }
+                    mBatchPerforming = false;
+                    return results;
+                }
+            });
+            for (Uri u : notifyingUri) {
+                getContext().getContentResolver().notifyChange(u, null);
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new OperationApplicationException(e);
+        } catch (java.sql.SQLException e) {
+            throw new OperationApplicationException(e);
+        }
     }
 }

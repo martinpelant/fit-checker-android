@@ -10,13 +10,13 @@
     <string name="refresh">Obnovit</string>
     <string name="add">Přidat</string>
     <string name="settings">Nastavení</string>
-    <string name="delete_title">Smazat ?</string>
+    <string name="delete_title">Smazat?</string>
     <string name="delete_message">Opravdu chcete smazat předmět %s?</string>
     <string name="add_subject">Přidat předmět</string>
     <string name="username">Už. jméno:</string>
     <string name="password">Heslo:</string>
     <string name="auth">Způsob ověření:</string>
-    <string name="account_edux">Účet Eduxu</string>
+    <string name="account_edux">Účet ČVUT</string>
     <string name="accounts">Účty</string>
     <string name="account_edux_summary">Nastavení přihlášení k Eduxu</string>
     <string name="login">Přihlásit</string>

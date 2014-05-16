@@ -3,6 +3,7 @@ package cz.mpelant.fitchecker.fragment.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import java.io.File;
@@ -35,7 +36,14 @@ public class DeleteAllSubjectsDialog extends BaseDialogFragment {
                 new Thread() {
                     @Override
                     public void run() {
+                        Cursor c = App.getInstance().getContentResolver().query(DataProvider.getSubjectsUri(), null, null, null, null);
+                        while (c.moveToNext()) {
+                            Subject subject = new Subject(c);
+                            File cacheFile = EduxServer.getSubejctFile(subject.getName());
+                            cacheFile.delete();
+                        }
                         App.getInstance().getContentResolver().delete(DataProvider.getSubjectsUri(), null, null);
+                        App.getInstance().getContentResolver().delete(DataProvider.getExamsUri(), null, null);
                     }
                 }.start();
             }

@@ -26,6 +26,7 @@ public class Exam extends AbstractEntity {
     public static final String COL_IS_REGISTERED = "is_registered";
 
     protected static final String TAG = Exam.class.getName();
+    public static final String TERM_TYPE_EXAM = "FINAL_EXAM";
     @DatabaseField(columnName = COL_DATE, unique = true)
     private long dateLong;
 
@@ -42,6 +43,8 @@ public class Exam extends AbstractEntity {
     private String examId;
     @DatabaseField(columnName = COL_IS_REGISTERED)
     private boolean isRegistered;
+
+    private String termType;
 
     public Exam() {
     }
@@ -154,5 +157,13 @@ public class Exam extends AbstractEntity {
 
     public long getLongDate() {
         return dateLong;
+    }
+
+    public String getTermType() {
+        return termType;
+    }
+
+    public void setTermType(String termType) {
+        this.termType = termType;
     }
 }

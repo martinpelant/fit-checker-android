@@ -41,7 +41,10 @@ public class ExamParser {
             String name = parser.getName();
             // Starts by looking for the entry tag
             if (name.equals("atom:entry")) {
-                exams.add(readExam(parser));
+                Exam e = readExam(parser);
+                if(e.getTermType().equals(Exam.TERM_TYPE_EXAM)) {
+                    exams.add(e);
+                }
             } else {
                 skip(parser);
             }
@@ -85,6 +88,8 @@ public class ExamParser {
                 e.setRoom(readRoom(parser));
             } else if (name.equals("startDate")) {
                 e.setDate(readStartDate(parser));
+            } else if (name.equals("termType")) {
+                e.setTermType(readTermType(parser));
             } else {
                 skip(parser);
             }
@@ -92,6 +97,12 @@ public class ExamParser {
         return e;
     }
 
+    private static String readTermType(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, null, "termType");
+        String startDate = readText(parser);
+        parser.require(XmlPullParser.END_TAG, null, "termType");
+        return startDate;
+    }
 
     private static String readStartDate(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, null, "startDate");

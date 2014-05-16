@@ -3,12 +3,15 @@ package cz.mpelant.fitchecker.service;
 import android.accounts.AuthenticatorException;
 import android.app.Service;
 import android.content.ContentProviderClient;
+import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.OperationApplicationException;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -77,8 +80,13 @@ public class UpdateExamsService extends Service {
                 ArrayList<ContentValues> cvs = new ArrayList<>();
                 KosExamsServer server = new KosExamsServer();
                 Set<String> registeredExams = server.getRegisteredExams();
+                ArrayList<ContentProviderOperation> batch = new ArrayList<>();
+
                 while (subjects.moveToNext()) {
+
                     Subject subject = new Subject(subjects);
+                    ContentProviderOperation.Builder ob = ContentProviderOperation.newDelete(DataProvider.getExamsUri()).withSelection(Exam.COL_SUBJECT + " = ?", new String[]{subject.getName()});
+                    batch.add(ob.build());
                     Cursor tmp = App.getInstance().getContentResolver().query(DataProvider.getExamsUri(), null, Exam.COL_SUBJECT + " = ?", new String[]{subject.getName()}, null);
                     tmp.moveToFirst();
                     int examCnt = tmp.getCount();
@@ -88,18 +96,19 @@ public class UpdateExamsService extends Service {
                         Log.d(TAG, e.toString());
                         e.setSubject(subject.getName());
                         e.setIsRegistered(registeredExams.contains(e.getExamId()));
-                        cvs.add(e.getContentValues());
+                        ob = ContentProviderOperation.newInsert(DataProvider.getExamsUri()).withValues(e.getContentValues());
+                        batch.add(ob.build());
                     }
                     if (examList.size() > examCnt) {
                         onSubjectChanged(subject);
                     }
                 }
                 subjects.close();
-                ContentValues cvArr[] = new ContentValues[cvs.size()];
-                for (int i = 0; i < cvArr.length; i++) {
-                    cvArr[i] = cvs.get(i);
+                try {
+                    getContentResolver().applyBatch(DataProvider.AUTHORITY, batch);
+                } catch (RemoteException | OperationApplicationException e) {
+                    e.printStackTrace();
                 }
-                App.getInstance().getContentResolver().bulkInsert(DataProvider.getExamsUri(), cvArr);
             } catch (IOException | AuthenticatorException | XmlPullParserException e) {
                 onTaskException(new KosException(e));
                 e.printStackTrace();
