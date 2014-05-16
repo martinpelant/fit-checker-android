@@ -91,6 +91,8 @@ public class DataProvider extends ContentProvider {
         } catch (SQLiteConstraintException e) {
             if (table.equals(Exam.TABLE_NAME)) {
                 sqlDB.update(table, values, Exam.COL_DATE + " = ?", new String[]{String.valueOf(values.get(Exam.COL_DATE))});
+                getContext().getContentResolver().notifyChange(uri, null);
+
             }
             return null;
         } catch (SQLException e) {
