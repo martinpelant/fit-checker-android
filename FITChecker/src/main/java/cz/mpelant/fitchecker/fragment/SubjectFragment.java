@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.viewpagerindicator.TabPageIndicator;
 
 import cz.mpelant.fitchecker.R;
@@ -36,13 +37,14 @@ public class SubjectFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ViewPager vp = (ViewPager) view.findViewById(R.id.viewPager);
-        TabPageIndicator indicator = (TabPageIndicator) view.findViewById(R.id.indicator);
+        PagerSlidingTabStrip indicator = (PagerSlidingTabStrip) view.findViewById(R.id.indicator);
         vp.setAdapter(new VPAdapter(getChildFragmentManager()));
         indicator.setViewPager(vp);
+        indicator.setTextColorResource(R.color.apptheme_color);
 
     }
 
-     class VPAdapter extends FragmentPagerAdapter {
+    class VPAdapter extends FragmentPagerAdapter {
         private static final int COUNT = 2;
 
         public VPAdapter(FragmentManager fm) {
