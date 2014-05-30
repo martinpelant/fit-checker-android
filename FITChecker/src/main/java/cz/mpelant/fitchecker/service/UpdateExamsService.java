@@ -77,7 +77,6 @@ public class UpdateExamsService extends Service {
         public void run() {
             try {
                 Cursor subjects = App.getInstance().getContentResolver().query(mRequest.mUri, null, null, null, null);
-                ArrayList<ContentValues> cvs = new ArrayList<>();
                 KosExamsServer server = new KosExamsServer();
                 Set<String> registeredExams = server.getRegisteredExams();
                 ArrayList<ContentProviderOperation> batch = new ArrayList<>();

@@ -43,6 +43,7 @@ public class KosExamsServer {
 
     @NonNull
     public List<Exam> loadExams(String subject) throws IOException, AuthenticatorException, XmlPullParserException {
+        //TODO: move a common code to a new method
         if (!KosAccountManager.isAccount()) {
             throw new AuthenticatorException("No credentials");
         }
@@ -79,6 +80,7 @@ public class KosExamsServer {
         ArrayList<NameValuePair> headers = new ArrayList<>();
         String base64EncodedCredentials = Base64.encodeBytes(credentials.getBytes());
         headers.add(new BasicNameValuePair("Authorization", "Basic " + base64EncodedCredentials));
+        headers.add(new BasicNameValuePair("Accept", "application/xml;charset=UTF-8"));
         ArrayList<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("fields", "entry(content(exam))"));
         HttpResponse response = client.call(String.format(REGISTERED_EXAMS_METHOD, account.getUsername()), RestClient.Methods.GET, params, headers);
