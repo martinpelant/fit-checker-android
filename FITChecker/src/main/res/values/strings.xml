@@ -48,7 +48,7 @@
     <string name="notification_message_big">Detekovány změny</string>
     <string name="error_table_not_found_title">Tabulka s výsledky nenalezena</string>
     <string name="error_table_not_found">Tento předmět bohužel nemá na eduxu standardní tabulku s výsledky.</string>
-    <string name="error_download">Při stahování dat z eduxu došlo k chybě.</string>
+    <string name="error_download">Při stahování dat došlo k chybě.</string>
     <string name="error_kos_download">Při stahování dat z KOSu došlo k chybě.</string>
     <string name="error_login">Nepodařilo se přihlásit.</string>
     <string name="error_invalid_credentials">Zadali jste neplatnou kombinaci uživatelského jména a hesla.</string>
