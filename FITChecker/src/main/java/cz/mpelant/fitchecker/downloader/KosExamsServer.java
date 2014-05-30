@@ -52,6 +52,7 @@ public class KosExamsServer {
         ArrayList<NameValuePair> headers = new ArrayList<>();
         String base64EncodedCredentials = Base64.encodeBytes(credentials.getBytes());
         headers.add(new BasicNameValuePair("Authorization", "Basic " + base64EncodedCredentials));
+        headers.add(new BasicNameValuePair("Accept", "application/xml;charset=UTF-8"));
         ArrayList<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("fields", "entry(id,content(capacity,occupied,startDate,room,termType))"));
         HttpResponse response = client.call(EXAMS_METHOD, RestClient.Methods.GET, params, headers);
