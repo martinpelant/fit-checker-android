@@ -27,7 +27,7 @@ public abstract class BaseListFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(getLayoutId(), null);
+        View layout = inflater.inflate(getLayoutId(), container, false);
         listViewContainer = ButterKnife.findById(layout, R.id.listContainer);
         mProgressContainer = ButterKnife.findById(layout, R.id.progressContainer);
         mListView = ButterKnife.findById(layout, android.R.id.list);
