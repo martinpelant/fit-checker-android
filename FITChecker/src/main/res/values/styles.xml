@@ -6,7 +6,6 @@
         <item name="listPreferredItemPaddingRight">@dimen/listPadding</item>
         <item name="android:listPreferredItemPaddingLeft">@dimen/listPadding</item>
         <item name="android:listPreferredItemPaddingRight">@dimen/listPadding</item>
-        <item name="vpiTabPageIndicatorStyle">@style/TabAppTheme</item>
         <!-- Customize your theme here. -->
     </style>
 

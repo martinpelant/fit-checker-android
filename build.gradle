@@ -4,19 +4,16 @@
 
 buildscript {
 	repositories {
-        maven { url "http://dl.bintray.com/populov/maven" }
 
         mavenCentral()
 	}
 	dependencies {
-		classpath 'com.android.tools.build:gradle:0.9.+'
+		classpath 'com.android.tools.build:gradle:0.10.+'
 	}
 }
 
 allprojects {
 	repositories {
-        maven { url "http://dl.bintray.com/populov/maven" }
-
         mavenCentral()
 	}
 }

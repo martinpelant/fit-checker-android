@@ -9,9 +9,11 @@
 
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/indicator"
-        indicator:pstsIndicatorColor="@color/apptheme_color"
-        indicator:pstsTabBackground="@drawable/apptheme_tab_indicator_holo"
+        indicator:pstsIndicatorColor="@color/fitcheckerstyled_color"
+        indicator:pstsTabBackground="@drawable/tab_indicator_ab_fitchecker"
         indicator:pstsShouldExpand="true"
+        android:background="@color/refresh_color4"
+        android:textColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="48dp" />
 

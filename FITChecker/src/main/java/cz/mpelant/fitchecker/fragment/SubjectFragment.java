@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.viewpagerindicator.TabPageIndicator;
 
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.model.Subject;
@@ -40,7 +39,6 @@ public class SubjectFragment extends BaseFragment {
         PagerSlidingTabStrip indicator = (PagerSlidingTabStrip) view.findViewById(R.id.indicator);
         vp.setAdapter(new VPAdapter(getChildFragmentManager()));
         indicator.setViewPager(vp);
-        indicator.setTextColorResource(R.color.apptheme_color);
 
     }
 
