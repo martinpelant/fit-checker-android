@@ -3,6 +3,8 @@ package cz.mpelant.fitchecker.model;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -15,7 +17,7 @@ import java.util.Date;
  * Created by David Bilik[david.bilik@ackee.cz] on 15. 5. 2014.
  */
 @DatabaseTable(tableName = Exam.TABLE_NAME)
-public class Exam extends AbstractEntity {
+public class Exam extends AbstractEntity implements Parcelable {
     public static final String TABLE_NAME = "exam";
     public static final String COL_DATE = "date";
     public static final String COL_ROOM = "room";
@@ -166,4 +168,47 @@ public class Exam extends AbstractEntity {
     public void setTermType(String termType) {
         this.termType = termType;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.dateLong);
+        dest.writeString(this.date);
+        dest.writeString(this.room);
+        dest.writeInt(this.capacity);
+        dest.writeInt(this.occupied);
+        dest.writeString(this.subject);
+        dest.writeString(this.examId);
+        dest.writeByte(isRegistered ? (byte) 1 : (byte) 0);
+        dest.writeString(this.termType);
+        dest.writeLong(this.internalId);
+    }
+
+    private Exam(Parcel in) {
+        this.dateLong = in.readLong();
+        this.date = in.readString();
+        this.room = in.readString();
+        this.capacity = in.readInt();
+        this.occupied = in.readInt();
+        this.subject = in.readString();
+        this.examId = in.readString();
+        this.isRegistered = in.readByte() != 0;
+        this.termType = in.readString();
+        this.internalId = in.readLong();
+    }
+
+    public static Parcelable.Creator<Exam> CREATOR = new Parcelable.Creator<Exam>() {
+        public Exam createFromParcel(Parcel source) {
+            return new Exam(source);
+        }
+
+        public Exam[] newArray(int size) {
+            return new Exam[size];
+        }
+    };
 }

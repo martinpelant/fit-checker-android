@@ -64,16 +64,21 @@ public class ExamAdapter extends CursorAdapter {
             }
         }
 
-        long now = System.currentTimeMillis();
-        if (now > exam.getLongDate()) {
+        if (!isEnabled(cursor.getPosition())) {
             view.setBackgroundResource(R.drawable.bgr_shade);
         } else {
             view.setBackgroundDrawable(null);
         }
+
+        view.setTag(exam);
     }
+
 
     @Override
     public boolean isEnabled(int position) {
-        return false;
+        getCursor().moveToPosition(position);
+        Exam exam = new Exam(getCursor());
+        long now = System.currentTimeMillis();
+        return now < exam.getLongDate();
     }
 }

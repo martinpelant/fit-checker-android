@@ -14,13 +14,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.AdapterView;
 import com.squareup.otto.Subscribe;
 
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
+import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.adapter.ExamAdapter;
 import cz.mpelant.fitchecker.db.DataProvider;
+import cz.mpelant.fitchecker.fragment.dialog.AddExamToCalendartDialog;
 import cz.mpelant.fitchecker.model.Exam;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.service.SubjectRequest;
@@ -32,7 +36,7 @@ import cz.mpelant.fitchecker.utils.MainThreadBus;
  * Fragment with exam list
  * Created by David Bilik[david.bilik@ackee.cz] on 15. 5. 2014.
  */
-public class ExamListFragment extends BaseListFragment implements LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener {
+public class ExamListFragment extends BaseListFragment implements LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener {
     protected static final String TAG = ExamListFragment.class.getName();
     private ExamAdapter mAdapter;
     private MainThreadBus mBus;
@@ -51,6 +55,7 @@ public class ExamListFragment extends BaseListFragment implements LoaderManager.
         getLoaderManager().initLoader(0, null, this);
         setListShown(false);
         getListView().setAdapter(mAdapter);
+        getListView().setOnItemClickListener(this);
         setHasOptionsMenu(true);
 
         ((SwipeRefreshLayout) listViewContainer).setOnRefreshListener(this);
@@ -151,5 +156,11 @@ public class ExamListFragment extends BaseListFragment implements LoaderManager.
     public void onUpdateServiceChanged(UpdateExamsService.UpdateExamStatus status) {
         boolean refreshing = status.getStatus() == UpdateExamsService.UpdateExamStatus.Status.STARTED;
         setRefreshing(refreshing);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Exam exam = (Exam) view.findViewById(R.id.list_item).getTag();
+        AddExamToCalendartDialog.newInstance(exam).show(getFragmentManager(), "calendar");
     }
 }

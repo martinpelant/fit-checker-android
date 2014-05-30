@@ -76,5 +76,8 @@
     <string name="notSpecified">Neurčeno</string>
     <string name="deleteAllSubjects">Smazat všechny předměty</string>
     <string name="delete_all_message">Opravdu chcete smazat všechny předměty?</string>
+    <string name="add_to_calendar_">Přidat do kalendáře?</string>
+    <string name="add_to_calendar_message">Chcete tuto zkoušku přidat do kalendáře?</string>
+    <string name="exam">zkouška</string>
 
 </resources>
