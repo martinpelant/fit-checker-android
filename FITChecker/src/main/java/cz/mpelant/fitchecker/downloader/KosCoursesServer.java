@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
+import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.utils.Base64;
 import cz.mpelant.fitchecker.utils.RestClient;
 import cz.mpelant.fitchecker.utils.SubjectParser;
@@ -59,13 +60,21 @@ public class KosCoursesServer {
             } else {
                 subjects = Arrays.asList(xmlResponse.split(","));
             }
-
+            filterSubjects(subjects);
 
             return subjects;
         } else if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {
             throw new AuthenticatorException("User not authorized");
         } else {
             throw new IOException("Unknown error");
+        }
+    }
+
+    private void filterSubjects(List<String> subjects) {
+        for (int i = subjects.size() - 1; i >= 0; i--) {
+            if (subjects.get(i) == null || subjects.get(i).trim().isEmpty()) {
+                subjects.remove(i);
+            }
         }
     }
 }
