@@ -81,4 +81,11 @@ public class ExamAdapter extends CursorAdapter {
         long now = System.currentTimeMillis();
         return now < exam.getLongDate();
     }
+
+    private boolean isInFuture(int position){
+        getCursor().moveToPosition(position);
+        Exam exam = new Exam(getCursor());
+        long now = System.currentTimeMillis();
+        return now < exam.getLongDate();
+    }
 }

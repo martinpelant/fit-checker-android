@@ -2,8 +2,10 @@ package cz.mpelant.fitchecker.fragment.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.Toast;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.model.Exam;
 import cz.mpelant.fitchecker.utils.Tools;
@@ -44,7 +46,12 @@ public class AddExamToCalendartDialog extends BaseDialogFragment {
         ab.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Tools.addToCalendar(exam.getSubject() + " " + getString(R.string.exam), exam.getRoom(), null, new Date(exam.getLongDate()), new Date(exam.getLongDate() + DURATION));
+                try {
+                    Tools.addToCalendar(exam.getSubject() + " " + getString(R.string.exam), exam.getRoom(), null, new Date(exam.getLongDate()), new Date(exam.getLongDate() + DURATION));
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(getActivity(), R.string.calendar_not_found, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         ab.setNegativeButton(android.R.string.cancel, null);

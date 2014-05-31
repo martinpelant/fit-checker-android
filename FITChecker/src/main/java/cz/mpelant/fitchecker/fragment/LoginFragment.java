@@ -229,8 +229,8 @@ public class LoginFragment extends BaseFragment implements LogoutDialog.OnLogOut
         private final String mPassword;
 
         UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
+            mEmail = email.trim();
+            mPassword = password.trim();
         }
 
         @Override
