@@ -189,12 +189,6 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.reset(this);
-    }
-
     private void loadData() {
         new HtmlLoader().execute();
     }
