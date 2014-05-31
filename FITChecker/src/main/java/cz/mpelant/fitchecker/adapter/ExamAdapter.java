@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v4.widget.CursorAdapter;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -64,7 +65,7 @@ public class ExamAdapter extends CursorAdapter {
             }
         }
 
-        if (!isEnabled(cursor.getPosition())) {
+        if (!isInFuture(cursor.getPosition())) {
             view.setBackgroundResource(R.drawable.bgr_shade);
         } else {
             view.setBackgroundDrawable(null);
@@ -76,13 +77,10 @@ public class ExamAdapter extends CursorAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        getCursor().moveToPosition(position);
-        Exam exam = new Exam(getCursor());
-        long now = System.currentTimeMillis();
-        return now < exam.getLongDate();
+        return (Build.VERSION.SDK_INT >= 14 && isInFuture(position));
     }
 
-    private boolean isInFuture(int position){
+    private boolean isInFuture(int position) {
         getCursor().moveToPosition(position);
         Exam exam = new Exam(getCursor());
         long now = System.currentTimeMillis();
