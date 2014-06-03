@@ -3,8 +3,10 @@
 
     <string-array name="course_prefixes">
         <item>BI-</item>
+        <item>BIK-</item>
         <item>MI-</item>
         <item>FI-</item>
+        <item>PI-</item>
     </string-array>
 
     <string name="refresh">Obnovit</string>
