@@ -108,7 +108,7 @@ android {
 		debug {
 //automatically marks src/debug as a source folders in addition to src/main if used and if the folder exists
 			versionNameSuffix " " + getShortCommitHash()
-			packageNameSuffix ".debug"
+			applicationIdSuffix ".debug"
 		}
 		release {
 //automatically marks src/release as a source folders in addition to src/main if used and if the folder exists
