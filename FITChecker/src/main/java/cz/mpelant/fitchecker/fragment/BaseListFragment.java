@@ -1,6 +1,8 @@
 package cz.mpelant.fitchecker.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,9 @@ public abstract class BaseListFragment extends BaseFragment {
 
 
     public void setEmptyText(CharSequence text) {
+        if(mEmptyTextView==null){
+            return;
+        }
         mEmptyTextView.setText(text);
         mListView.setEmptyView(mEmptyTextView);
     }
@@ -60,20 +65,37 @@ public abstract class BaseListFragment extends BaseFragment {
      *              indicator. The initial value is true.
      */
     public void setListShown(boolean shown) {
+        if(mProgressContainer==null){
+            return;
+        }
         if (mListShown == shown) {
             return;
         }
+        Log.v("Show/Hide", shown + "");
         mListShown = shown;
-        if (shown) {
-            mProgressContainer.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
-            mListView.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
-            mProgressContainer.setVisibility(View.GONE);
-            mListView.setVisibility(View.VISIBLE);
-        } else {
-            mProgressContainer.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
-            mListView.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out));
-            mProgressContainer.setVisibility(View.VISIBLE);
-            mListView.setVisibility(View.GONE);
+        long duration = getResources().getInteger(android.R.integer.config_mediumAnimTime);
+
+
+        if(Build.VERSION.SDK_INT>=12){
+            if (shown) {
+                mProgressContainer.animate().alpha(0).setDuration(duration);
+                mListView.animate().alpha(1).setDuration(duration);
+            } else {
+                mProgressContainer.animate().alpha(1).setDuration(duration);
+                mListView.animate().alpha(0).setDuration(duration);
+
+            }
+
+        }else{
+            if (shown) {
+                mProgressContainer.setVisibility(View.GONE);
+                mListView.setVisibility(View.VISIBLE);
+            } else {
+                mProgressContainer.setVisibility(View.VISIBLE);
+                mListView.setVisibility(View.GONE);
+
+            }
         }
+
     }
 }

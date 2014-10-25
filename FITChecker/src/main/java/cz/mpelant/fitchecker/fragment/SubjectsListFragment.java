@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -120,7 +121,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         setListShown(true);
-        mAdapter.changeCursor(data);
+        mAdapter.swapCursor(data);
         if (data != null && data.getCount() == 0) {
             setEmptyText(getString(R.string.subjects_empty_list));
         }
@@ -128,8 +129,8 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+        mAdapter.swapCursor(null);
         setListShown(false);
-        mAdapter.changeCursor(null);
     }
 
     @Override
