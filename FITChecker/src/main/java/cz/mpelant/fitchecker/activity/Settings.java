@@ -8,11 +8,17 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -21,6 +27,10 @@ import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.fragment.SettingsFragment;
 import cz.mpelant.fitchecker.service.SubjectRequest;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
+
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Settings extends ActionBarActivity {
     public static final String PREF_ALARM = "alarm";
@@ -109,4 +119,134 @@ public class Settings extends ActionBarActivity {
         am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, firstTime, interval, pi);
     }
 
+    
+    
+    public static class SettingsDelegate implements SharedPreferences.OnSharedPreferenceChangeListener {
+        
+        public interface PreferencesImpl{
+            Context getContext();
+            void addPreferencesFromResource(int preferences);
+            Preference findPreference(CharSequence prefRingtone);
+            void startActivity(Intent intent);
+        }
+
+
+        private SharedPreferences sp;
+        public static String TAG = "fitchecker";
+        private ListPreference listPreference;
+        private Preference lastRun;
+        private Preference ringtone;
+        private Preference led;
+        private Preference vibrate;
+        
+        private PreferencesImpl prefImpl;
+
+        public SettingsDelegate(PreferencesImpl prefImpl) {
+            this.prefImpl = prefImpl;
+        }
+
+        public void onCreate(Bundle savedInstanceState) {
+            sp = PreferenceManager.getDefaultSharedPreferences(prefImpl.getContext());
+            prefImpl.addPreferencesFromResource(R.xml.preferences);
+            listPreference = (ListPreference) prefImpl.findPreference(Settings.PREF_ALARM_INTERVAL);
+            ringtone = prefImpl.findPreference(Settings.PREF_RINGTONE);
+            led = prefImpl.findPreference(Settings.PREF_LED);
+            vibrate = prefImpl.findPreference(Settings.PREF_VIBRATE);
+
+            setNotificationOptions();
+            lastRun = prefImpl.findPreference(Settings.PREF_ALARM_LAST_RUN);
+
+            displayRingtone(sp);
+            displayLastRun();
+            CharSequence entry = listPreference.getEntry();
+            if (entry == null) {
+                Log.d(TAG, "interval nenastaven");
+                listPreference.setValueIndex(3);
+                entry = listPreference.getEntry();
+            }
+            listPreference.setSummary(entry);
+            Preference account = prefImpl.findPreference(Settings.PREF_ACCOUNT);
+            account.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    prefImpl.startActivity(new Intent(prefImpl.getContext(), LoginActivity.class));
+                    return true;
+                }
+            });
+        }
+
+
+        private void displayLastRun() {
+            if (sp.contains(Settings.PREF_ALARM_LAST_RUN)) {
+                Format formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+                Date date = new Date(sp.getLong(Settings.PREF_ALARM_LAST_RUN, 0));
+                lastRun.setSummary(formatter.format(date));
+            }
+        }
+
+        private void displayRingtone(SharedPreferences sp) {
+            try {
+                String s = sp.getString(Settings.PREF_RINGTONE, null);
+                Uri ringtoneUri = Uri.parse(s);
+                Ringtone ringtone = RingtoneManager.getRingtone(prefImpl.getContext(), ringtoneUri);
+                String name = ringtone.getTitle(prefImpl.getContext());
+                this.ringtone.setSummary(name);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void onPause() {
+            sp.unregisterOnSharedPreferenceChangeListener(this);
+        }
+
+        public void onResume() {
+            sp.registerOnSharedPreferenceChangeListener(this);
+            ringtone.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    try {
+                        Uri ringtoneUri = Uri.parse((String) newValue);
+                        Ringtone ringtone = RingtoneManager.getRingtone(prefImpl.getContext(), ringtoneUri);
+                        String name = ringtone.getTitle(prefImpl.getContext());
+                        SettingsDelegate.this.ringtone.setSummary(name);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    return true;
+                }
+            });
+            displayLastRun();
+        }
+
+
+
+
+        private void setNotificationOptions() {
+            boolean enabled = sp.getBoolean(Settings.PREF_ALARM, false);
+            listPreference.setEnabled(enabled);
+            ringtone.setEnabled(enabled);
+            led.setEnabled(enabled);
+            vibrate.setEnabled(enabled);
+
+        }
+
+
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+            if (key.equals(Settings.PREF_ALARM_INTERVAL) || key.equals(Settings.PREF_ALARM)) {
+                if (sp.getBoolean(Settings.PREF_ALARM, false))
+                    Settings.startAlarm(prefImpl.getContext());
+                else
+                    Settings.stopAlarm(prefImpl.getContext());
+                setNotificationOptions();
+                if (key.equals(Settings.PREF_ALARM_INTERVAL))
+                    listPreference.setSummary(listPreference.getEntry());
+            }
+
+        }
+    }
 }
