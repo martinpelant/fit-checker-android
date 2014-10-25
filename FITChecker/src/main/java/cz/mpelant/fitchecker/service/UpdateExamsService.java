@@ -2,41 +2,29 @@ package cz.mpelant.fitchecker.service;
 
 import android.accounts.AuthenticatorException;
 import android.app.Service;
-import android.content.ContentProviderClient;
 import android.content.ContentProviderOperation;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.OperationApplicationException;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-
 import com.squareup.otto.Produce;
-
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import cz.mpelant.fitchecker.App;
-import cz.mpelant.fitchecker.BuildConfig;
-import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.db.DataProvider;
-import cz.mpelant.fitchecker.downloader.KosCoursesServer;
 import cz.mpelant.fitchecker.downloader.KosExamsServer;
 import cz.mpelant.fitchecker.model.Exam;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
 import cz.mpelant.fitchecker.utils.NotificationHelper;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * AddFromKosService.java
@@ -173,8 +161,6 @@ public class UpdateExamsService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        bus = App.getInstance().getBus();
-        bus.register(this);
         tasksCount = 0;
     }
 
@@ -199,6 +185,11 @@ public class UpdateExamsService extends Service {
 
     private synchronized void onNewTask(SubjectRequest request) {
         post(new UpdateExamStatus(UpdateExamStatus.Status.STARTED, request));
+        if (bus == null) {
+            bus = App.getInstance().getBus();
+            bus.register(this);
+        }
+
         tasksCount++;
         new Task(request).start();
     }
@@ -220,13 +211,17 @@ public class UpdateExamsService extends Service {
 
     private void post(UpdateExamStatus status) {
         lastStatus = status;
-        bus.postOnMainThread(status);
+        if (bus != null) {
+            bus.postOnMainThread(status);
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        bus.unregister(this);
+        if (bus != null) {
+            bus.unregister(this);
+        }
     }
 
     @Produce

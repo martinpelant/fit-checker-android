@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -18,10 +17,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
-
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
@@ -97,7 +94,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
         getListView().setOnItemLongClickListener(this);
         mSwipeRefreshLayout = (SwipeRefreshLayout) listViewContainer;
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setColorScheme(R.color.refresh_color1, R.color.refresh_color2, R.color.refresh_color3, R.color.refresh_color4);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_color1, R.color.refresh_color2, R.color.refresh_color3, R.color.refresh_color4);
     }
 
     @Override
@@ -213,6 +210,9 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
             public void run() {
                 if (mSwipeRefreshLayout.isRefreshing() != refreshing)
                     mSwipeRefreshLayout.setRefreshing(refreshing);
+                if (getActivity() != null) {
+                    getActivity().supportInvalidateOptionsMenu();
+                }
             }
         });
 
@@ -221,10 +221,7 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
     @Override
     protected boolean isRefreshing() {
-        if (mSwipeRefreshLayout == null) {
-            return false;
-        }
-        return mSwipeRefreshLayout.isRefreshing();
+        return mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing();
     }
 
     @Override

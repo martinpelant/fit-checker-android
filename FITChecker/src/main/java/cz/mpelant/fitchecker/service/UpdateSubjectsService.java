@@ -8,24 +8,17 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import com.squareup.otto.Produce;
-
 import cz.mpelant.fitchecker.App;
-import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.downloader.EduxServer;
-import cz.mpelant.fitchecker.fragment.SettingsFragment;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
 import cz.mpelant.fitchecker.utils.NotificationHelper;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * UpdateSubjectsService.java
@@ -78,9 +71,6 @@ public class UpdateSubjectsService extends Service {
             return mRequest;
         }
     }
-
-
-
 
 
     private class Task extends Thread {
@@ -154,8 +144,6 @@ public class UpdateSubjectsService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        bus = App.getInstance().getBus();
-        bus.register(this);
         tasksCount = 0;
     }
 
@@ -171,6 +159,10 @@ public class UpdateSubjectsService extends Service {
 
     private synchronized void onNewTask(SubjectRequest request) {
         post(new UpdateSubjectsStatus(UpdateSubjectsStatus.Status.STARTED, request));
+        if (bus == null) {
+            bus = App.getInstance().getBus();
+            bus.register(this);
+        }
         tasksCount++;
         new Task(request).start();
     }
@@ -180,7 +172,7 @@ public class UpdateSubjectsService extends Service {
         if (request.showNotifications) {//save last run time
             SharedPreferences.Editor ed = PreferenceManager.getDefaultSharedPreferences(this).edit();
             ed.putLong(Settings.PREF_ALARM_LAST_RUN, System.currentTimeMillis());
-            ed.commit();
+            ed.apply();
             if (result.isChangesDetected()) {
                 new NotificationHelper(this).displayNotification(result.getChangedSubjects(), NotificationHelper.NotificationType.EDUX);
             }
@@ -195,13 +187,17 @@ public class UpdateSubjectsService extends Service {
 
     private void post(UpdateSubjectsStatus status) {
         lastStatus = status;
-        bus.postOnMainThread(status);
+        if (bus != null) {
+            bus.postOnMainThread(status);
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        bus.unregister(this);
+        if (bus != null) {
+            bus.unregister(this);
+        }
     }
 
     @Produce

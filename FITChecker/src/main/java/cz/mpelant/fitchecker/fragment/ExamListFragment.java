@@ -59,7 +59,7 @@ public class ExamListFragment extends BaseListFragment implements LoaderManager.
         setHasOptionsMenu(true);
 
         ((SwipeRefreshLayout) listViewContainer).setOnRefreshListener(this);
-        ((SwipeRefreshLayout) listViewContainer).setColorScheme(R.color.refresh_color1, R.color.refresh_color2, R.color.refresh_color3, R.color.refresh_color4);
+        ((SwipeRefreshLayout) listViewContainer).setColorSchemeResources(R.color.refresh_color1, R.color.refresh_color2, R.color.refresh_color3, R.color.refresh_color4);
     }
 
     @Override
@@ -145,17 +145,18 @@ public class ExamListFragment extends BaseListFragment implements LoaderManager.
             public void run() {
                 if (((SwipeRefreshLayout) listViewContainer).isRefreshing() != refreshing)
                     ((SwipeRefreshLayout) listViewContainer).setRefreshing(refreshing);
+                if (getActivity() != null) {
+                    getActivity().supportInvalidateOptionsMenu();
+                }
             }
         });
+
     }
 
 
     @Override
     protected boolean isRefreshing() {
-        if (((SwipeRefreshLayout) listViewContainer) == null) {
-            return false;
-        }
-        return ((SwipeRefreshLayout) listViewContainer).isRefreshing();
+        return (listViewContainer) != null && ((SwipeRefreshLayout) listViewContainer).isRefreshing();
     }
 
     @Subscribe

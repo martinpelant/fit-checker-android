@@ -172,7 +172,7 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.display_subject, null);
+        return inflater.inflate(R.layout.display_subject, container, false);
     }
 
     @Override
@@ -180,7 +180,7 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.inject(this, view);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setColorScheme(R.color.refresh_color1, R.color.refresh_color2, R.color.refresh_color3, R.color.refresh_color4);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_color1, R.color.refresh_color2, R.color.refresh_color3, R.color.refresh_color4);
         if (mWebContent == null) {
             setContentShown(false);
             loadData();
@@ -234,6 +234,9 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
             public void run() {
                 if (mSwipeRefreshLayout.isRefreshing() != refreshing)
                     mSwipeRefreshLayout.setRefreshing(refreshing);
+                if (getActivity() != null) {
+                    getActivity().supportInvalidateOptionsMenu();
+                }
             }
         });
     }
