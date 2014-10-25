@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import cz.mpelant.fitchecker.activity.Settings;
+import cz.mpelant.fitchecker.fragment.SettingsFragment;
 
 public class BootReceiver extends BroadcastReceiver {
     public static String TAG = "fitchecker";

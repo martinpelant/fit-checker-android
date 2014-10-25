@@ -30,6 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.Settings"/>
+        <activity android:name=".activity.SettingsCompat"/>
         <activity android:name=".activity.BaseFragmentActivity"/>
 
         <receiver android:name=".BootReceiver">
@@ -52,6 +53,7 @@
                 android:authorities="${applicationId}.subjectsprovider"
                 android:exported="false">
         </provider>
+
         <service
                 android:name=".service.UpdateSubjectsService"
                 android:exported="false">

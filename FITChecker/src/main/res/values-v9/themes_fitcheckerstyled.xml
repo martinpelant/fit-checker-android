@@ -3,7 +3,7 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="_Theme.Fitchecker.Styled" parent="Theme.Fitchecker">
+    <style name="_Theme.Fitchecker.Styled" parent="AppTheme">
 
     <item name="android:textSelectHandleLeft">@drawable/fitcheckerstyled_text_select_handle_left</item>
     <item name="android:textSelectHandleRight">@drawable/fitcheckerstyled_text_select_handle_right</item>

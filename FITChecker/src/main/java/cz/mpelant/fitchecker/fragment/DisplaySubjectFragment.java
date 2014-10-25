@@ -269,7 +269,7 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
         menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                startActivity(new Intent(getActivity(), Settings.class));
+                startActivity(Settings.generateIntent(getActivity()));
                 return true;
             }
         });

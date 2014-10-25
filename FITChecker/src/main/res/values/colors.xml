@@ -7,4 +7,7 @@
     <color name="windowBackground">#ffffff</color>
     <color name="divider">#18264c6f</color>
 
+    <color name="colorPrimary">#002d56</color>
+    <color name="colorAccent">#e77f08</color>
+
 </resources>

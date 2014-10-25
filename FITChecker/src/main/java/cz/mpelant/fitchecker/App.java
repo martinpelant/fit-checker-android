@@ -4,6 +4,7 @@ import android.app.Application;
 import android.preference.PreferenceManager;
 import android.view.ViewConfiguration;
 import cz.mpelant.fitchecker.activity.Settings;
+import cz.mpelant.fitchecker.fragment.SettingsFragment;
 import cz.mpelant.fitchecker.oldimport.OldImport;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
 

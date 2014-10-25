@@ -18,6 +18,7 @@ import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.downloader.EduxServer;
+import cz.mpelant.fitchecker.fragment.SettingsFragment;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.utils.MainThreadBus;
 import cz.mpelant.fitchecker.utils.NotificationHelper;

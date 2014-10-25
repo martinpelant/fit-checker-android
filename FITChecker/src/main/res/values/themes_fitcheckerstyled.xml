@@ -5,9 +5,7 @@
 
     <style name="Theme.Fitchecker.Styled" parent="_Theme.Fitchecker.Styled"/>
 
-    <style name="_Theme.Fitchecker.Styled" parent="Theme.Fitchecker">
-
-        <item name="android:editTextStyle">@style/EditTextFitcheckerStyled</item>
+    <style name="_Theme.Fitchecker.Styled" parent="AppTheme">
 
         <item name="android:textColorHighlight">#99e77f08</item>
 
@@ -25,7 +23,7 @@
 
         <item name="android:spinnerItemStyle">@style/SpinnerItemFitcheckerStyled</item>
 
-        <item name="android:checkboxStyle">@style/CheckBoxfitcheckerstyled</item>
+        <!--<item name="android:checkboxStyle">@style/CheckBoxfitcheckerstyled</item>-->
 
     </style>
 
