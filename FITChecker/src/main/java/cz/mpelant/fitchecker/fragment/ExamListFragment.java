@@ -137,10 +137,16 @@ public class ExamListFragment extends BaseListFragment implements LoaderManager.
     }
 
     @Override
-    protected void setRefreshing(boolean refreshing) {
+    protected void setRefreshing(final boolean refreshing) {
         super.setRefreshing(refreshing);
-        if (((SwipeRefreshLayout) listViewContainer).isRefreshing() != refreshing)
-            ((SwipeRefreshLayout) listViewContainer).setRefreshing(refreshing);
+
+        listViewContainer.post(new Runnable() {
+            @Override
+            public void run() {
+                if (((SwipeRefreshLayout) listViewContainer).isRefreshing() != refreshing)
+                    ((SwipeRefreshLayout) listViewContainer).setRefreshing(refreshing);
+            }
+        });
     }
 
 

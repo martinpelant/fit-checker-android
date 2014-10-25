@@ -206,10 +206,16 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
 
     @Override
-    protected void setRefreshing(boolean refreshing) {
+    protected void setRefreshing(final boolean refreshing) {
         super.setRefreshing(refreshing);
-        if (mSwipeRefreshLayout.isRefreshing() != refreshing)
-            mSwipeRefreshLayout.setRefreshing(refreshing);
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                if (mSwipeRefreshLayout.isRefreshing() != refreshing)
+                    mSwipeRefreshLayout.setRefreshing(refreshing);
+            }
+        });
+
     }
 
 
