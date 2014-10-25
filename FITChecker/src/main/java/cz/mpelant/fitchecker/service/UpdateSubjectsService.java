@@ -36,10 +36,6 @@ import java.util.Set;
  * @since 4/17/2014
  */
 public class UpdateSubjectsService extends Service {
-
-
-    private static final String ACTION = BuildConfig.PACKAGE_NAME + ".UPDATE_SUBJECTS";
-
     public static class UpdateSubjectsException {
         private Exception mException;
 
@@ -145,7 +141,7 @@ public class UpdateSubjectsService extends Service {
     private int tasksCount;
 
     public static Intent generateIntent(SubjectRequest request) {
-        Intent i = new Intent(ACTION);
+        Intent i = new Intent(App.getInstance(), UpdateSubjectsService.class);
         request.applyToIntent(i);
         return i;
     }

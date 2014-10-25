@@ -56,27 +56,15 @@
 
         <service
                 android:name=".service.UpdateSubjectsService"
-                android:exported="false">
-            <intent-filter>
-                <action android:name="${applicationId}.UPDATE_SUBJECTS"/>
-            </intent-filter>
-        </service>
+                android:exported="false"/>
 
         <service
                 android:name=".service.AddFromKosService"
-                android:exported="false">
-            <intent-filter>
-                <action android:name="${applicationId}.KOS_ADD_SUBJECTS"/>
-            </intent-filter>
-        </service>
+                android:exported="false" />
 
         <service
                 android:name=".service.UpdateExamsService"
-                android:exported="false">
-            <intent-filter>
-                <action android:name="${applicationId}.KOS_ADD_EXAMS"/>
-            </intent-filter>
-        </service>
+                android:exported="false" />
 
 
     </application>

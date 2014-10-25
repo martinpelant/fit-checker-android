@@ -48,7 +48,6 @@ import cz.mpelant.fitchecker.utils.NotificationHelper;
  */
 public class UpdateExamsService extends Service {
     private static final String TAG = UpdateExamsService.class.getName();
-    private static final String ACTION = BuildConfig.PACKAGE_NAME + ".KOS_ADD_EXAMS";
 
 
     public static class KosException {
@@ -166,7 +165,7 @@ public class UpdateExamsService extends Service {
     private MainThreadBus bus;
 
     public static Intent generateIntent(SubjectRequest request) {
-        Intent i = new Intent(ACTION);
+        Intent i = new Intent(App.getInstance(), UpdateExamsService.class);
         request.applyToIntent(i);
         return i;
     }

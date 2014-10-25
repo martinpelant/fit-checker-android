@@ -26,7 +26,6 @@ import java.util.List;
  * @since 4/18/2014
  */
 public class AddFromKosService extends Service {
-    private static final String ACTION = BuildConfig.PACKAGE_NAME+".KOS_ADD_SUBJECTS";
 
 
     public static class KosException {
@@ -74,7 +73,7 @@ public class AddFromKosService extends Service {
     private MainThreadBus bus;
 
     public static Intent generateIntent() {
-        return new Intent(ACTION);
+        return new Intent(App.getInstance(), AddFromKosService.class);
     }
 
     @Override
