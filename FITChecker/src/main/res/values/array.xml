@@ -23,8 +23,4 @@
         <item>1440</item>
     </string-array>
     
-    <string-array name="authentication">
-        <item>Servery SUN FIT ČVUT</item>
-        <item>FIT ČVUT - fakultní heslo</item>
-    </string-array>
 </resources>
