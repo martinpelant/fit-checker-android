@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.activity.MainActivity;
 import cz.mpelant.fitchecker.activity.Settings;
@@ -74,6 +75,7 @@ public class NotificationHelper {
         nb.setContentTitle(mCtx.getString(R.string.app_name));
         nb.setContentIntent(getClickIntent());
         nb.setAutoCancel(true);
+        nb.setColor(mCtx.getResources().getColor(R.color.colorPrimary));
 
 
         NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
