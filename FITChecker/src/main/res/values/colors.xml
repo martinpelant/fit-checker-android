@@ -8,6 +8,9 @@
     <color name="divider">#18264c6f</color>
 
     <color name="colorPrimary">#002d56</color>
+    <color name="colorPrimaryDark">#05172F</color>
+
+
     <color name="colorAccent">#e77f08</color>
 
 </resources>
