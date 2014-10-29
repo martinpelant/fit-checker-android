@@ -5,10 +5,10 @@
 
     <style name="_Theme.Fitchecker.Styled" parent="AppTheme">
 
-    <item name="android:textSelectHandleLeft">@drawable/fitcheckerstyled_text_select_handle_left</item>
-    <item name="android:textSelectHandleRight">@drawable/fitcheckerstyled_text_select_handle_right</item>
-    <item name="android:textSelectHandle">@drawable/fitcheckerstyled_text_select_handle_middle</item>
+        <item name="android:textSelectHandleLeft">@drawable/fitcheckerstyled_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/fitcheckerstyled_text_select_handle_right</item>
+        <item name="android:textSelectHandle">@drawable/fitcheckerstyled_text_select_handle_middle</item>
 
-  </style>
+    </style>
 
 </resources>
