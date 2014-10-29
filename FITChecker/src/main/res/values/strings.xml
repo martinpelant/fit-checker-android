@@ -48,7 +48,7 @@
     <string name="vibrate">Vibrovat</string>
     <string name="vibrate_summary">Vibrovat při notifikaci</string>
     <string name="ringtone">Vyzvánění</string>
-    <string name="addSubjectsFromKOS">Importovat z KOSu</string>
+    <string name="addSubjectsFromKOS">Import z KOSu</string>
     <string name="loadingSubjects">Nahrávám předměty</string>
     <string name="delete">Smazat</string>
     <string name="subjects_empty_list">Nemáte v seznamu žádné předměty.</string>

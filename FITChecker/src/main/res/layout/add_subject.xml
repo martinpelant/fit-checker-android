@@ -6,27 +6,32 @@
               android:orientation="vertical"
               android:paddingTop="20dp">
 
-    <LinearLayout
+    <RelativeLayout
+            android:paddingLeft="?listPreferredItemPaddingLeft"
+            android:paddingRight="?listPreferredItemPaddingLeft"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
         <Spinner
-                android:paddingRight="?listPreferredItemPaddingLeft"
                 android:id="@+id/course_prefix"
                 android:layout_width="wrap_content"
                 android:entries="@array/course_prefixes"
                 android:layout_height="wrap_content"/>
 
         <EditText
+                android:layout_alignBaseline="@id/course_prefix"
+                android:layout_toRightOf="@id/course_prefix"
                 android:id="@+id/subject"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapCharacters"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
+            android:paddingLeft="?listPreferredItemPaddingLeft"
+            android:paddingRight="?listPreferredItemPaddingLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
