@@ -12,7 +12,7 @@
         indicator:pstsIndicatorColor="@color/fitcheckerstyled_color"
         indicator:pstsTabBackground="@drawable/tab_indicator_ab_fitchecker"
         indicator:pstsShouldExpand="true"
-        android:background="@color/refresh_color4"
+        android:background="@color/colorPrimary"
         android:textColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="48dp" />
