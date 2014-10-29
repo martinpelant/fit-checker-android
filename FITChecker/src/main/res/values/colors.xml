@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="refresh_color1">@color/fitcheckerstyled_color</color>
+    <color name="refresh_color1">@color/colorAccent</color>
     <color name="refresh_color2">#264c6f</color>
-    <color name="refresh_color3">@color/fitcheckerstyled_color</color>
+    <color name="refresh_color3">@color/colorAccent</color>
     <color name="refresh_color4">#264c6f</color>
     <color name="windowBackground">#ffffff</color>
     <color name="divider">#18264c6f</color>
 
+    <color name="textColor">#bb05172F</color>
     <color name="colorPrimary">#002d56</color>
     <color name="colorPrimaryDark">#05172F</color>
 

@@ -17,7 +17,7 @@
                 android:layout_weight="1"
                 android:textSize="20sp"
                 android:gravity="center_vertical"
-                android:textColor="#0063A8"
+                android:textColor="@color/textColor"
                 />
 
         <ImageView
