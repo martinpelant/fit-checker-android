@@ -10,7 +10,7 @@
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/indicator"
         indicator:pstsIndicatorColor="@color/fitcheckerstyled_color"
-        indicator:pstsTabBackground="@drawable/tab_indicator_ab_fitchecker"
+        indicator:pstsTabBackground="@drawable/tab_indicator"
         indicator:pstsShouldExpand="true"
         android:background="@color/colorPrimary"
         android:textColor="#FFFFFF"
