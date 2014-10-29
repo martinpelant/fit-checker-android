@@ -232,4 +232,15 @@ public class UpdateExamsService extends Service {
         return lastStatus;
     }
 
+
+    private List<Exam> createFakeList(){
+        List<Exam> list = new ArrayList<>();
+
+        list.add(new Exam("2014-09-30T00:10:00", "t9:155", 30, 30, "MI-MVI", true));
+        list.add(new Exam("2014-10-30T00:10:00", "t9:155", 30, 30, "MI-MVI", false));
+        list.add(new Exam("2014-11-30T00:10:00", "t9:155", 20, 30, "MI-MVI", true));
+        list.add(new Exam("2014-12-30T00:10:00", "t9:155", 30, 20, "MI-MVI", true));
+        return list;
+    }
+
 }

@@ -51,6 +51,16 @@ public class Exam extends AbstractEntity implements Parcelable {
     public Exam() {
     }
 
+    public Exam( String date, String room, int capacity, int occupied, String subject,  boolean isRegistered) {
+        examId = String.valueOf(Math.random());
+        this.date = date;
+        this.room = room;
+        this.capacity = capacity;
+        this.occupied = occupied;
+        this.subject = subject;
+        this.isRegistered = isRegistered;
+    }
+
     public Exam(Cursor cursor) {
         dateLong = cursor.getLong(cursor.getColumnIndex(COL_DATE));
         capacity = cursor.getInt(cursor.getColumnIndex(COL_CAPACITY));
