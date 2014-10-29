@@ -44,7 +44,7 @@ public class AddSubjectFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setRetainInstance(true);
-        return inflater.inflate(R.layout.add_subject, null);
+        return inflater.inflate(R.layout.add_subject, container, false);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class AddSubjectFragment extends BaseFragment {
             public void onItemSelected(AdapterView<?> parent, View arg1, int pos, long arg3) {
                 SharedPreferences.Editor ed = sp.edit();
                 ed.putInt(PREF_TYPE, pos);
-                ed.commit();
+                ed.apply();
             }
 
             @Override

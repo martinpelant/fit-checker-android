@@ -61,6 +61,6 @@ public class OldImport {
         if (username != null && password != null) {
             KosAccountManager.saveAccount(new KosAccount(username, password));
         }
-        sp.edit().remove(PREFERENCES_USERNAME).remove(PREFERENCES_PASSWORD).commit();
+        sp.edit().remove(PREFERENCES_USERNAME).remove(PREFERENCES_PASSWORD).apply();
     }
 }

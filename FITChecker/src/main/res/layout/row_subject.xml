@@ -15,8 +15,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="BI-OMO"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:gravity="center_vertical"
                 android:textColor="#0063A8"
                 />

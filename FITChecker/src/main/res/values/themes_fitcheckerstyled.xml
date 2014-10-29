@@ -23,8 +23,6 @@
 
         <item name="android:spinnerItemStyle">@style/SpinnerItemFitcheckerStyled</item>
 
-        <!--<item name="android:checkboxStyle">@style/CheckBoxfitcheckerstyled</item>-->
-
     </style>
 
 </resources>

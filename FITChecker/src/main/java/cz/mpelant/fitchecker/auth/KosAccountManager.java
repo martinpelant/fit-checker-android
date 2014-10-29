@@ -43,7 +43,7 @@ public class KosAccountManager {
             Log.e("KosAccountManager", "WARNING: storing plaintext password");
             ed.putString(PREFERENCES_PASSWORD, account.getPassword());
         }
-        ed.commit();
+        ed.apply();
         mAccount = account;
     }
 
@@ -76,7 +76,7 @@ public class KosAccountManager {
         SharedPreferences.Editor ed = getSp().edit();
         ed.remove(PREFERENCES_USERNAME);
         ed.remove(PREFERENCES_PASSWORD);
-        ed.commit();
+        ed.apply();
         mAccount = null;
     }
 
