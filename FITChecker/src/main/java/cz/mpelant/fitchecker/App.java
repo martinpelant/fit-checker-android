@@ -1,6 +1,7 @@
 package cz.mpelant.fitchecker;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.ViewConfiguration;
 import cz.mpelant.fitchecker.activity.Settings;
@@ -18,7 +19,7 @@ import java.lang.reflect.Field;
  * @since 4/17/2014
  */
 public class App extends Application {
-    public static final String SP_IMPORTED = "imported";
+    public static final String VERSION_CODE = "versionCode";
     private static App instance;
     private MainThreadBus mBus;
 
@@ -28,26 +29,39 @@ public class App extends Application {
         mBus = new MainThreadBus();
         forceOverflowHack();
         super.onCreate();
-        if (!PreferenceManager.getDefaultSharedPreferences(instance).getBoolean(SP_IMPORTED, false) && OldImport.isUpgradeFromOldVersion(this)) {
+
+        if (isNewVersion()) {
             performUpgrade();
-        } else {//no need to update, save it to SP so we don't have to check it again
-            PreferenceManager.getDefaultSharedPreferences(instance).edit().putBoolean(SP_IMPORTED, true).commit();
         }
     }
 
     private void performUpgrade() {
-        if(Settings.isNotifEnabled(this)){//reenable auto refresh if needed
+        if (Settings.isNotifEnabled(this)) {//reenable auto refresh if needed
             Settings.stopAlarm(this);
             Settings.startAlarm(this);
         }
-        new Thread() {
-            @Override
-            public void run() {
-                OldImport.importCredentials(instance);
-                OldImport.importDb(instance);
-                PreferenceManager.getDefaultSharedPreferences(instance).edit().putBoolean(SP_IMPORTED, true).commit();
-            }
-        }.start();
+        if (OldImport.isUpgradeFromOldVersion(this)) {
+            new Thread() {
+                @Override
+                public void run() {
+                    OldImport.importCredentials(instance);
+                    OldImport.importDb(instance);
+                }
+            }.start();
+        }
+    }
+
+    /**
+     * @return true if this is the first start of the app after new version is installed, false otherwise
+     */
+    private boolean isNewVersion() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.getInt(VERSION_CODE, 0) < BuildConfig.VERSION_CODE) {
+            sp.edit().putInt(VERSION_CODE, BuildConfig.VERSION_CODE).apply();
+            return true;
+        }
+        return false;
+
     }
 
     private void forceOverflowHack() {
