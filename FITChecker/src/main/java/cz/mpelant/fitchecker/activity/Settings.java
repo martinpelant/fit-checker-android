@@ -5,6 +5,8 @@ import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -114,6 +116,8 @@ public class Settings extends ActionBarActivity {
         long firstTime = SystemClock.elapsedRealtime() + 60000;
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, firstTime, interval, pi);
+        //TODO: job scheduler
+
     }
 
     
