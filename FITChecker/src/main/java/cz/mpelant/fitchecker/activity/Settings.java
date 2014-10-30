@@ -84,9 +84,6 @@ public class Settings extends ActionBarActivity {
     }
 
 
-
-
-
     public static boolean isNotifEnabled(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREF_ALARM, false);
     }
