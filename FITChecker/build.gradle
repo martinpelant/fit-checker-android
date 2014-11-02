@@ -82,7 +82,7 @@ tasks.whenTaskAdded { task ->
 
 android {
 	compileSdkVersion 21
-	buildToolsVersion '21.0.2'
+	buildToolsVersion '21.1'
 
 	defaultConfig {
 		minSdkVersion 9
@@ -112,7 +112,7 @@ android {
 		}
 		release {
 //automatically marks src/release as a source folders in addition to src/main if used and if the folder exists
-			runProguard true
+			minifyEnabled true
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), file('proguard-project.txt')
 			signingConfig signingConfigs.release
 		}
