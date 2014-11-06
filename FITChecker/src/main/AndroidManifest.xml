@@ -65,7 +65,10 @@
                 android:name=".service.UpdateExamsService"
                 android:exported="false" />
 
-
+        <service
+                android:name=".service.UpdateJobService"
+                android:permission="android.permission.BIND_JOB_SERVICE"
+                android:exported="true"/>
     </application>
 
 </manifest>

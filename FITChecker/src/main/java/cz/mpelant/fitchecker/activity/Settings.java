@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -28,6 +30,7 @@ import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.fragment.SettingsFragment;
 import cz.mpelant.fitchecker.service.SubjectRequest;
+import cz.mpelant.fitchecker.service.UpdateJobService;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
 import java.text.Format;
@@ -42,8 +45,7 @@ public class Settings extends ActionBarActivity {
     public static final String PREF_VIBRATE = "vibrate";
     public static final String PREF_LED = "led";
     public static final String PREF_RINGTONE = "ringtone";
-    public static final String PREF_DONATE = "donate";
-
+    public static final int JOB_ID = 534532;
 
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -60,7 +62,7 @@ public class Settings extends ActionBarActivity {
 
         Fragment fragment = getFragmentManager().findFragmentById(R.id.baseActivityContent);
         if ((fragment == null) && (savedInstanceState == null)) {
-            fragment=new SettingsFragment();
+            fragment = new SettingsFragment();
             getFragmentManager().beginTransaction().add(R.id.baseActivityContent, fragment, fragment.getClass().getName()).commit();
         }
     }
@@ -92,6 +94,20 @@ public class Settings extends ActionBarActivity {
 
 
     public static void stopAlarm(Context context) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            @SuppressWarnings("ResourceType")
+            JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            jobScheduler.cancel(JOB_ID);
+        }
+
+        stopAlarmCompat(context); //need to caal it even if user runs Lollipop,
+        // so we can disable the alarm if the app is updated and we continu using only the job scheduler
+
+
+    }
+
+    private static void stopAlarmCompat(Context context) {
+        //cancel any previously set alarms when Job scheduler was not yet applied
         Intent serviceIntent = UpdateSubjectsService.generateIntent(new SubjectRequest(DataProvider.getSubjectsUri(), true));
         PendingIntent pi = PendingIntent.getService(context, 0, serviceIntent, 0);
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -103,7 +119,7 @@ public class Settings extends ActionBarActivity {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         Intent serviceIntent = UpdateSubjectsService.generateIntent(new SubjectRequest(DataProvider.getSubjectsUri(), true));
         PendingIntent pi = PendingIntent.getService(context, 0, serviceIntent, 0);
-        int interval = 0;
+        int interval = 0; //interval in minutes
         try {
             interval = Integer.parseInt(sp.getString(PREF_ALARM_INTERVAL, "60"));
         } catch (Exception e) {
@@ -113,21 +129,36 @@ public class Settings extends ActionBarActivity {
             interval = 60;
 
         interval *= 60 * 1000;
-        long firstTime = SystemClock.elapsedRealtime() + 60000;
-        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, firstTime, interval, pi);
-        //TODO: job scheduler
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            ComponentName serviceComponent = new ComponentName(context, UpdateJobService.class);
+
+            @SuppressWarnings("ResourceType")
+            JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            JobInfo uploadTask = new JobInfo.Builder(JOB_ID, serviceComponent)
+                    .setPeriodic(interval)
+                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                    .setPersisted(true)
+                    .build();
+            jobScheduler.schedule(uploadTask);
+        } else {
+            long firstTime = SystemClock.elapsedRealtime() + 60000;
+            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, firstTime, interval, pi);
+        }
 
     }
 
-    
-    
+
     public static class SettingsDelegate implements SharedPreferences.OnSharedPreferenceChangeListener {
-        
-        public interface PreferencesImpl{
+
+        public interface PreferencesImpl {
             Context getContext();
+
             void addPreferencesFromResource(int preferences);
+
             Preference findPreference(CharSequence prefRingtone);
+
             void startActivity(Intent intent);
         }
 
@@ -139,7 +170,7 @@ public class Settings extends ActionBarActivity {
         private Preference ringtone;
         private Preference led;
         private Preference vibrate;
-        
+
         private PreferencesImpl prefImpl;
 
         public SettingsDelegate(PreferencesImpl prefImpl) {
@@ -222,8 +253,6 @@ public class Settings extends ActionBarActivity {
             });
             displayLastRun();
         }
-
-
 
 
         private void setNotificationOptions() {

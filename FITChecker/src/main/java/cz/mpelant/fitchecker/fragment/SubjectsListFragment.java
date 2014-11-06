@@ -63,8 +63,8 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
 
     @Override
     public void onPause() {
-        super.onPause();
         bus.unregister(this);
+        super.onPause();
     }
 
     @Subscribe

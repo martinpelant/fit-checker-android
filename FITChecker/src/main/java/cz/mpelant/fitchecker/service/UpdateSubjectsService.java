@@ -86,7 +86,7 @@ public class UpdateSubjectsService extends Service {
         public void run() {
             EduxServer server = new EduxServer(App.getInstance());
             Cursor c = App.getInstance().getContentResolver().query(mRequest.mUri, null, null, null, null);
-            while (c.moveToNext()) {
+            while (c.moveToNext() && !mServiceDestroyed) {
                 Subject s = new Subject(c);
                 try {
                     boolean changes = server.downloadSubjectData(s.getName());
@@ -129,6 +129,7 @@ public class UpdateSubjectsService extends Service {
     private static UpdateSubjectsStatus lastStatus;
     private MainThreadBus bus;
     private int tasksCount;
+    private boolean mServiceDestroyed;
 
     public static Intent generateIntent(SubjectRequest request) {
         Intent i = new Intent(App.getInstance(), UpdateSubjectsService.class);
@@ -145,6 +146,7 @@ public class UpdateSubjectsService extends Service {
     public void onCreate() {
         super.onCreate();
         tasksCount = 0;
+        mServiceDestroyed=false;
     }
 
     @Override
@@ -194,10 +196,11 @@ public class UpdateSubjectsService extends Service {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+        mServiceDestroyed=true;
         if (bus != null) {
             bus.unregister(this);
         }
+        super.onDestroy();
     }
 
     @Produce
