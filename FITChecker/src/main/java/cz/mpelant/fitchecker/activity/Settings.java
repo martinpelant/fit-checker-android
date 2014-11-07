@@ -101,7 +101,7 @@ public class Settings extends ActionBarActivity {
         }
 
         stopAlarmCompat(context); //need to caal it even if user runs Lollipop,
-        // so we can disable the alarm if the app is updated and we continu using only the job scheduler
+        // so we can disable the alarm if the app is updated and we continue using only the job scheduler
 
 
     }
@@ -117,8 +117,7 @@ public class Settings extends ActionBarActivity {
 
     public static void startAlarm(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        Intent serviceIntent = UpdateSubjectsService.generateIntent(new SubjectRequest(DataProvider.getSubjectsUri(), true));
-        PendingIntent pi = PendingIntent.getService(context, 0, serviceIntent, 0);
+
         int interval = 0; //interval in minutes
         try {
             interval = Integer.parseInt(sp.getString(PREF_ALARM_INTERVAL, "60"));
@@ -142,6 +141,8 @@ public class Settings extends ActionBarActivity {
                     .build();
             jobScheduler.schedule(uploadTask);
         } else {
+            Intent serviceIntent = UpdateSubjectsService.generateIntent(new SubjectRequest(DataProvider.getSubjectsUri(), true));
+            PendingIntent pi = PendingIntent.getService(context, 0, serviceIntent, 0);
             long firstTime = SystemClock.elapsedRealtime() + 60000;
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, firstTime, interval, pi);
