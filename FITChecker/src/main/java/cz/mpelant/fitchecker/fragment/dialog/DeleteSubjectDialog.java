@@ -3,8 +3,10 @@ package cz.mpelant.fitchecker.fragment.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.db.DataProvider;
@@ -40,25 +42,45 @@ public class DeleteSubjectDialog extends BaseDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Subject subject = getSubject();
-
-        AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
-        ab.setTitle(R.string.delete_title);
-        ab.setMessage(getResources().getString(R.string.delete_message, subject.getName()));
-        ab.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+        Dialog d;
+        final Thread callback = new Thread() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        App.getInstance().getContentResolver().delete(DataProvider.getSubjectUri(subject.getId()), null, null);
-                        App.getInstance().getContentResolver().delete(DataProvider.getExamsUri(), Exam.COL_SUBJECT + " = ?", new String[]{subject.getName()});
-                        File cacheFile = EduxServer.getSubejctFile(subject.getName());
-                        cacheFile.delete();
-                    }
-                }.start();
+            public void run() {
+                App.getInstance().getContentResolver().delete(DataProvider.getSubjectUri(subject.getId()), null, null);
+                App.getInstance().getContentResolver().delete(DataProvider.getExamsUri(), Exam.COL_SUBJECT + " = ?", new String[]{subject.getName()});
+                File cacheFile = EduxServer.getSubejctFile(subject.getName());
+                //noinspection ResultOfMethodCallIgnored
+                cacheFile.delete();
             }
-        });
-        ab.setNegativeButton(android.R.string.cancel, null);
-        return ab.create();
+        };
+
+
+        if (Build.VERSION.SDK_INT >= 14 && Build.VERSION.SDK_INT < 21) {
+            MaterialDialog.Builder ab = new MaterialDialog.Builder(getActivity());
+            ab.title(R.string.delete_title)
+                    .content(getResources().getString(R.string.delete_message, subject.getName()))
+                    .positiveText(R.string.delete)
+                    .negativeText(android.R.string.cancel)
+                    .callback(new MaterialDialog.SimpleCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog materialDialog) {
+                            callback.start();
+                        }
+                    });
+            d = ab.build();
+        } else {
+            AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
+            ab.setTitle(R.string.delete_title);
+            ab.setMessage(getResources().getString(R.string.delete_message, subject.getName()));
+            ab.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    callback.start();
+                }
+            });
+            ab.setNegativeButton(android.R.string.cancel, null);
+            d = ab.create();
+        }
+        return d;
     }
 }
