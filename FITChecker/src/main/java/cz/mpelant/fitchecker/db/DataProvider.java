@@ -34,7 +34,7 @@ import cz.mpelant.fitchecker.model.Subject;
  */
 public class DataProvider extends ContentProvider {
 
-    public static final String AUTHORITY = BuildConfig.PACKAGE_NAME + ".subjectsprovider";
+    public static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".subjectsprovider";
 
     private static final String SUBJECTS_BASE_PATH = "subjects";
     private static final String EXAMS_BASE_PATH = "exams";
