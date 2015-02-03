@@ -41,6 +41,7 @@ public class DeleteAllSubjectsDialog extends BaseDialogFragment {
                     //noinspection ResultOfMethodCallIgnored
                     cacheFile.delete();
                 }
+                c.close();
                 App.getInstance().getContentResolver().delete(DataProvider.getSubjectsUri(), null, null);
                 App.getInstance().getContentResolver().delete(DataProvider.getExamsUri(), null, null);
             }

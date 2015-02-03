@@ -56,6 +56,9 @@
 -keepclassmembers enum com.j256.** { *; }
 -keep interface com.j256.**
 -keepclassmembers interface com.j256.** { *; }
+#-keep interface com.afollestad.materialdialogs.**
+#-keepclassmembers interface com.afollestad.materialdialogs.** { *; }
+
 
 
 #otto
