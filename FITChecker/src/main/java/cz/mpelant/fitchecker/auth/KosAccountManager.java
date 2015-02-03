@@ -26,7 +26,7 @@ import java.security.NoSuchAlgorithmException;
 public class KosAccountManager {
     private static final String PREFERENCES_USERNAME = "username";
     private static final String PREFERENCES_PASSWORD = "password";
-    static final int AUTH_OPTION = 3;
+    static final int AUTH_OPTION = 1;
     private static final String SP_FNAME = "eduxcred";
     private static KosAccount mAccount;
 
