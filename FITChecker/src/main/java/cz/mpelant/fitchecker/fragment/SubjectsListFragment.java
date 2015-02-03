@@ -29,6 +29,7 @@ import cz.mpelant.fitchecker.fragment.dialog.DeleteAllSubjectsDialog;
 import cz.mpelant.fitchecker.fragment.dialog.DeleteSubjectDialog;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.service.SubjectRequest;
+import cz.mpelant.fitchecker.service.UpdateExamsService;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
 import java.io.IOException;
@@ -83,7 +84,14 @@ public class SubjectsListFragment extends BaseListFragment implements LoaderMana
         if (exception.getException() instanceof IOException) {
             onIOError();
         }
+    }
 
+    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
+    @Subscribe
+    public void onException(UpdateExamsService.KosException exception) {
+        if (exception.getException() instanceof AuthenticatorException) {
+            onAuthError();
+        }
     }
 
     @Override

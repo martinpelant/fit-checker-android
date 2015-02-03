@@ -24,6 +24,7 @@ import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.downloader.EduxServer;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.service.SubjectRequest;
+import cz.mpelant.fitchecker.service.UpdateExamsService;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 import cz.mpelant.fitchecker.utils.MyReader;
 
@@ -159,9 +160,9 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
 
     @Override
     public void onPause() {
-        super.onPause();
         mBus.unregister(this);
         getActivity().getContentResolver().unregisterContentObserver(myObserver);
+        super.onPause();
     }
 
     @Override
@@ -223,6 +224,14 @@ public class DisplaySubjectFragment extends BaseFragment implements SwipeRefresh
             onIOError();
         }
 
+    }
+
+    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
+    @Subscribe
+    public void onException(UpdateExamsService.KosException exception) {
+        if (exception.getException() instanceof AuthenticatorException) {
+            onAuthError();
+        }
     }
 
 

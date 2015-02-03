@@ -1,6 +1,7 @@
 package cz.mpelant.fitchecker.fragment;
 
 
+import android.accounts.AuthenticatorException;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -77,8 +78,8 @@ public class ExamListFragment extends BaseListFragment implements LoaderManager.
 
     @Override
     public void onPause() {
-        super.onPause();
         mBus.unregister(this);
+        super.onPause();
     }
 
     @Override
@@ -102,6 +103,14 @@ public class ExamListFragment extends BaseListFragment implements LoaderManager.
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
+    @Subscribe
+    public void onException(UpdateExamsService.KosException exception) {
+        if (exception.getException() instanceof AuthenticatorException) {
+            onAuthError();
+        }
     }
 
     @Override

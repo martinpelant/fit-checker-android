@@ -86,20 +86,15 @@ public class KosAccountManager {
 
     private static String generateKey() throws UnsupportedEncodingException, NoSuchAlgorithmException {
 
-        String uuid = null;
+        String uuid;
         try {
             TelephonyManager tManager = (TelephonyManager) App.getInstance().getSystemService(Context.TELEPHONY_SERVICE);
             uuid = tManager.getDeviceId();
         } catch (Exception e) {
             e.printStackTrace();
+            uuid = Build.FINGERPRINT + "-" + Build.SERIAL + "-" + Build.ID;
         }
-
-
-        String key = Build.FINGERPRINT + "-" + Build.SERIAL + "-" + Build.ID;
-        key += uuid;
-
-
-        String shaKey = convertToHex(SHA1(key));
+        String shaKey = convertToHex(SHA1(uuid));
         shaKey = shaKey.substring(0, 32);
         return shaKey;
     }
