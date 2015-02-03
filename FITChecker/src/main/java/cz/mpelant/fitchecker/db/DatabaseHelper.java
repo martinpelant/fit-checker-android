@@ -23,7 +23,7 @@ import java.util.concurrent.Callable;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "fitchecker.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     private Context mCtx;
 
@@ -57,15 +57,21 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        if (oldVersion == 1 && newVersion == 2) {
+        if (oldVersion == 1) {
             try {
                 TableUtils.createTableIfNotExists(connectionSource, Exam.class);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-
         }
+        if (oldVersion == 2) {
+            try {
+                TableUtils.dropTable(connectionSource, Exam.class, true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        onCreate(sqLiteDatabase, connectionSource);
 
     }
 

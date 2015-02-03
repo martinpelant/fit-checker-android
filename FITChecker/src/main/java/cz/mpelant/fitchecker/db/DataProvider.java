@@ -96,12 +96,12 @@ public class DataProvider extends ContentProvider {
         }
 
         SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
-        long newId=0;
+        long newId = 0;
         try {
             newId = sqlDB.insertOrThrow(table, null, values);
         } catch (SQLiteConstraintException e) {
             if (table.equals(Exam.TABLE_NAME)) {
-                sqlDB.update(table, values, Exam.COL_DATE + " = ?", new String[]{String.valueOf(values.get(Exam.COL_DATE))});
+                sqlDB.update(table, values, Exam.COL_DATE + " = ? AND " + Exam.COL_SUBJECT + " = ?", new String[]{String.valueOf(values.get(Exam.COL_DATE)), values.getAsString(Exam.COL_SUBJECT)});
                 if (!mBatchPerforming) {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
