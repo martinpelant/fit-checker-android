@@ -62,7 +62,7 @@ public class AddExamToCalendartDialog extends BaseDialogFragment {
                     .content(R.string.add_to_calendar_message)
                     .positiveText(R.string.add)
                     .negativeText(android.R.string.cancel)
-                    .callback(new MaterialDialog.SimpleCallback() {
+                    .callback(new MaterialDialog.ButtonCallback() {
                         @Override
                         public void onPositive(MaterialDialog materialDialog) {
                             callback.run();

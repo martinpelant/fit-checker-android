@@ -51,7 +51,7 @@ public class DeleteAllSubjectsDialog extends BaseDialogFragment {
                     .content(R.string.delete_all_message)
                     .positiveText(R.string.delete)
                     .negativeText(android.R.string.cancel)
-                    .callback(new MaterialDialog.SimpleCallback() {
+                    .callback(new MaterialDialog.ButtonCallback() {
                         @Override
                         public void onPositive(MaterialDialog materialDialog) {
                             callback.start();

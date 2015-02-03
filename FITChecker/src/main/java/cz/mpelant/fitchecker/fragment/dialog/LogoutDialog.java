@@ -43,7 +43,7 @@ public class LogoutDialog extends BaseDialogFragment {
                     .content(R.string.logout_message)
                     .positiveText(R.string.logout)
                     .negativeText(android.R.string.cancel)
-                    .callback(new MaterialDialog.SimpleCallback() {
+                    .callback(new MaterialDialog.ButtonCallback() {
                         @Override
                         public void onPositive(MaterialDialog materialDialog) {
                             callback.run();
