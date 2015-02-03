@@ -96,7 +96,7 @@ public class DataProvider extends ContentProvider {
         }
 
         SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
-        long newId;
+        long newId=0;
         try {
             newId = sqlDB.insertOrThrow(table, null, values);
         } catch (SQLiteConstraintException e) {
@@ -106,7 +106,6 @@ public class DataProvider extends ContentProvider {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
             }
-            return null;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

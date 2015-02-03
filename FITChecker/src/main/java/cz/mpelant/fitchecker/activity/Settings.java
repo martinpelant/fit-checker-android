@@ -139,6 +139,7 @@ public class Settings extends ActionBarActivity {
                     .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                     .setPersisted(true)
                     .build();
+            jobScheduler.cancel(JOB_ID);
             jobScheduler.schedule(uploadTask);
         } else {
             Intent serviceIntent = UpdateSubjectsService.generateIntent(new SubjectRequest(DataProvider.getSubjectsUri(), true));

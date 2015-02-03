@@ -15,11 +15,8 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (Settings.isNotifEnabled(context) && Build.VERSION.SDK_INT < 21) {
+        if (Settings.isNotifEnabled(context)) {
             Settings.startAlarm(context);
-            Log.d(TAG, "BOOT - alarm set");
-        } else {
-            Log.d(TAG, "BOOT - alarm NOT set");
         }
 
     }
