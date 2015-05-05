@@ -1,0 +1,159 @@
+package cz.mpelant.fitchecker.auth;
+
+import android.util.Log;
+import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
+import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.auth.oauth2.TokenResponse;
+import com.google.api.client.http.*;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.util.GenericData;
+import com.google.api.client.util.Key;
+import com.google.api.client.util.Preconditions;
+
+import java.io.IOException;
+import java.net.*;
+
+/**
+ * OAuthApp.java
+ *
+ * @author eMan s.r.o.
+ * @project FITChecker
+ * @package cz.mpelant.fitchecker.auth
+ * @since 5/4/2015
+ */
+public class AuthorizationCodeInstalledCvut {
+
+
+    public static final String LOGIN_URL = "https://auth.fit.cvut.cz/oauth/login.do";
+    public static final String APPROVE_URL = "https://auth.fit.cvut.cz/oauth/oauth/authorize";
+    /**
+     * Authorization code flow.
+     */
+    private final AuthorizationCodeFlow flow;
+
+    public AuthorizationCodeInstalledCvut(AuthorizationCodeFlow flow) {
+        this.flow = Preconditions.checkNotNull(flow);
+    }
+
+
+    /**
+     * Authorizes the installed application to access user's protected data.
+     *
+     * @param userId user ID or {@code null} if not using a persisted credential store
+     * @return credential
+     */
+    public Credential authorize(String userId) throws IOException {
+        Credential credential = flow.loadCredential(userId);
+        if (credential != null && (credential.getRefreshToken() != null || credential.getExpiresInSeconds() > 60)) {
+            return credential;
+        }
+
+        //handle http requests
+        // open in browser
+        String redirectUri = OAuth2ClientCredentials.CALLBACK;
+        AuthorizationCodeRequestUrl authorizationUrl = flow.newAuthorizationUrl().setRedirectUri(redirectUri);
+
+        // receive authorization code and exchange it for an access token
+        String code = onAuthorization(authorizationUrl);
+        TokenResponse response = flow.newTokenRequest(code).setRedirectUri(redirectUri).execute();
+        // store credential and return it
+        return flow.createAndStoreCredential(response, userId);
+    }
+
+
+    protected String onAuthorization(AuthorizationCodeRequestUrl authorizationUrl) throws IOException {
+        CookieManager cookieManager = new CookieManager();
+        CookieHandler.setDefault(cookieManager);
+
+//        String auth = download(new URL(authorizationUrl.build()));
+
+        HttpTransport transport = new NetHttpTransport();
+        HttpRequestFactory factory = transport.createRequestFactory();
+        HttpResponse response = factory.buildGetRequest(authorizationUrl).execute();
+        String page = response.parseAsString();
+        Log.v("Location", response.getHeaders().getLocation() + "");
+        Log.v("Page", page);
+
+        if (page.contains(LoginForm.PASSWORD_FIELD)) {
+            try {
+                response = factory
+                        .buildPostRequest(new GenericUrl(LOGIN_URL), new UrlEncodedContent(new LoginForm(KosAccountManager.getAccount().getUsername(), KosAccountManager.getAccount().getPassword())))
+                        .setLoggingEnabled(true)
+                        .setFollowRedirects(false)
+                        .execute();
+            } catch (HttpResponseException e) {
+                if (e.getStatusCode() == 302) {
+                    String redirect = e.getHeaders().getLocation();
+                    if (redirect.contains(OAuth2ClientCredentials.CALLBACK)) {
+                        return extractCode(redirect);
+                    }
+                    response = factory
+                            .buildGetRequest(new GenericUrl(redirect))
+                            .setLoggingEnabled(true)
+                            .execute();
+                }else{
+                    throw e;
+                }
+            }
+
+            page = response.parseAsString();
+            Log.v("Location", response.getHeaders().getLocation() + "");
+            Log.v("Page", page);
+        }
+
+        if (page.contains(ApprovalForm.APPROVE)) {
+            try {
+            response = factory
+                    .buildPostRequest(new GenericUrl(APPROVE_URL), new UrlEncodedContent(new ApprovalForm()))
+                    .setLoggingEnabled(true)
+                    .setFollowRedirects(false)
+                    .execute();
+            } catch (HttpResponseException e) {
+                if (e.getStatusCode() == 302) {
+                    String redirect = e.getHeaders().getLocation();
+                    if (redirect.contains(OAuth2ClientCredentials.CALLBACK)) {
+                        return extractCode(redirect);
+                    }
+                    response = factory
+                            .buildGetRequest(new GenericUrl(redirect))
+                            .setLoggingEnabled(true)
+                            .execute();
+                }else{
+                    throw e;
+                }
+            }
+            page = response.parseAsString();
+            Log.v("Location", response.getHeaders().getLocation() + "");
+            Log.v("Page", page);
+        }
+
+        Log.d("Location", response.getHeaders().getLocation());
+        return "gg";
+    }
+
+    private String extractCode(String url) {
+        return "";
+    }
+
+    private static class LoginForm extends GenericData {
+        public static final String PASSWORD_FIELD = "j_password";
+        public static final String USERNAME_FIELD = "j_username";
+        @Key(USERNAME_FIELD)
+        private String username;
+
+        @Key(PASSWORD_FIELD)
+        private String password;
+
+        public LoginForm(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+    }
+
+    private static class ApprovalForm extends GenericData {
+        public static final String APPROVE = "user_oauth_approval";
+        @Key(APPROVE)
+        private Boolean approve = true;
+    }
+}

@@ -22,6 +22,7 @@ import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
+import cz.mpelant.fitchecker.auth.OAuth;
 import cz.mpelant.fitchecker.downloader.EduxServer;
 import cz.mpelant.fitchecker.fragment.dialog.LogoutDialog;
 
@@ -239,6 +240,7 @@ public class LoginFragment extends BaseFragment implements LogoutDialog.OnLogOut
             try {
                 if (new EduxServer(App.getInstance()).login(account)) {
                     KosAccountManager.saveAccount(account);
+                    OAuth.test();
                     return true;
                 }
             } catch (IOException e) {
