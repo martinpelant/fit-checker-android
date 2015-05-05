@@ -6,6 +6,8 @@ import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.http.*;
+import com.google.api.client.http.javanet.ConnectionFactory;
+import com.google.api.client.http.javanet.DefaultConnectionFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.util.GenericData;
 import com.google.api.client.util.Key;
@@ -13,6 +15,7 @@ import com.google.api.client.util.Preconditions;
 
 import java.io.IOException;
 import java.net.*;
+import java.security.GeneralSecurityException;
 
 /**
  * OAuthApp.java
@@ -62,13 +65,40 @@ public class AuthorizationCodeInstalledCvut {
     }
 
 
+    private class CodeFoundException extends RuntimeException {
+        String code;
+
+        public CodeFoundException(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
+    }
+
     protected String onAuthorization(AuthorizationCodeRequestUrl authorizationUrl) throws IOException {
         CookieManager cookieManager = new CookieManager();
         CookieHandler.setDefault(cookieManager);
 
 //        String auth = download(new URL(authorizationUrl.build()));
 
-        HttpTransport transport = new NetHttpTransport();
+        HttpTransport transport = null;
+        try {
+            transport = new NetHttpTransport.Builder().setConnectionFactory(new ConnectionFactory() {
+                @Override
+                public HttpURLConnection openConnection(URL url) throws IOException, ClassCastException {
+                    String urlStr = url.toString();
+                    Log.v("URL", urlStr);
+                    if (urlStr.startsWith(OAuth2ClientCredentials.CALLBACK)) {
+                        throw new CodeFoundException(extractCode(urlStr));
+                    }
+                    return new DefaultConnectionFactory().openConnection(url);
+                }
+            }).doNotValidateCertificate().build();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
         HttpRequestFactory factory = transport.createRequestFactory();
         HttpResponse response = factory.buildGetRequest(authorizationUrl).execute();
         String page = response.parseAsString();
@@ -80,21 +110,9 @@ public class AuthorizationCodeInstalledCvut {
                 response = factory
                         .buildPostRequest(new GenericUrl(LOGIN_URL), new UrlEncodedContent(new LoginForm(KosAccountManager.getAccount().getUsername(), KosAccountManager.getAccount().getPassword())))
                         .setLoggingEnabled(true)
-                        .setFollowRedirects(false)
                         .execute();
-            } catch (HttpResponseException e) {
-                if (e.getStatusCode() == 302) {
-                    String redirect = e.getHeaders().getLocation();
-                    if (redirect.contains(OAuth2ClientCredentials.CALLBACK)) {
-                        return extractCode(redirect);
-                    }
-                    response = factory
-                            .buildGetRequest(new GenericUrl(redirect))
-                            .setLoggingEnabled(true)
-                            .execute();
-                }else{
-                    throw e;
-                }
+            } catch (CodeFoundException e) {
+                return e.getCode();
             }
 
             page = response.parseAsString();
@@ -104,24 +122,12 @@ public class AuthorizationCodeInstalledCvut {
 
         if (page.contains(ApprovalForm.APPROVE)) {
             try {
-            response = factory
-                    .buildPostRequest(new GenericUrl(APPROVE_URL), new UrlEncodedContent(new ApprovalForm()))
-                    .setLoggingEnabled(true)
-                    .setFollowRedirects(false)
-                    .execute();
-            } catch (HttpResponseException e) {
-                if (e.getStatusCode() == 302) {
-                    String redirect = e.getHeaders().getLocation();
-                    if (redirect.contains(OAuth2ClientCredentials.CALLBACK)) {
-                        return extractCode(redirect);
-                    }
-                    response = factory
-                            .buildGetRequest(new GenericUrl(redirect))
-                            .setLoggingEnabled(true)
-                            .execute();
-                }else{
-                    throw e;
-                }
+                response = factory
+                        .buildPostRequest(new GenericUrl(APPROVE_URL), new UrlEncodedContent(new ApprovalForm()))
+                        .setLoggingEnabled(true)
+                        .execute();
+            } catch (CodeFoundException e) {
+                return e.getCode();
             }
             page = response.parseAsString();
             Log.v("Location", response.getHeaders().getLocation() + "");
@@ -133,7 +139,7 @@ public class AuthorizationCodeInstalledCvut {
     }
 
     private String extractCode(String url) {
-        return "";
+        return url.replaceFirst(OAuth2ClientCredentials.CALLBACK + "\\?code=", "");
     }
 
     private static class LoginForm extends GenericData {

@@ -11,10 +11,10 @@ package cz.mpelant.fitchecker.auth;
 public class OAuth2ClientCredentials {
 
     /** Value of the "API Key". */
-    public static final String API_KEY = "b03f64b8-50fb-4aae-bbf2-ceecf8cc6260";
+    public static final String API_KEY = "eb3bc0ec-9555-4ac6-8019-48f7b5be1304";
 
     /** Value of the "API Secret". */
-    public static final String API_SECRET = "35FaspXeZCL8MgGMl7fgW4J81ZLv09L8";
+    public static final String API_SECRET = "EoeBb6cvtFJPEDDIm149hsTqyElqpeA4";
 
     /** Port in the "Callback URL". */
     public static final int PORT = 80;

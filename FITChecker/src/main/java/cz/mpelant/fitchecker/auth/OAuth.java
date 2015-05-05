@@ -29,7 +29,7 @@ public class OAuth {
     /**
      * Directory to store user credentials.
      */
-    private static final String DATA_STORE_FILE = "oauth.dat";
+    private static final String DATA_STORE_FILE = "oauth2.dat";
 
     /**
      * Global instance of the {@link DataStoreFactory}. The best practice is to make it a single
@@ -40,7 +40,8 @@ public class OAuth {
     /**
      * OAuth 2 scope.
      */
-    private static final String SCOPE = "read";
+    private static final String SCOPE_AUTH = "urn:ctu:oauth:kosapi:public.readonly";
+    private static final String SCOPE_REFRESH = "refresh_token";
 
     /**
      * Global instance of the HTTP transport.
@@ -69,7 +70,7 @@ public class OAuth {
                 new ClientParametersAuthentication(
                         OAuth2ClientCredentials.API_KEY, OAuth2ClientCredentials.API_SECRET),
                 OAuth2ClientCredentials.API_KEY,
-                AUTHORIZATION_SERVER_URL).setScopes(Arrays.asList(SCOPE))
+                AUTHORIZATION_SERVER_URL).setScopes(Arrays.asList(SCOPE_AUTH))
                 .setDataStoreFactory(DATA_STORE_FACTORY).build();
 
         return new AuthorizationCodeInstalledCvut(flow).authorize("user");
