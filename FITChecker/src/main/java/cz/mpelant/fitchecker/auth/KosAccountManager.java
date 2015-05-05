@@ -3,6 +3,7 @@ package cz.mpelant.fitchecker.auth;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import cz.mpelant.fitchecker.App;
@@ -76,6 +77,12 @@ public class KosAccountManager {
         ed.remove(PREFERENCES_USERNAME);
         ed.remove(PREFERENCES_PASSWORD);
         ed.apply();
+        new Thread(){
+            @Override
+            public void run() {
+                OAuth.reset();
+            }
+        }.start();
         mAccount = null;
     }
 
@@ -84,7 +91,7 @@ public class KosAccountManager {
     }
 
     private static String generateKey() throws UnsupportedEncodingException, NoSuchAlgorithmException {
-//TODO: Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID)
+        //TODO: Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID)
         String uuid;
         try {
             TelephonyManager tManager = (TelephonyManager) App.getInstance().getSystemService(Context.TELEPHONY_SERVICE);

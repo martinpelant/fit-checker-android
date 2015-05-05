@@ -1,6 +1,5 @@
 package cz.mpelant.fitchecker.auth;
 
-import android.util.Log;
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.BearerToken;
 import com.google.api.client.auth.oauth2.ClientParametersAuthentication;
@@ -29,7 +28,7 @@ public class OAuth {
     /**
      * Directory to store user credentials.
      */
-    private static final String DATA_STORE_FILE = "oauth2.dat";
+    private static final String DATA_STORE_FILE = "oauth2";
 
     /**
      * Global instance of the {@link DataStoreFactory}. The best practice is to make it a single
@@ -40,7 +39,7 @@ public class OAuth {
     /**
      * OAuth 2 scope.
      */
-    private static final String SCOPE_AUTH = "urn:ctu:oauth:kosapi:public.readonly";
+    private static final String SCOPE = "urn:ctu:oauth:kosapi:public.readonly";
 
     /**
      * Global instance of the HTTP transport.
@@ -55,12 +54,32 @@ public class OAuth {
     private static final String TOKEN_SERVER_URL = "https://auth.fit.cvut.cz/oauth/oauth/token";
     private static final String AUTHORIZATION_SERVER_URL = "https://auth.fit.cvut.cz/oauth/oauth/authorize";
 
+
+    private static void deleteRecursively(File file){
+        if(getAuthFile().isDirectory()){
+            String[] children = file.list();
+            for (int i = 0; children!=null && i < children.length; i++) {
+                deleteRecursively(new File(file, children[i]));
+            }
+        }
+        file.delete();
+    }
+
+    public static void reset() {
+        deleteRecursively(getAuthFile());
+        DATA_STORE_FACTORY = null;
+    }
+
+    private static File getAuthFile() {
+        return new File(App.getInstance().getFilesDir(), DATA_STORE_FILE);
+    }
+
     /**
      * Authorizes the installed application to access user's protected data.
      */
-    private static Credential authorize() throws Exception {
+    public static Credential authorize(KosAccount account) throws Exception {
         if (DATA_STORE_FACTORY == null) {
-            DATA_STORE_FACTORY = new FileDataStoreFactory(new File(App.getInstance().getFilesDir(), DATA_STORE_FILE));
+            DATA_STORE_FACTORY = new FileDataStoreFactory(getAuthFile());
         }
         OAuth2ClientCredentials.errorIfNotSpecified();
         // set up authorization code flow
@@ -72,22 +91,14 @@ public class OAuth {
                 new ClientParametersAuthentication(
                         OAuth2ClientCredentials.API_KEY, OAuth2ClientCredentials.API_SECRET),
                 OAuth2ClientCredentials.API_KEY,
-                AUTHORIZATION_SERVER_URL).setScopes(Arrays.asList(SCOPE_AUTH))
+                AUTHORIZATION_SERVER_URL).setScopes(Arrays.asList(SCOPE))
                 .setDataStoreFactory(DATA_STORE_FACTORY).build();
 
-        return new AuthorizationCodeInstalledCvut(flow).authorize("user");
+        return new AuthorizationCodeInstalledCvut(flow, account).authorize("user");
     }
 
-    private static void run(HttpRequestFactory requestFactory) throws IOException {
-        GenericUrl url = new GenericUrl("https://kosapi.fit.cvut.cz/api/3/students/pelanma4/enrolledCourses");
-
-        HttpRequest request = requestFactory.buildGetRequest(url);
-        String response = request.execute().parseAsString();
-        Log.d("Courses", response + "");
-    }
-
-    public static HttpRequestFactory createRequestFactory() throws Exception {
-        final Credential credential = authorize();
+    public static HttpRequestFactory createRequestFactory(KosAccount account) throws Exception {
+        final Credential credential = authorize(account);
         return HTTP_TRANSPORT.createRequestFactory(new HttpRequestInitializer() {
             @Override
             public void initialize(HttpRequest request) throws IOException {
@@ -97,16 +108,5 @@ public class OAuth {
         });
     }
 
-    public static void test() {
-        try {
-            run(createRequestFactory());
-            // Success!
-            return;
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-        System.exit(1);
-    }
+
 }

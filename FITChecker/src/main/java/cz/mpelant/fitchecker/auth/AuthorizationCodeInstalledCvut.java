@@ -34,9 +34,11 @@ public class AuthorizationCodeInstalledCvut {
      * Authorization code flow.
      */
     private final AuthorizationCodeFlow flow;
+    private KosAccount mKosAccount;
 
-    public AuthorizationCodeInstalledCvut(AuthorizationCodeFlow flow) {
+    public AuthorizationCodeInstalledCvut(AuthorizationCodeFlow flow, KosAccount kosAccount) {
         this.flow = Preconditions.checkNotNull(flow);
+        mKosAccount = kosAccount;
     }
 
 
@@ -80,9 +82,6 @@ public class AuthorizationCodeInstalledCvut {
     protected String onAuthorization(AuthorizationCodeRequestUrl authorizationUrl) throws IOException {
         CookieManager cookieManager = new CookieManager();
         CookieHandler.setDefault(cookieManager);
-
-//        String auth = download(new URL(authorizationUrl.build()));
-
         HttpTransport transport = null;
         try {
             transport = new NetHttpTransport.Builder().setConnectionFactory(new ConnectionFactory() {
@@ -102,13 +101,11 @@ public class AuthorizationCodeInstalledCvut {
         HttpRequestFactory factory = transport.createRequestFactory();
         HttpResponse response = factory.buildGetRequest(authorizationUrl).execute();
         String page = response.parseAsString();
-        Log.v("Location", response.getHeaders().getLocation() + "");
-        Log.v("Page", page);
 
         if (page.contains(LoginForm.PASSWORD_FIELD)) {
             try {
                 response = factory
-                        .buildPostRequest(new GenericUrl(LOGIN_URL), new UrlEncodedContent(new LoginForm(KosAccountManager.getAccount().getUsername(), KosAccountManager.getAccount().getPassword())))
+                        .buildPostRequest(new GenericUrl(LOGIN_URL), new UrlEncodedContent(new LoginForm(mKosAccount.getUsername(), mKosAccount.getPassword())))
                         .setLoggingEnabled(true)
                         .execute();
             } catch (CodeFoundException e) {
@@ -116,8 +113,6 @@ public class AuthorizationCodeInstalledCvut {
             }
 
             page = response.parseAsString();
-            Log.v("Location", response.getHeaders().getLocation() + "");
-            Log.v("Page", page);
         }
 
         if (page.contains(ApprovalForm.APPROVE)) {
@@ -129,13 +124,10 @@ public class AuthorizationCodeInstalledCvut {
             } catch (CodeFoundException e) {
                 return e.getCode();
             }
-            page = response.parseAsString();
-            Log.v("Location", response.getHeaders().getLocation() + "");
-            Log.v("Page", page);
+            Log.w("OAuth", "Code not found" + response.parseAsString());
         }
-
-        Log.d("Location", response.getHeaders().getLocation());
-        return "gg";
+        Log.w("OAuth", "Login not found" + response.parseAsString());
+        return "";
     }
 
     private String extractCode(String url) {

@@ -4,6 +4,9 @@ import android.accounts.AuthenticatorException;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -34,66 +37,36 @@ import cz.mpelant.fitchecker.utils.SubjectParser;
  * @package cz.mpelant.fitchecker.downloader
  * @since 4/18/2014
  */
-public class KosExamsServer {
-    private static final String KOS_API_BASE = "https://kosapi.fit.cvut.cz/api/3/";
+public class KosExamsServer extends KosServer {
     private static final String REGISTERED_EXAMS_METHOD = "students/%s/registeredExams";
-    private static final String KOS_API_URL = "https://kosapi.fit.cvut.cz/api/3/courses/%s/";
-    private static final String EXAMS_METHOD = "exams";
+    private static final String EXAMS_METHOD = "courses/%s/exams";
     private final String TAG = KosExamsServer.class.getSimpleName();
 
     @NonNull
     public List<Exam> loadExams(String subject) throws IOException, AuthenticatorException, XmlPullParserException {
-        //TODO: move a common code to a new method
-        if (!KosAccountManager.isAccount()) {
-            throw new AuthenticatorException("No credentials");
-        }
-        KosAccount account = KosAccountManager.getAccount();
-        RestClient client = new RestClient(String.format(KOS_API_URL, subject), new DefaultHttpClient());
-        String credentials = account.getUsername() + ":" + account.getPassword();
-        ArrayList<NameValuePair> headers = new ArrayList<>();
-        String base64EncodedCredentials = Base64.encodeBytes(credentials.getBytes());
-        headers.add(new BasicNameValuePair("Authorization", "Basic " + base64EncodedCredentials));
-        headers.add(new BasicNameValuePair("Accept", "application/xml;charset=UTF-8"));
-        ArrayList<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("fields", "entry(id,content(capacity,occupied,startDate,room,termType))"));
-        HttpResponse response = client.call(EXAMS_METHOD, RestClient.Methods.GET, params, headers);
-        if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_OK) {
-            String xmlResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
-            Log.d(TAG, xmlResponse);
-            List<Exam> exams;
-            exams = ExamParser.parseExams(xmlResponse);
-            return exams;
-        } else if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {
-            throw new AuthenticatorException("User not authorized");
-        } else {
-            throw new IOException("Unknown error");
-        }
+        HttpRequestFactory factory =  getHttpFactory();
+        GenericUrl url = new GenericUrl(String.format(KOS_API_URL + EXAMS_METHOD, subject));
+        url.put("fields", "entry(id,content(capacity,occupied,startDate,room,termType))");
+        HttpRequest request = factory.buildGetRequest(url);
+        request.getHeaders().setAccept("application/xml;charset=UTF-8");
+        String xmlResponse = request.execute().parseAsString();
+
+        Log.d(TAG, xmlResponse);
+        List<Exam> exams;
+        exams = ExamParser.parseExams(xmlResponse);
+        return exams;
     }
 
     public Set<String> getRegisteredExams() throws AuthenticatorException, IOException, XmlPullParserException {
-        if (!KosAccountManager.isAccount()) {
-            throw new AuthenticatorException("No credentials");
-        }
-        KosAccount account = KosAccountManager.getAccount();
-        RestClient client = new RestClient(KOS_API_BASE, new DefaultHttpClient());
-        String credentials = account.getUsername() + ":" + account.getPassword();
-        ArrayList<NameValuePair> headers = new ArrayList<>();
-        String base64EncodedCredentials = Base64.encodeBytes(credentials.getBytes());
-        headers.add(new BasicNameValuePair("Authorization", "Basic " + base64EncodedCredentials));
-        headers.add(new BasicNameValuePair("Accept", "application/xml;charset=UTF-8"));
-        ArrayList<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("fields", "entry(content(exam))"));
-        HttpResponse response = client.call(String.format(REGISTERED_EXAMS_METHOD, account.getUsername()), RestClient.Methods.GET, params, headers);
-        if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_OK) {
-            String xmlResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
-            Log.d(TAG, xmlResponse);
-            Set<String> examIds;
-            examIds = ExamParser.parseRegisteredExams(xmlResponse);
-            return examIds;
-        } else if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {
-            throw new AuthenticatorException("User not authorized");
-        } else {
-            throw new IOException("Unknown error");
-        }
+        HttpRequestFactory factory =  getHttpFactory();
+        GenericUrl url = new GenericUrl(String.format(KOS_API_URL + REGISTERED_EXAMS_METHOD, KosAccountManager.getAccount().getUsername()));
+        url.put("fields", "entry(content(exam))");
+        HttpRequest request = factory.buildGetRequest(url);
+        request.getHeaders().setAccept("application/xml;charset=UTF-8");
+        String xmlResponse = request.execute().parseAsString();
+        Log.d(TAG, xmlResponse);
+        Set<String> examIds;
+        examIds = ExamParser.parseRegisteredExams(xmlResponse);
+        return examIds;
     }
 }

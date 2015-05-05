@@ -34,28 +34,15 @@ import java.util.List;
  * @package cz.mpelant.fitchecker.downloader
  * @since 4/18/2014
  */
-public class KosCoursesServer {
+public class KosCoursesServer extends KosServer {
 
-    private static final String KOS_API_URL = "https://kosapi.fit.cvut.cz/api/3/students/%s/";
-    private static final String COURSES_METHOD = "enrolledCourses";
+    private static final String COURSES_METHOD = "students/%s/enrolledCourses";
     private final String TAG = KosCoursesServer.class.getSimpleName();
 
     @NonNull
     public List<String> loadSubjects() throws IOException, AuthenticatorException, XmlPullParserException {
-        if (!KosAccountManager.isAccount()) {
-            throw new AuthenticatorException("No credentials");
-        }
-
-        KosAccount account = KosAccountManager.getAccount();
-        HttpRequestFactory factory;
-        try {
-            factory = OAuth.createRequestFactory();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new AuthenticatorException("User not authorized");
-        }
-
-        GenericUrl url = new GenericUrl(String.format(KOS_API_URL + COURSES_METHOD, account.getUsername()));
+        HttpRequestFactory factory =  getHttpFactory();
+        GenericUrl url = new GenericUrl(String.format(KOS_API_URL + COURSES_METHOD, KosAccountManager.getAccount().getUsername()));
         url.put("fields", "entry(content(course))");
         HttpRequest request = factory.buildGetRequest(url);
         request.getHeaders().setAccept("application/xml;charset=UTF-8");

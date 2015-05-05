@@ -239,13 +239,12 @@ public class LoginFragment extends BaseFragment implements LogoutDialog.OnLogOut
             KosAccount account = new KosAccount(mEmail, mPassword);
             try {
                 if (new EduxServer(App.getInstance()).login(account)) {
+                    OAuth.authorize(account);
                     KosAccountManager.saveAccount(account);
-                    OAuth.test();
                     return true;
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-
             }
             return false;
         }
@@ -261,8 +260,10 @@ public class LoginFragment extends BaseFragment implements LogoutDialog.OnLogOut
                 finish();
             } else {
                 showProgress(false);
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                if (getActivity() != null) {
+                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.requestFocus();
+                }
             }
         }
 
