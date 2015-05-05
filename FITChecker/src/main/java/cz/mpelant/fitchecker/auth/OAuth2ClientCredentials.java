@@ -1,5 +1,7 @@
 package cz.mpelant.fitchecker.auth;
 
+import cz.mpelant.fitchecker.BuildConfig;
+
 /**
  * OAuth2ClientCredentials.java
  *
@@ -10,16 +12,19 @@ package cz.mpelant.fitchecker.auth;
  */
 public class OAuth2ClientCredentials {
 
-    /** Value of the "API Key". */
+    /**
+     * Value of the "API Key".
+     */
     public static final String API_KEY = "eb3bc0ec-9555-4ac6-8019-48f7b5be1304";
 
-    /** Value of the "API Secret". */
-    public static final String API_SECRET = "EoeBb6cvtFJPEDDIm149hsTqyElqpeA4";
+    /**
+     * Value of the "API Secret".
+     */
+    public static final String API_SECRET = BuildConfig.OAUTH_SECRET;
 
-    /** Port in the "Callback URL". */
-    public static final int PORT = 80;
-
-    /** Domain name in the "Callback URL". */
+    /**
+     * Domain name in the "Callback URL".
+     */
     public static final String CALLBACK = "http://127.0.0.1/callback";
 
     public static void errorIfNotSpecified() {
