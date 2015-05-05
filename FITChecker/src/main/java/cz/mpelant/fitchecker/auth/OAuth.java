@@ -41,7 +41,6 @@ public class OAuth {
      * OAuth 2 scope.
      */
     private static final String SCOPE_AUTH = "urn:ctu:oauth:kosapi:public.readonly";
-    private static final String SCOPE_REFRESH = "refresh_token";
 
     /**
      * Global instance of the HTTP transport.
@@ -60,6 +59,9 @@ public class OAuth {
      * Authorizes the installed application to access user's protected data.
      */
     private static Credential authorize() throws Exception {
+        if (DATA_STORE_FACTORY == null) {
+            DATA_STORE_FACTORY = new FileDataStoreFactory(new File(App.getInstance().getFilesDir(), DATA_STORE_FILE));
+        }
         OAuth2ClientCredentials.errorIfNotSpecified();
         // set up authorization code flow
         AuthorizationCodeFlow flow = new AuthorizationCodeFlow.Builder(BearerToken
@@ -84,19 +86,20 @@ public class OAuth {
         Log.d("Courses", response + "");
     }
 
+    public static HttpRequestFactory createRequestFactory() throws Exception {
+        final Credential credential = authorize();
+        return HTTP_TRANSPORT.createRequestFactory(new HttpRequestInitializer() {
+            @Override
+            public void initialize(HttpRequest request) throws IOException {
+                credential.initialize(request);
+                request.setParser(new JsonObjectParser(JSON_FACTORY));
+            }
+        });
+    }
+
     public static void test() {
         try {
-            DATA_STORE_FACTORY = new FileDataStoreFactory(new File(App.getInstance().getFilesDir(), DATA_STORE_FILE));
-            final Credential credential = authorize();
-            HttpRequestFactory requestFactory =
-                    HTTP_TRANSPORT.createRequestFactory(new HttpRequestInitializer() {
-                        @Override
-                        public void initialize(HttpRequest request) throws IOException {
-                            credential.initialize(request);
-                            request.setParser(new JsonObjectParser(JSON_FACTORY));
-                        }
-                    });
-            run(requestFactory);
+            run(createRequestFactory());
             // Success!
             return;
         } catch (IOException e) {

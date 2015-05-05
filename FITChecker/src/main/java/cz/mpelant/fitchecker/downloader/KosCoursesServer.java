@@ -3,8 +3,12 @@ package cz.mpelant.fitchecker.downloader;
 import android.accounts.AuthenticatorException;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestFactory;
 import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
+import cz.mpelant.fitchecker.auth.OAuth;
 import cz.mpelant.fitchecker.model.Subject;
 import cz.mpelant.fitchecker.utils.Base64;
 import cz.mpelant.fitchecker.utils.RestClient;
@@ -41,33 +45,32 @@ public class KosCoursesServer {
         if (!KosAccountManager.isAccount()) {
             throw new AuthenticatorException("No credentials");
         }
-        KosAccount account = KosAccountManager.getAccount();
-        RestClient client = new RestClient(String.format(KOS_API_URL, account.getUsername()), new DefaultHttpClient());
-        String credentials = account.getUsername() + ":" + account.getPassword();
-        ArrayList<NameValuePair> headers = new ArrayList<>();
-        String base64EncodedCredentials = Base64.encodeBytes(credentials.getBytes());
-        headers.add(new BasicNameValuePair("Authorization", "Basic " + base64EncodedCredentials));
-        headers.add(new BasicNameValuePair("Accept", "application/xml;charset=UTF-8"));
-        ArrayList<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("fields", "entry(content(course))"));
-        HttpResponse response = client.call(COURSES_METHOD, RestClient.Methods.GET, params, headers);
-        if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_OK) {
-            String xmlResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
-            Log.d(TAG, xmlResponse);
-            List<String> subjects;
-            if (xmlResponse.contains("<")) {
-                subjects = SubjectParser.parseSubjects(xmlResponse);
-            } else {
-                subjects = Arrays.asList(xmlResponse.split(","));
-            }
-            filterSubjects(subjects);
 
-            return subjects;
-        } else if (client.getStatusCode() != null && client.getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {
+        KosAccount account = KosAccountManager.getAccount();
+        HttpRequestFactory factory;
+        try {
+            factory = OAuth.createRequestFactory();
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new AuthenticatorException("User not authorized");
-        } else {
-            throw new IOException("Unknown error");
         }
+
+        GenericUrl url = new GenericUrl(String.format(KOS_API_URL + COURSES_METHOD, account.getUsername()));
+        url.put("fields", "entry(content(course))");
+        HttpRequest request = factory.buildGetRequest(url);
+        request.getHeaders().setAccept("application/xml;charset=UTF-8");
+        String xmlResponse = request.execute().parseAsString();
+        Log.d(TAG, xmlResponse);
+        List<String> subjects;
+        if (xmlResponse.contains("<")) {
+            subjects = SubjectParser.parseSubjects(xmlResponse);
+        } else {
+            subjects = Arrays.asList(xmlResponse.split(","));
+        }
+        filterSubjects(subjects);
+
+        return subjects;
+
     }
 
     private void filterSubjects(List<String> subjects) {
