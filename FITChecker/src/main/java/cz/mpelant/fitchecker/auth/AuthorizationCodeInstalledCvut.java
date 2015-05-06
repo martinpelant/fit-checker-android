@@ -1,5 +1,6 @@
 package cz.mpelant.fitchecker.auth;
 
+import android.net.Uri;
 import android.util.Log;
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.AuthorizationCodeRequestUrl;
@@ -32,6 +33,7 @@ public class AuthorizationCodeInstalledCvut {
 
     public static final String LOGIN_URL = "https://auth.fit.cvut.cz/oauth/login.do";
     public static final String APPROVE_URL = "https://auth.fit.cvut.cz/oauth/oauth/authorize";
+    public static final String CODE = "code";
     /**
      * Authorization code flow.
      */
@@ -85,16 +87,16 @@ public class AuthorizationCodeInstalledCvut {
         CookieManager cookieManager = new CookieManager();
         CookieHandler.setDefault(cookieManager);
         HttpTransport transport = new NetHttpTransport.Builder().setConnectionFactory(new ConnectionFactory() {
-                @Override
-                public HttpURLConnection openConnection(URL url) throws IOException, ClassCastException {
-                    String urlStr = url.toString();
-                    Log.v("URL", urlStr);
-                    if (urlStr.startsWith(OAuth2ClientCredentials.CALLBACK)) {
-                        throw new CodeFoundException(extractCode(urlStr));
-                    }
-                    return new DefaultConnectionFactory().openConnection(url);
+            @Override
+            public HttpURLConnection openConnection(URL url) throws IOException, ClassCastException {
+                String urlStr = url.toString();
+                Log.v("URL", urlStr);
+                if (urlStr.startsWith(OAuth2ClientCredentials.CALLBACK)) {
+                    throw new CodeFoundException(extractCode(urlStr));
                 }
-            }).build();
+                return new DefaultConnectionFactory().openConnection(url);
+            }
+        }).build();
         HttpRequestFactory factory = transport.createRequestFactory();
         HttpResponse response = factory.buildGetRequest(authorizationUrl).execute();
         String page = response.parseAsString();
@@ -128,7 +130,8 @@ public class AuthorizationCodeInstalledCvut {
     }
 
     private String extractCode(String url) {
-        return url.replaceFirst(OAuth2ClientCredentials.CALLBACK + "\\?code=", "");
+        Uri uri = Uri.parse(url);
+        return uri.getQueryParameter(CODE);
     }
 
     @SuppressWarnings("unused")
