@@ -1,10 +1,8 @@
 package cz.mpelant.fitchecker.utils;
 
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.Xml;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -12,8 +10,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import cz.mpelant.fitchecker.model.Subject;
 
 /**
  * Class that parses subjects from xml server response

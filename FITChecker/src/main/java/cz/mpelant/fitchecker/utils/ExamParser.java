@@ -2,7 +2,7 @@ package cz.mpelant.fitchecker.utils;
 
 import android.support.annotation.NonNull;
 import android.util.Xml;
-
+import cz.mpelant.fitchecker.model.Exam;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import cz.mpelant.fitchecker.model.Exam;
 
 /**
  * Class that parses exams from xml server response

@@ -11,13 +11,9 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.view.ViewGroup;
-
-import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.activity.MainActivity;
 import cz.mpelant.fitchecker.activity.Settings;
-import cz.mpelant.fitchecker.fragment.SettingsFragment;
 import cz.mpelant.fitchecker.model.Subject;
 
 import java.util.Collection;
