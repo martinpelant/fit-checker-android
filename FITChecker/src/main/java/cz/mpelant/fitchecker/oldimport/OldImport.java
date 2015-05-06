@@ -5,14 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.preference.PreferenceManager;
-import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.model.Subject;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * OldImport.java

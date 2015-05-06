@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import cz.mpelant.fitchecker.R;
 
-public class BaseFragmentActivity extends ActionBarActivity {
+public class BaseFragmentActivity extends AppCompatActivity {
     public static final String TAG = "BaseFragmentActivity";
 
     private static final String EXTRA_FRAGMENT_NAME = "fragment";

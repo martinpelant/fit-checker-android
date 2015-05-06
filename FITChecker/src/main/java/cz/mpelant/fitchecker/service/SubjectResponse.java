@@ -1,9 +1,9 @@
 package cz.mpelant.fitchecker.service;
 
+import cz.mpelant.fitchecker.model.Subject;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import cz.mpelant.fitchecker.model.Subject;
 
 /**
  * Response of some subject update operation

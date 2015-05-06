@@ -2,7 +2,6 @@ package cz.mpelant.fitchecker.model;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.j256.ormlite.field.DatabaseField;
@@ -11,6 +10,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Exam entity class
@@ -136,7 +136,7 @@ public class Exam extends AbstractEntity implements Parcelable {
     }
 
     private long parseDate(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
         try {
             return sdf.parse(date).getTime();
         } catch (ParseException e) {
@@ -147,7 +147,7 @@ public class Exam extends AbstractEntity implements Parcelable {
 
     public String getFormattedDate() {
         String format = "dd. MM. yyyy, HH:mm";
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
         return sdf.format(new Date(dateLong));
     }
 

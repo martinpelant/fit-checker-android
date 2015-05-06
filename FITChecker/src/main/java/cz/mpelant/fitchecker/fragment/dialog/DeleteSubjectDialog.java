@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;

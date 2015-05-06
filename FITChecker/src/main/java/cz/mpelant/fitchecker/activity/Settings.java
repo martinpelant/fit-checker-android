@@ -16,12 +16,11 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,11 +32,11 @@ import cz.mpelant.fitchecker.service.SubjectRequest;
 import cz.mpelant.fitchecker.service.UpdateJobService;
 import cz.mpelant.fitchecker.service.UpdateSubjectsService;
 
+import java.text.DateFormat;
 import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Settings extends ActionBarActivity {
+public class Settings extends AppCompatActivity {
     public static final String PREF_ALARM = "alarm";
     public static final String PREF_ALARM_INTERVAL = "alarmInterval";
     public static final String PREF_ALARM_LAST_RUN = "alarmLastRun";
@@ -214,7 +213,7 @@ public class Settings extends ActionBarActivity {
 
         private void displayLastRun() {
             if (sp.contains(Settings.PREF_ALARM_LAST_RUN)) {
-                Format formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+                Format formatter = DateFormat.getDateTimeInstance();
                 Date date = new Date(sp.getLong(Settings.PREF_ALARM_LAST_RUN, 0));
                 lastRun.setSummary(formatter.format(date));
             }

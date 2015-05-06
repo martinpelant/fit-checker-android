@@ -3,7 +3,6 @@ package cz.mpelant.fitchecker.auth;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import cz.mpelant.fitchecker.App;

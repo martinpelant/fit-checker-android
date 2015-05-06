@@ -5,9 +5,7 @@ import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.IBinder;
-
 import cz.mpelant.fitchecker.App;
-import cz.mpelant.fitchecker.BuildConfig;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.downloader.KosCoursesServer;
 import cz.mpelant.fitchecker.model.Subject;

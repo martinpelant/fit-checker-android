@@ -1,30 +1,22 @@
 
 package cz.mpelant.fitchecker.db;
 
-import android.content.ContentProvider;
-import android.content.ContentProviderOperation;
-import android.content.ContentProviderResult;
-import android.content.ContentValues;
-import android.content.OperationApplicationException;
-import android.content.UriMatcher;
+import android.content.*;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.util.Log;
-
 import com.j256.ormlite.misc.TransactionManager;
+import cz.mpelant.fitchecker.BuildConfig;
+import cz.mpelant.fitchecker.model.AbstractEntity;
+import cz.mpelant.fitchecker.model.Exam;
+import cz.mpelant.fitchecker.model.Subject;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
-
-import cz.mpelant.fitchecker.BuildConfig;
-import cz.mpelant.fitchecker.model.AbstractEntity;
-import cz.mpelant.fitchecker.model.Exam;
-import cz.mpelant.fitchecker.model.Subject;
 
 
 /**

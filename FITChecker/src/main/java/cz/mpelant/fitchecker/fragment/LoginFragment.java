@@ -26,8 +26,6 @@ import cz.mpelant.fitchecker.auth.OAuth;
 import cz.mpelant.fitchecker.downloader.EduxServer;
 import cz.mpelant.fitchecker.fragment.dialog.LogoutDialog;
 
-import java.io.IOException;
-
 /**
  * LoginFragment.java
  *

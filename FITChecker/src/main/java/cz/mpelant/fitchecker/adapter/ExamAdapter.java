@@ -3,7 +3,6 @@ package cz.mpelant.fitchecker.adapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.widget.CursorAdapter;
 import android.text.TextUtils;
@@ -12,11 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import butterknife.ButterKnife;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.model.Exam;
-import cz.mpelant.fitchecker.model.Subject;
 
 /**
  * SubjectAdapter.java

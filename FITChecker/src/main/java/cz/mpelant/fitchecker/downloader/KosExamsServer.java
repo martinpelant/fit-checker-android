@@ -3,31 +3,17 @@ package cz.mpelant.fitchecker.downloader;
 import android.accounts.AuthenticatorException;
 import android.support.annotation.NonNull;
 import android.util.Log;
-
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+import cz.mpelant.fitchecker.auth.KosAccountManager;
+import cz.mpelant.fitchecker.model.Exam;
+import cz.mpelant.fitchecker.utils.ExamParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
-import cz.mpelant.fitchecker.auth.KosAccount;
-import cz.mpelant.fitchecker.auth.KosAccountManager;
-import cz.mpelant.fitchecker.model.Exam;
-import cz.mpelant.fitchecker.utils.Base64;
-import cz.mpelant.fitchecker.utils.ExamParser;
-import cz.mpelant.fitchecker.utils.RestClient;
-import cz.mpelant.fitchecker.utils.SubjectParser;
 
 /**
  * KosServer.java

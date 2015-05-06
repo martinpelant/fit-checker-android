@@ -3,12 +3,10 @@ package cz.mpelant.fitchecker.ui;
 import android.os.Build;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
-
 import cz.mpelant.fitchecker.R;
 
 /**

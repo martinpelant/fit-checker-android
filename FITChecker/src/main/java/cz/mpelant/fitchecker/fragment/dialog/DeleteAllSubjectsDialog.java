@@ -6,16 +6,14 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-
-import java.io.File;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.db.DataProvider;
 import cz.mpelant.fitchecker.downloader.EduxServer;
-import cz.mpelant.fitchecker.model.Exam;
 import cz.mpelant.fitchecker.model.Subject;
+
+import java.io.File;
 
 /**
  * DeleteSubjectDialog.java

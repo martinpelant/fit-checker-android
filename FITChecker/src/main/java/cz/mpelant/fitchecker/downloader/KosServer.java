@@ -2,7 +2,6 @@ package cz.mpelant.fitchecker.downloader;
 
 import android.accounts.AuthenticatorException;
 import com.google.api.client.http.HttpRequestFactory;
-import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
 import cz.mpelant.fitchecker.auth.OAuth;
 

@@ -6,23 +6,11 @@ import android.util.Log;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
-import cz.mpelant.fitchecker.auth.KosAccount;
 import cz.mpelant.fitchecker.auth.KosAccountManager;
-import cz.mpelant.fitchecker.auth.OAuth;
-import cz.mpelant.fitchecker.model.Subject;
-import cz.mpelant.fitchecker.utils.Base64;
-import cz.mpelant.fitchecker.utils.RestClient;
 import cz.mpelant.fitchecker.utils.SubjectParser;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

@@ -8,10 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
-import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
-import cz.mpelant.fitchecker.auth.KosAccountManager;
-import cz.mpelant.fitchecker.downloader.EduxServer;
 import cz.mpelant.fitchecker.model.Exam;
 import cz.mpelant.fitchecker.utils.Tools;
 

@@ -14,14 +14,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 import android.view.View;
 import android.widget.AdapterView;
 import com.squareup.otto.Subscribe;
-
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.R;
-import cz.mpelant.fitchecker.activity.BaseFragmentActivity;
 import cz.mpelant.fitchecker.activity.Settings;
 import cz.mpelant.fitchecker.adapter.ExamAdapter;
 import cz.mpelant.fitchecker.db.DataProvider;

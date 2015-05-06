@@ -2,7 +2,6 @@ package cz.mpelant.fitchecker.downloader;
 
 import android.accounts.AuthenticatorException;
 import android.content.Context;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import cz.mpelant.fitchecker.App;
 import cz.mpelant.fitchecker.auth.KosAccount;

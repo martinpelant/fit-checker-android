@@ -8,9 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.astuetz.PagerSlidingTabStrip;
-
 import cz.mpelant.fitchecker.R;
 import cz.mpelant.fitchecker.model.Subject;
 

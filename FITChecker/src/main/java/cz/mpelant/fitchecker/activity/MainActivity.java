@@ -1,11 +1,7 @@
 package cz.mpelant.fitchecker.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-
-import cz.mpelant.fitchecker.downloader.KosExamsServer;
 import cz.mpelant.fitchecker.fragment.SubjectsListFragment;
-import cz.mpelant.fitchecker.service.UpdateExamsService;
 
 /**
  * MainActivity.java
