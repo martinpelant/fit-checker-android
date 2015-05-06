@@ -14,8 +14,10 @@ import com.google.api.client.util.Key;
 import com.google.api.client.util.Preconditions;
 
 import java.io.IOException;
-import java.net.*;
-import java.security.GeneralSecurityException;
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * OAuthApp.java
@@ -82,9 +84,7 @@ public class AuthorizationCodeInstalledCvut {
     protected String onAuthorization(AuthorizationCodeRequestUrl authorizationUrl) throws IOException {
         CookieManager cookieManager = new CookieManager();
         CookieHandler.setDefault(cookieManager);
-        HttpTransport transport = null;
-        try {
-            transport = new NetHttpTransport.Builder().setConnectionFactory(new ConnectionFactory() {
+        HttpTransport transport = new NetHttpTransport.Builder().setConnectionFactory(new ConnectionFactory() {
                 @Override
                 public HttpURLConnection openConnection(URL url) throws IOException, ClassCastException {
                     String urlStr = url.toString();
@@ -94,10 +94,7 @@ public class AuthorizationCodeInstalledCvut {
                     }
                     return new DefaultConnectionFactory().openConnection(url);
                 }
-            }).doNotValidateCertificate().build();
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-        }
+            }).build();
         HttpRequestFactory factory = transport.createRequestFactory();
         HttpResponse response = factory.buildGetRequest(authorizationUrl).execute();
         String page = response.parseAsString();
@@ -134,6 +131,7 @@ public class AuthorizationCodeInstalledCvut {
         return url.replaceFirst(OAuth2ClientCredentials.CALLBACK + "\\?code=", "");
     }
 
+    @SuppressWarnings("unused")
     private static class LoginForm extends GenericData {
         public static final String PASSWORD_FIELD = "j_password";
         public static final String USERNAME_FIELD = "j_username";
@@ -149,6 +147,7 @@ public class AuthorizationCodeInstalledCvut {
         }
     }
 
+    @SuppressWarnings("unused")
     private static class ApprovalForm extends GenericData {
         public static final String APPROVE = "user_oauth_approval";
         @Key(APPROVE)
