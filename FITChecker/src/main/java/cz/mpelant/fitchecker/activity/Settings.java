@@ -92,9 +92,9 @@ public class Settings extends ActionBarActivity {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREF_ALARM, false);
     }
 
-
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void stopAlarm(Context context) {
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (false) {//Build.VERSION.SDK_INT >= 21 TODO: return to jobs after crash is resolved https://code.google.com/p/android/issues/detail?id=104302
             @SuppressWarnings("ResourceType")
             JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
             jobScheduler.cancel(JOB_ID);
@@ -115,6 +115,7 @@ public class Settings extends ActionBarActivity {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void startAlarm(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -129,7 +130,7 @@ public class Settings extends ActionBarActivity {
 
         interval *= 60 * 1000;
 
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (false) {//Build.VERSION.SDK_INT >= 21 TODO: return to jobs after crash is resolved https://code.google.com/p/android/issues/detail?id=104302
             ComponentName serviceComponent = new ComponentName(context, UpdateJobService.class);
 
             @SuppressWarnings("ResourceType")
