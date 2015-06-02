@@ -29,7 +29,7 @@ public class Exam extends AbstractEntity implements Parcelable {
 
     protected static final String TAG = Exam.class.getName();
     public static final String TERM_TYPE_EXAM = "FINAL_EXAM";
-    @DatabaseField(columnName = COL_DATE, uniqueCombo = true)
+    @DatabaseField(columnName = COL_DATE)
     private long dateLong;
 
     private String date;
@@ -39,9 +39,9 @@ public class Exam extends AbstractEntity implements Parcelable {
     private int capacity;
     @DatabaseField(columnName = COL_OCCUPIED)
     private int occupied;
-    @DatabaseField(columnName = COL_SUBJECT, uniqueCombo = true)
+    @DatabaseField(columnName = COL_SUBJECT)
     private String subject;
-    @DatabaseField(columnName = COL_EXAM_ID)
+    @DatabaseField(columnName = COL_EXAM_ID, unique = true)
     private String examId;
     @DatabaseField(columnName = COL_IS_REGISTERED)
     private boolean isRegistered;

@@ -21,7 +21,7 @@ import java.util.concurrent.Callable;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "fitchecker.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     private Context mCtx;
 
@@ -62,7 +62,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                 e.printStackTrace();
             }
         }
-        if (oldVersion == 2) {
+        else if (oldVersion <=3) {
             try {
                 TableUtils.dropTable(connectionSource, Exam.class, true);
             } catch (SQLException e) {
