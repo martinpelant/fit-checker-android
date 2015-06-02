@@ -94,7 +94,7 @@ android {
 	buildToolsVersion '22.0.1'
 
 	defaultConfig {
-		minSdkVersion 9
+		minSdkVersion 11
 		targetSdkVersion 22
 		versionName mVersion //value from gradle.properties (it is available automatically)
 		versionCode getGitCommits()//value from gradle.properties
@@ -145,7 +145,7 @@ dependencies {
 	compile 'com.google.protobuf:protobuf-java:2.6.1'
 
 
-	compile 'com.afollestad:material-dialogs:0.7.3.1'
+	compile 'com.afollestad:material-dialogs:0.7.5.1'
 	compile 'com.squareup:otto:1.3.6'
 	compile 'com.j256.ormlite:ormlite-android:4.48@jar'
 	compile 'com.j256.ormlite:ormlite-core:4.48@jar'
@@ -153,7 +153,6 @@ dependencies {
 	compile 'com.android.support:appcompat-v7:22.2.0'
 	compile 'com.android.support:design:22.2.0'
 	compile 'com.jakewharton:butterknife:5.1.2'
-	compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 	compile 'com.nineoldandroids:library:2.4.0'
 
 }
