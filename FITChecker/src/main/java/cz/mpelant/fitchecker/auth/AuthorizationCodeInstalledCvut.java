@@ -31,8 +31,8 @@ import java.net.URL;
 public class AuthorizationCodeInstalledCvut {
 
 
-    public static final String LOGIN_URL = "https://auth.fit.cvut.cz/oauth/login.do";
-    public static final String APPROVE_URL = "https://auth.fit.cvut.cz/oauth/oauth/authorize";
+    public static final String LOGIN_URL = "https://auth.fit.cvut.cz/login.do";
+    public static final String APPROVE_URL = "https://auth.fit.cvut.cz/oauth/authorize";
     public static final String CODE = "code";
     /**
      * Authorization code flow.

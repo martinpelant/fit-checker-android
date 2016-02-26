@@ -39,7 +39,7 @@ public class OAuth {
     /**
      * OAuth 2 scope.
      */
-    private static final String SCOPE = "urn:ctu:oauth:kosapi:public.readonly";
+    private static final String SCOPE = "cvut:kosapi:read";
 
     /**
      * Global instance of the HTTP transport.
@@ -51,8 +51,8 @@ public class OAuth {
      */
     static final JsonFactory JSON_FACTORY = new AndroidJsonFactory();
 
-    private static final String TOKEN_SERVER_URL = "https://auth.fit.cvut.cz/oauth/oauth/token";
-    private static final String AUTHORIZATION_SERVER_URL = "https://auth.fit.cvut.cz/oauth/oauth/authorize";
+    private static final String TOKEN_SERVER_URL = "https://auth.fit.cvut.cz/oauth/token";
+    private static final String AUTHORIZATION_SERVER_URL = "https://auth.fit.cvut.cz/oauth/authorize";
 
 
     private static void deleteRecursively(File file){
